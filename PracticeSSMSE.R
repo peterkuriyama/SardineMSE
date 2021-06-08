@@ -10,7 +10,7 @@ mseOutputPath <- "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/PracticeM
 # Operating Model - Research Model ----------------------------------------
 
 # directory for OM SS code
-OMmodelPath <- "C:/Users/rwildermuth/Documents/FutureSeas/testNew"
+OMmodelPath <- "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/constGrowth_test2"
 
 # Create the OM - This modifies and re-runs the OM. Not needed now
 # develop_OMs(OM_in_dir = OMmodelPath, out_dir = mseOutputPath,
