@@ -1,6 +1,7 @@
 # Practice using SSMSE with Peter Kuriyama's sardine SS models
 # Created: 6/7/2021, Robert Wildermuth
 
+library(tidyverse)
 library(SSMSE)
 library(r4ss)
 
@@ -861,206 +862,303 @@ fore$Nforecastyrs
 datfile <- SS_readdat(file = paste0(OMmodelPath, "/data.ss"), version = "3.30")
 sample_struct <- create_sample_struct(dat = datfile, nyrs = 6)
 
-# ---- troubleshooting -----
-traceback()
+# # ---- troubleshooting -----
+# traceback()
+# 
+# # code from create_sample_struct()
+# dat = datfile
+# nyrs = 6
+# 
+# assertive.types::assert_is_a_number(nyrs)
+# if (length(dat) == 1 & is.character(dat)) {
+#   dat <- SS_readdat(dat, verbose = FALSE)
+# }
+# list_name <- c("catch", "CPUE", "lencomp", "agecomp")
+# sample_struct <- lapply(list_name,
+#                         function(name, dat) {
+#                           
+# # try running apply individually
+# 
+# test1 <- function(name, dat) {  
+#                           df <- dat[[name]]
+#                           if (is.null(df)) {
+#                             return(NA)
+#                           }
+#                           # get year, seas, fleet combo, ignoring -999 values.
+#                           yr_col <- grep("year|yr", colnames(df), ignore.case = TRUE, value = TRUE)
+#                           seas_col <- grep("seas", colnames(df), ignore.case = TRUE, value = TRUE)
+#                           flt_col <- grep("FltSvy|fleet|index", colnames(df),
+#                                           ignore.case = TRUE,
+#                                           value = TRUE
+#                           )
+#                           input_SE_col <- grep("_se|se_", colnames(df),
+#                                                ignore.case = TRUE,
+#                                                value = TRUE
+#                           ) # catch sample size
+#                           Nsamp_col <- grep("Nsamp", colnames(df),
+#                                             ignore.case = TRUE,
+#                                             value = TRUE
+#                           ) # input sample size
+#                           # sanity checks. should match with 1 (or 0 in some cases) cols. Failing these
+#                           # checks indicate a bug in the code (invalid assuptions of how to match the
+#                           # cols.)
+#                           assertive.properties::assert_is_of_length(yr_col, 1)
+#                           assertive.properties::assert_is_of_length(seas_col, 1)
+#                           assertive.properties::assert_is_of_length(flt_col, 1)
+#                           # b/c only Nsamp or SE should exist for a df
+#                           assertive.base::assert_is_identical_to_true(
+#                             (length(input_SE_col) == 0 & length(Nsamp_col) == 1) |
+#                               (length(input_SE_col) == 1 & length(Nsamp_col) == 0)
+#                           )
+#                           # find combinations of season and fleet in the df.
+#                           df_combo <- unique(df[, c(seas_col, flt_col), drop = FALSE])
+#                           fill_vec <- vector(mode = "list", length = nrow(df_combo))
+#                           for (i in seq_len(nrow(df_combo))) {
+#                             tmp_seas <- df_combo[i, seas_col]
+#                             tmp_flt <- df_combo[i, flt_col]
+#                             tmp_yrs <- df[df[[seas_col]] == tmp_seas &
+#                                             df[[flt_col]] == tmp_flt &
+#                                             df[[yr_col]] != -999, yr_col]
+#                             tmp_yrs <- unique(tmp_yrs)
+#                             tmp_yrs <- tmp_yrs[order(tmp_yrs)]
+#                             
+#                             
+#                             # figure out diff between first and second yr.
+#                             tmp_diff <- tmp_yrs[2] - tmp_yrs[1]
+#                             # reconstruct the pattern
+#                             pat <- seq(tmp_yrs[1], by = tmp_diff, length.out = length(tmp_yrs))
+#                             if (all(!is.na(pat)) && all(pat == tmp_yrs)) { # a pattern was found
+#                               future_pat <- seq(pat[length(pat)], dat[["endyr"]] + nyrs, by = tmp_diff)
+#                               future_pat <- future_pat[future_pat > dat[["endyr"]]]
+#                               if (length(future_pat) > 0) {
+#                                 future_pat <- data.frame(
+#                                   Yr = future_pat,
+#                                   Seas = tmp_seas,
+#                                   FltSvy = tmp_flt,
+#                                   stringsAsFactors = FALSE
+#                                 )
+#                               } else {
+#                                 message(
+#                                   "Pattern found for ", name, ": FltSvy ", tmp_flt,
+#                                   ", Seas ", tmp_seas, ", but no data to add for the ",
+#                                   "timeframe specified. Returning NA for Yr in this ",
+#                                   "dataframe."
+#                                 )
+#                                 future_pat <- data.frame(
+#                                   Yr = NA,
+#                                   Seas = tmp_seas,
+#                                   FltSvy = tmp_flt,
+#                                   stringsAsFactors = FALSE
+#                                 )
+#                               }
+#                             } else {
+#                               # the pattern was not found
+#                               warning(
+#                                 "Pattern not found for ", name, ": FltSvy ", tmp_flt,
+#                                 ", Seas ", tmp_seas, ". Returning NA for Yr in this dataframe."
+#                               )
+#                               future_pat <- data.frame(
+#                                 Yr = NA,
+#                                 Seas = tmp_seas,
+#                                 FltSvy = tmp_flt,
+#                                 stringsAsFactors = FALSE
+#                               )
+#                             }
+#                             if (name %in% c("lencomp", "agecomp")) {
+#                               # Sex
+#                               sex_col <- grep("Sex|Gender", colnames(df),
+#                                               ignore.case = TRUE,
+#                                               value = TRUE
+#                               )
+#                               tmp_sex <- unique(df[df[[seas_col]] == tmp_seas &
+#                                                      df[[flt_col]] == tmp_flt, sex_col])
+#                               if (length(tmp_sex) == 1) {
+#                                 future_pat[["Sex"]] <- tmp_sex
+#                               } else {
+#                                 future_pat[["Sex"]] <- NA
+#                               }
+#                               # partition
+#                               tmp_part <- unique(df[df[[seas_col]] == tmp_seas &
+#                                                       df[[flt_col]] == tmp_flt, "Part"])
+#                               if (length(tmp_part) == 1) {
+#                                 future_pat[["Part"]] <- tmp_part
+#                               } else {
+#                                 future_pat[["Part"]] <- NA
+#                               }
+#                             }
+#                             if (name == "agecomp") {
+#                               # Ageerr, Lbin_lo, Lbin_hi
+#                               tmp_err <- unique(df[df[[seas_col]] == tmp_seas &
+#                                                      df[[flt_col]] == tmp_flt, "Ageerr"])
+#                               if (length(tmp_sex) == 1) {
+#                                 future_pat[["Ageerr"]] <- tmp_err
+#                               } else {
+#                                 future_pat[["Ageerr"]] <- NA
+#                               }
+#                               # Lbin_lo (expect should be -1)
+#                               tmp_lo <- unique(df[df[[seas_col]] == tmp_seas &
+#                                                     df[[flt_col]] == tmp_flt, "Lbin_lo"])
+#                               if (length(tmp_lo) == 1) {
+#                                 future_pat[["Lbin_lo"]] <- tmp_lo
+#                               } else {
+#                                 future_pat[["Lbin_lo"]] <- NA
+#                               }
+#                               # Lbin_hi (expect should be -1)
+#                               tmp_hi <- unique(df[df[[seas_col]] == tmp_seas &
+#                                                     df[[flt_col]] == tmp_flt, "Lbin_hi"])
+#                               if (length(tmp_hi) == 1) {
+#                                 future_pat[["Lbin_hi"]] <- tmp_hi
+#                               } else {
+#                                 future_pat[["Lbin_hi"]] <- NA
+#                               }
+#                             }
+#                             # add sample size, if possible
+#                             # see if se or Nsamp is the same across years for the seas/flt. If so,
+#                             # add to the df. If not, add NA's.
+#                             if (length(input_SE_col) == 1) {
+#                               tmp_SE <- unique(df[df[[seas_col]] == tmp_seas &
+#                                                     df[[flt_col]] == tmp_flt &
+#                                                     df[[yr_col]] != -999, input_SE_col])
+#                               if (length(tmp_SE) == 1) {
+#                                 future_pat[["SE"]] <- tmp_SE
+#                               } else {
+#                                 future_pat[["SE"]] <- NA
+#                                 warning("NA included in column SE for ", name, ".")
+#                               }
+#                             }
+#                             if (length(Nsamp_col) == 1) {
+#                               tmp_Nsamp <- unique(df[df[[seas_col]] == tmp_seas &
+#                                                        df[[flt_col]] == tmp_flt &
+#                                                        df[[yr_col]] != -999, Nsamp_col])
+#                               if (length(tmp_Nsamp) == 1) {
+#                                 future_pat[["Nsamp"]] <- tmp_Nsamp
+#                               } else {
+#                                 future_pat[["Nsamp"]] <- NA
+#                                 warning("NA included in column Nsamp for ", name, ".")
+#                               }
+#                             }
+#                             fill_vec[[i]] <- future_pat
+#                           }
+#                           future_pat_all <- do.call("rbind", fill_vec)
+#                         }#,
+# #                         dat = dat
+# # )
+# name <- list_name[4]
+# sample_struct <- test1(name, dat)
+# # !!!RW: something in the definition of age-length comps making the error:
+# #Error in `[[<-.data.frame`(`*tmp*`, "Ageerr", value = 1:4) : 
+# #  replacement has 4 rows, data has 1
+# names(sample_struct) <- list_name
+# sample_struct
 
-# code from create_sample_struct()
-dat = datfile
+
+# create_sample_strct() has trouble IDing SE for survey CPUE
+# define an index for the Acoustic-Trawl survey as in Desiree's code
+#specify number of years of MSE loop
 nyrs = 6
 
-assertive.types::assert_is_a_number(nyrs)
-if (length(dat) == 1 & is.character(dat)) {
-  dat <- SS_readdat(dat, verbose = FALSE)
+#specify the start year of data inputs
+yrsrt = datfile$endyr +1
+
+#specify the end year of data inputs
+yrend = datfile$endyr + nyrs
+
+sample_struct$CPUE = sample_struct$CPUE[1:nyrs,]
+sample_struct$CPUE$FltSvy = 4
+sample_struct$CPUE$SE = 0.5
+sample_struct$CPUE$Yr= yrsrt:yrend
+sample_struct$CPUE$Seas= 1
+
+# for now assume no additional age or length comps
+sample_struct$lencomp <- NULL
+sample_struct$agecomp <- NULL
+
+sample_struct_list <- list("constGrowth" = sample_struct)
+# Run the OM --------------------------------------------------------------
+
+run_res_path <- file.path("C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE", "results")
+# dir.create(run_res_path)
+run_SSMSE(scen_name_vec = "constGrowth",# name of the scenario
+          out_dir_scen_vec = run_res_path, # directory in which to run the scenario
+          iter_vec = c(2), # run with 2 iterations for now
+          OM_name_vec = NULL, # specify directories instead
+          OM_in_dir_vec = OMmodelPath, # OM files
+          EM_name_vec = "constGrowthSelfTest", # cod is included in package data
+          EM_in_dir_vec = OMmodelPath, # EM files
+          MS_vec = "EM",       # The management strategy is specified in the EM
+          use_SS_boot_vec = TRUE, # use the SS bootstrap module for sampling
+          nyrs_vec = 2,        # Years to project OM forward
+          nyrs_assess_vec = 1, # Years between assessments
+          rec_dev_pattern = "rand", # Use random recruitment devs
+          scope = "2", # to use the same recruitment devs across scenarios.
+          impl_error_pattern = "none", # Don't use implementation error
+          run_EM_last_yr = FALSE, # Run the EM in 106
+          run_parallel = FALSE, # Run iterations in parallel
+          sample_struct_list = sample_struct_list, # How to sample data for running the EM.
+          seed = 12345) #Set a fixed integer seed that allows replication
+
+
+# Summarize results -------------------------------------------------------
+
+# Summarize 1 iteration of output
+sumry <- SSMSE_summary_all(run_res_path)
+
+sumry$ts[, c("model_run", "year", "SpawnBio", "iteration")]
+# Get rid of duplicated SSB years
+tsMod <- na.omit(sumry$ts)
+
+ggplot2::ggplot(data = subset(tsMod, model_run %in% c("constGrowth_test2_OM", 
+                                                         "constGrowthSelfTest_EM_2020")), 
+                ggplot2::aes(x = year, y = SpawnBio)) +
+  ggplot2::geom_vline(xintercept = 2019, color = "gray") +
+  ggplot2::geom_line(ggplot2::aes(linetype = as.character(iteration), color = model_run))+
+  ggplot2::scale_color_manual(values = c("#D65F00", "black", "blue")) +
+  ggplot2::scale_linetype_manual(values = rep("solid", 50)) +
+  ggplot2::guides(linetype = FALSE) +
+  ggplot2::facet_wrap(. ~ scenario) +
+  ggplot2::theme_classic()
+
+# The get_rel_SSB_avg calculates the relative SSB in each year for each
+# iteration of the operating model, then takes the average over the years from
+# min_yr, to max_year. It uses the summary object as input to do these
+# calculations.
+get_rel_SSB_avg <- function(scalarSmry, tsSmry, min_yr, max_yr) {
+  # Get just the result for the OMs and not for the EMs.
+  OM_vals <- unique(tsSmry$model_run)
+  OM_vals <- grep("_OM$", OM_vals, value = TRUE)
+  # find the unfished biomass fr the OMs
+  B_unfished <- scalarSmry %>% 
+    filter(model_run %in% OM_vals) %>% 
+    select(iteration, scenario,SSB_Unfished)
+  #  find the spawning stock biomass for the years of interest
+  SSB_yr <- tsSmry %>% 
+    filter(year >= min_yr & year <= max_yr) %>% 
+    select(iteration, scenario, year, SpawnBio)
+  # Calculated the relative spawning stock biomass using B_unfished and SSB_yr
+  # dataframes, then take an average over years.
+  SSB_yr <- left_join(SSB_yr, B_unfished) %>% 
+    mutate(Rel_SSB = SpawnBio/SSB_Unfished) %>% 
+    group_by(iteration, scenario) %>% 
+    summarize(avg_SSB = mean(Rel_SSB), .groups = "keep") %>% 
+    ungroup()
+  SSB_yr # return SSB averaged over yrs for each iteration and each scenario.
 }
-list_name <- c("catch", "CPUE", "lencomp", "agecomp")
-sample_struct <- lapply(list_name,
-                        function(name, dat) {
-                          
-# try running apply individually
+rel_SSB <- get_rel_SSB_avg(scalarSmry = sumry$scalar, tsSmry = tsMod, min_yr = 2020, max_yr = 2021)
+## Joining, by = c("iteration", "scenario")
 
-test1 <- function(name, dat) {  
-                          df <- dat[[name]]
-                          if (is.null(df)) {
-                            return(NA)
-                          }
-                          # get year, seas, fleet combo, ignoring -999 values.
-                          yr_col <- grep("year|yr", colnames(df), ignore.case = TRUE, value = TRUE)
-                          seas_col <- grep("seas", colnames(df), ignore.case = TRUE, value = TRUE)
-                          flt_col <- grep("FltSvy|fleet|index", colnames(df),
-                                          ignore.case = TRUE,
-                                          value = TRUE
-                          )
-                          input_SE_col <- grep("_se|se_", colnames(df),
-                                               ignore.case = TRUE,
-                                               value = TRUE
-                          ) # catch sample size
-                          Nsamp_col <- grep("Nsamp", colnames(df),
-                                            ignore.case = TRUE,
-                                            value = TRUE
-                          ) # input sample size
-                          # sanity checks. should match with 1 (or 0 in some cases) cols. Failing these
-                          # checks indicate a bug in the code (invalid assuptions of how to match the
-                          # cols.)
-                          assertive.properties::assert_is_of_length(yr_col, 1)
-                          assertive.properties::assert_is_of_length(seas_col, 1)
-                          assertive.properties::assert_is_of_length(flt_col, 1)
-                          # b/c only Nsamp or SE should exist for a df
-                          assertive.base::assert_is_identical_to_true(
-                            (length(input_SE_col) == 0 & length(Nsamp_col) == 1) |
-                              (length(input_SE_col) == 1 & length(Nsamp_col) == 0)
-                          )
-                          # find combinations of season and fleet in the df.
-                          df_combo <- unique(df[, c(seas_col, flt_col), drop = FALSE])
-                          fill_vec <- vector(mode = "list", length = nrow(df_combo))
-                          for (i in seq_len(nrow(df_combo))) {
-                            tmp_seas <- df_combo[i, seas_col]
-                            tmp_flt <- df_combo[i, flt_col]
-                            tmp_yrs <- df[df[[seas_col]] == tmp_seas &
-                                            df[[flt_col]] == tmp_flt &
-                                            df[[yr_col]] != -999, yr_col]
-                            tmp_yrs <- unique(tmp_yrs)
-                            tmp_yrs <- tmp_yrs[order(tmp_yrs)]
-                            
-                            
-                            # figure out diff between first and second yr.
-                            tmp_diff <- tmp_yrs[2] - tmp_yrs[1]
-                            # reconstruct the pattern
-                            pat <- seq(tmp_yrs[1], by = tmp_diff, length.out = length(tmp_yrs))
-                            if (all(!is.na(pat)) && all(pat == tmp_yrs)) { # a pattern was found
-                              future_pat <- seq(pat[length(pat)], dat[["endyr"]] + nyrs, by = tmp_diff)
-                              future_pat <- future_pat[future_pat > dat[["endyr"]]]
-                              if (length(future_pat) > 0) {
-                                future_pat <- data.frame(
-                                  Yr = future_pat,
-                                  Seas = tmp_seas,
-                                  FltSvy = tmp_flt,
-                                  stringsAsFactors = FALSE
-                                )
-                              } else {
-                                message(
-                                  "Pattern found for ", name, ": FltSvy ", tmp_flt,
-                                  ", Seas ", tmp_seas, ", but no data to add for the ",
-                                  "timeframe specified. Returning NA for Yr in this ",
-                                  "dataframe."
-                                )
-                                future_pat <- data.frame(
-                                  Yr = NA,
-                                  Seas = tmp_seas,
-                                  FltSvy = tmp_flt,
-                                  stringsAsFactors = FALSE
-                                )
-                              }
-                            } else {
-                              # the pattern was not found
-                              warning(
-                                "Pattern not found for ", name, ": FltSvy ", tmp_flt,
-                                ", Seas ", tmp_seas, ". Returning NA for Yr in this dataframe."
-                              )
-                              future_pat <- data.frame(
-                                Yr = NA,
-                                Seas = tmp_seas,
-                                FltSvy = tmp_flt,
-                                stringsAsFactors = FALSE
-                              )
-                            }
-                            if (name %in% c("lencomp", "agecomp")) {
-                              # Sex
-                              sex_col <- grep("Sex|Gender", colnames(df),
-                                              ignore.case = TRUE,
-                                              value = TRUE
-                              )
-                              tmp_sex <- unique(df[df[[seas_col]] == tmp_seas &
-                                                     df[[flt_col]] == tmp_flt, sex_col])
-                              if (length(tmp_sex) == 1) {
-                                future_pat[["Sex"]] <- tmp_sex
-                              } else {
-                                future_pat[["Sex"]] <- NA
-                              }
-                              # partition
-                              tmp_part <- unique(df[df[[seas_col]] == tmp_seas &
-                                                      df[[flt_col]] == tmp_flt, "Part"])
-                              if (length(tmp_part) == 1) {
-                                future_pat[["Part"]] <- tmp_part
-                              } else {
-                                future_pat[["Part"]] <- NA
-                              }
-                            }
-                            if (name == "agecomp") {
-                              # Ageerr, Lbin_lo, Lbin_hi
-                              tmp_err <- unique(df[df[[seas_col]] == tmp_seas &
-                                                     df[[flt_col]] == tmp_flt, "Ageerr"])
-                              if (length(tmp_sex) == 1) {
-                                future_pat[["Ageerr"]] <- tmp_err
-                              } else {
-                                future_pat[["Ageerr"]] <- NA
-                              }
-                              # Lbin_lo (expect should be -1)
-                              tmp_lo <- unique(df[df[[seas_col]] == tmp_seas &
-                                                    df[[flt_col]] == tmp_flt, "Lbin_lo"])
-                              if (length(tmp_lo) == 1) {
-                                future_pat[["Lbin_lo"]] <- tmp_lo
-                              } else {
-                                future_pat[["Lbin_lo"]] <- NA
-                              }
-                              # Lbin_hi (expect should be -1)
-                              tmp_hi <- unique(df[df[[seas_col]] == tmp_seas &
-                                                    df[[flt_col]] == tmp_flt, "Lbin_hi"])
-                              if (length(tmp_hi) == 1) {
-                                future_pat[["Lbin_hi"]] <- tmp_hi
-                              } else {
-                                future_pat[["Lbin_hi"]] <- NA
-                              }
-                            }
-                            # add sample size, if possible
-                            # see if se or Nsamp is the same across years for the seas/flt. If so,
-                            # add to the df. If not, add NA's.
-                            if (length(input_SE_col) == 1) {
-                              tmp_SE <- unique(df[df[[seas_col]] == tmp_seas &
-                                                    df[[flt_col]] == tmp_flt &
-                                                    df[[yr_col]] != -999, input_SE_col])
-                              if (length(tmp_SE) == 1) {
-                                future_pat[["SE"]] <- tmp_SE
-                              } else {
-                                future_pat[["SE"]] <- NA
-                                warning("NA included in column SE for ", name, ".")
-                              }
-                            }
-                            if (length(Nsamp_col) == 1) {
-                              tmp_Nsamp <- unique(df[df[[seas_col]] == tmp_seas &
-                                                       df[[flt_col]] == tmp_flt &
-                                                       df[[yr_col]] != -999, Nsamp_col])
-                              if (length(tmp_Nsamp) == 1) {
-                                future_pat[["Nsamp"]] <- tmp_Nsamp
-                              } else {
-                                future_pat[["Nsamp"]] <- NA
-                                warning("NA included in column Nsamp for ", name, ".")
-                              }
-                            }
-                            fill_vec[[i]] <- future_pat
-                          }
-                          future_pat_all <- do.call("rbind", fill_vec)
-                        }#,
-#                         dat = dat
-# )
-name <- list_name[4]
-sample_struct <- test1(name, dat)
-# !!!RW: something in the definition of age-length comps making the error:
-#Error in `[[<-.data.frame`(`*tmp*`, "Ageerr", value = 1:4) : 
-#  replacement has 4 rows, data has 1
-names(sample_struct) <- list_name
-sample_struct
-
-# ---- try using constant_growth as OM
-
-# directory for OM SS code
-OMmodelPath <- "C:/Users/rwildermuth/Documents/FutureSeas/constant_growth"
-fore <- r4ss::SS_readforecast(file = paste0(OMmodelPath, "/forecast.ss"),  verbose = FALSE)
-fore$Forecast
-fore$Btarget
-fore$BforconstantF
-fore$BfornoF
-fore$Flimitfraction
-fore$Nforecastyrs
-datfile <- SS_readdat(file = paste0(OMmodelPath, "/data.ss"))
-traceback()
-sample_struct <- create_sample_struct(dat = datfile, nyrs = 6)
+# function to summarize data in plot
+data_summary <- function(x) {
+  m <- mean(x)
+  ymin <- m - sd(x)
+  ymax <- m + sd(x)
+  return(c(y = m, ymin = ymin, ymax = ymax))
+}
+# Now, plot the average relative spawning stock biomass for years 104 - 106
+ggplot(data = rel_SSB, aes(x = scenario, y = avg_SSB)) +
+  geom_hline(yintercept = 0.4, color = "gray") +
+  stat_summary(fun.data = data_summary, 
+               position = position_dodge(width = 0.9), color = "blue") +
+  scale_y_continuous(limits = c(0, 0.8)) +
+  labs(title = "Long-term average relative SSB\n(years 2020-2021)", 
+       x = "Scenario", y = "SSB/SSB_unfished") +
+  theme_classic()
