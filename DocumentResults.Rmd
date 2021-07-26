@@ -1,0 +1,59 @@
+---
+title: "Sardine MSE Result Notes"
+author: "Robert Wildermuth"
+date: "7/26/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Evaluation of sardine cohort growth operating model
+
+The following notes document the results of applying a 6 year projection to Peter Kuriyama's cohort growth Stock Synthesis model for Pacific sardine using {SSMSE}. The separate runs progress from a self test to applying additional sampling error in the SSMSE sampling module.
+
+## Self test with only acoustic-trawl index specified
+
+```{r OMselftest}
+# read in SSMSE results summary
+tsSumry <- read.csv("C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohortGrowthOMandEM/cohortGrowthselftest/results_ts_cohortGrowthselftest.csv")
+
+# Get rid of duplicated SSB years
+tsSumry <- na.omit(tsSumry)
+
+# plots of simulated and estimated biomass trends per iteration
+ggplot2::ggplot(data = subset(tsSumry, model_run %in% c("0_estimate_cohort_growh_OM",  
+                                                      "cohortGrowthOMandEM_EM_2020",
+                                                      "cohortGrowthOMandEM_EM_2021",
+                                                      "cohortGrowthOMandEM_EM_2022",
+                                                      "cohortGrowthOMandEM_EM_2023",
+                                                      "cohortGrowthOMandEM_EM_2024")), 
+                ggplot2::aes(x = year, y = SpawnBio)) +
+  ggplot2::geom_vline(xintercept = 2019, color = "gray") +
+  ggplot2::geom_line(ggplot2::aes(linetype = as.character(iteration), color = model_run))+
+  ggplot2::scale_color_manual(values = c("#D65F00", rep("black", 4), "blue")) +
+  ggplot2::scale_linetype_manual(values = rep("solid", 50)) +
+  ggplot2::guides(linetype = FALSE) +
+  ggplot2::facet_wrap(. ~ iteration) +
+  ggplot2::theme_classic()
+
+```
+
+Summary plots of terminal year estimates
+```{r}
+termYr <- tsSumry %>% filter(model_run %in% c("0_estimate_cohort_growh_OM", 
+                                              "cohortGrowthOMandEM_EM_init") | # or keep end years
+                             year == as.numeric(regmatches(model_run, 
+                                                           gregexpr("[[:digit:]]+", model_run))))
+
+ggplot2::ggplot(data = termYr, 
+                ggplot2::aes(x = year, y = SpawnBio)) +
+  ggplot2::geom_vline(xintercept = 2019, color = "gray") +
+  ggplot2::geom_line(ggplot2::aes(linetype = as.character(iteration), color = model_run))+
+  ggplot2::scale_color_manual(values = c("#D65F00", "black", rep("blue", 5))) +
+  ggplot2::scale_linetype_manual(values = rep("solid", 50)) +
+  ggplot2::guides(linetype = FALSE) +
+  ggplot2::facet_wrap(. ~ iteration) +
+  ggplot2::theme_classic()
+```

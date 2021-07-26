@@ -1,0 +1,230 @@
+ -nohess flag (1 means do Hessian): 1
+#V3.30.15.09-safe;_2020_07_06;_Stock_Synthesis_by_Richard_Methot_(NOAA)_using_ADMB_12.0
+#Stock Synthesis (SS) is a work of the U.S. Government and is not subject to copyright protection in the United States.
+#Foreign copyrights may apply. See copyright.txt for more information.
+Mon Jul 12 14:38:45 2021
+
+om.dat  datfilename
+om.ctl  ctlfilename
+1  readparfile
+0  rundetail
+1  reportdetail 0=minimal for data-limited, 1=all, 2=no growth, 3=custom
+1 Y  DEFINITIONS report:1
+2 Y  LIKELIHOOD report:2
+3 Y  Input_Variance_Adjustment report:3
+4 Y  Parm_devs_detail report:4
+5 Y  PARAMETERS report:5
+6 Y  DERIVED_QUANTITIES report:6
+7 Y  MGparm_By_Year_after_adjustments report:7
+8 Y  selparm(Size)_By_Year_after_adjustments report:8
+9 Y  selparm(Age)_By_Year_after_adjustments report:9
+10 Y  RECRUITMENT_DIST report:10
+11 Y  MORPH_INDEXING report:11
+12 Y  SIZEFREQ_TRANSLATION report:12
+13 Y  MOVEMENT report:13
+14 Y  EXPLOITATION report:14
+15 Y  CATCH report:15
+16 Y  TIME_SERIES report:16
+17 Y  SPR_SERIES report:17
+18 Y  Kobe_Plot report:18
+19 Y  SPAWN_RECRUIT report:19
+20 Y  SPAWN_RECR_CURVE report:20
+21 Y  INDEX_1 report:21
+22 Y  INDEX_2 report:22
+23 Y  INDEX_3 report:23
+24 Y  DISCARD_SPECIFICATION report:24
+25 Y  DISCARD_OUTPUT report:25
+26 Y  MEAN_BODY_WT_OUTPUT report:26
+27 Y  FIT_LEN_COMPS report:27
+28 Y  FIT_AGE_COMPS report:28
+29 Y  FIT_SIZE_COMPS report:29
+30 Y  OVERALL_COMPS report:30
+31 Y  LEN_SELEX report:31
+32 Y  AGE_SELEX report:32
+33 Y  ENVIRONMENTAL_DATA report:33
+34 Y  TAG_Recapture report:34
+35 Y  NUMBERS_AT_AGE report:35
+36 Y  BIOMASS_AT_AGE report:36
+37 Y  NUMBERS_AT_LENGTH report:37
+38 Y  BIOMASS_AT_LENGTH report:38
+39 Y  F_AT_AGE report:39
+40 Y  CATCH_AT_AGE report:40
+41 Y  DISCARD_AT_AGE report:41
+42 Y  BIOLOGY report:42
+43 Y  Natural_Mortality report:43
+44 Y  AGE_SPECIFIC_K report:44
+45 Y  Growth_Parameters report:45
+46 Y  Seas_Effects report:46
+47 Y  Biology_at_age_in_endyr report:47
+48 Y  MEAN_BODY_WT(Begin) report:48
+49 Y  MEAN_SIZE_TIMESERIES report:49
+50 Y  AGE_LENGTH_KEY report:50
+51 Y  AGE_AGE_KEY report:51
+52 Y  COMPOSITION_DATABASE report:52
+53 Y  SELEX_database report:53
+54 Y  SPR/YPR_Profile report:54
+55 Y  GLOBAL_MSY report:55
+56 Y  SS_summary.sso report:56
+57 Y  rebuilder.sso report:57
+58 Y  SIStable.sso report:58
+59 Y  Dynamic_Bzero report:59
+60 Y  wtatage.ss_new report:60
+0  docheckup
+3  Do_ParmTrace
+2  Do_CumReport
+0  Do_all_priors
+1  SoftBound
+3  N_nudata
+10  Turn_off_phase
+10  MCeval burn_intvl
+2  MCeval thin_intvl
+0  jitter fraction for initial parm values
+1981  STD_Yr_min
+-2  STD_Yr_max (-1 for endyr; -2 for YrMax)
+0  N extra STD years to read
+1e-005  final_conv
+0  retro_yr
+1  Smry_Age
+1  depletion_basis
+1  depletion_level
+4  SPR_reporting
+1  F_reporting
+2  F_std_basis_rd
+F_std_multi and F_std_basis: 0 2
+For Kobe plot, set depletion_basis=2; depletion_level=1.0; F_reporting=your choose; F_std_basis=2
+Read files in 3.30 format
+SS will read values until it reads 3.30
+read MCMC_output_detail.MCMC_bump as a single real number;  separate values will be parsed from integer and fraction
+MCMC output detail:  0
+MCMC bump to R0:  0
+Now get ALK tolerance (0.0 is OK for no compression; 0.1 is too big;  suggest 0.0001)
+ALK tolerance:  0.0001
+Now get random number seed; enter -1 to use long(time) as the seed
+  finish reading starter.ss
+
+1981 start year 
+2019 end year 
+2 N seasons 
+ 6 6 months/seas (fractions OK) 
+2 Number of subseasons (even number only; min 2) for calculation of ALK 
+ 0.5 0.5 processed season duration (frac. of year) 
+ 0.25 0.25 processed subseason duration (frac. of year) 
+ processed subseason cumulative annual time within season 
+ 0 0.25
+ 0 0.25
+SPAWN month: 7; seas: 2; subseas_for_ALK: 1; timing_in_season: 0
+1 N sexes 
+Accumulator age 10
+1 N_areas 
+6 total number of fishing fleets and surveys 
+rows are fleets; columns are: Fleet_#, fleet_type, timing, area, units, need_catch_mult
+1 #  1 -1 1 1 0 # MexCal_S1
+2 #  1 -1 1 1 0 # MexCal_S2
+3 #  1 -1 1 1 0 # PNW
+4 #  3 1 1 2 0 # AT_Survey
+5 #  3 1 1 2 0 # DEPM
+6 #  3 1 1 2 0 # TEP_all
+YPR_optimize_mask:  1 1 1 0 0 0
+240 records
+first catch record:  -999 1 1 0 0.05
+last catch record:  2019 2 3 2.51 0.05
+ equ, seas:   -1 1 catches:  0 0 0 0 0 0
+ equ, seas:   -1 2 catches:  0 1000 0 0 0 0
+year, seas: 1981 1 catches:  5.78 0 0 0 0 0
+year, seas: 1981 2 catches:  0 57.15 0 0 0 0
+year, seas: 1982 1 catches:  73.94 0 0 0 0 0
+year, seas: 1982 2 catches:  0 412.76 0 0 0 0
+year, seas: 1983 1 catches:  213.19 0 0 0 0 0
+year, seas: 1983 2 catches:  0 159.12 0 0 0 0
+year, seas: 1984 1 catches:  75.39 0 0 0 0 0
+year, seas: 1984 2 catches:  0 3495.8 0 0 0 0
+year, seas: 1985 1 catches:  819.43 0 0 0 0 0
+year, seas: 1985 2 catches:  0 1019 0 0 0 0
+year, seas: 1986 1 catches:  387.71 0 0 0 0 0
+year, seas: 1986 2 catches:  0 2278.89 0 0 0 0
+year, seas: 1987 1 catches:  2247.31 0 0 0 0 0
+year, seas: 1987 2 catches:  0 3639.76 0 0 0 0
+year, seas: 1988 1 catches:  2179.91 0 0 0 0 0
+year, seas: 1988 2 catches:  0 2614.75 0 0 0 0
+year, seas: 1989 1 catches:  7290.44 0 0 0 0 0
+year, seas: 1989 2 catches:  0 8031.52 0 0 0 0
+year, seas: 1990 1 catches:  6158.41 0 0 0 0 0
+year, seas: 1990 2 catches:  0 14443.5 0 0 0 0
+year, seas: 1991 1 catches:  24698 0 0 0 0 0
+year, seas: 1991 2 catches:  0 10323.5 0 0 0 0
+year, seas: 1992 1 catches:  43433.3 0 3.9 0 0 0
+year, seas: 1992 2 catches:  0 30776.4 0.18 0 0 0
+year, seas: 1993 1 catches:  822.8 0 0 0 0 0
+year, seas: 1993 2 catches:  0 11345.8 0 0 0 0
+year, seas: 1994 1 catches:  8838.65 0 0 0 0 0
+year, seas: 1994 2 catches:  0 39748.4 0 0 0 0
+year, seas: 1995 1 catches:  5993.28 0 22.68 0 0 0
+year, seas: 1995 2 catches:  0 26565.7 0 0 0 0
+year, seas: 1996 1 catches:  11917.3 0 0 0 0 0
+year, seas: 1996 2 catches:  0 19158.7 43.54 0 0 0
+year, seas: 1997 1 catches:  13018.2 0 27.22 0 0 0
+year, seas: 1997 2 catches:  0 24527.6 0.82 0 0 0
+year, seas: 1998 1 catches:  18925.2 0 488.25 0 0 0
+year, seas: 1998 2 catches:  0 63278.4 74.39 0 0 0
+year, seas: 1999 1 catches:  14996.2 0 725.2 0 0 0
+year, seas: 1999 2 catches:  0 58341.4 429.59 0 0 0
+year, seas: 2000 1 catches:  23693.4 0 15586.2 0 0 0
+year, seas: 2000 2 catches:  0 35179.2 2336.9 0 0 0
+year, seas: 2001 1 catches:  11550.5 0 22546 0 0 0
+year, seas: 2001 2 catches:  0 41118.4 3136.84 0 0 0
+year, seas: 2002 1 catches:  16562.7 0 35525.7 0 0 0
+year, seas: 2002 2 catches:  0 36130.7 597.29 0 0 0
+year, seas: 2003 1 catches:  10340.6 0 37242.3 0 0 0
+year, seas: 2003 2 catches:  0 21300.5 2618.43 0 0 0
+year, seas: 2004 1 catches:  17049 0 46730.8 0 0 0
+year, seas: 2004 2 catches:  0 25249.9 1016.32 0 0 0
+year, seas: 2005 1 catches:  13803 0 54152.6 0 0 0
+year, seas: 2005 2 catches:  0 30364.2 101.7 0 0 0
+year, seas: 2006 1 catches:  20726.2 0 41220.9 0 0 0
+year, seas: 2006 2 catches:  0 39900.3 0 0 0 0
+year, seas: 2007 1 catches:  46228.1 0 48237.1 0 0 0
+year, seas: 2007 2 catches:  0 42910.1 0 0 0 0
+year, seas: 2008 1 catches:  30249.2 0 39800.1 0 0 0
+year, seas: 2008 2 catches:  0 41198.5 0 0 0 0
+year, seas: 2009 1 catches:  14044.9 0 44841.2 0 0 0
+year, seas: 2009 2 catches:  0 31146.5 1369.73 0 0 0
+year, seas: 2010 1 catches:  11274 0 54085.9 0 0 0
+year, seas: 2010 2 catches:  0 27267.6 0.09 0 0 0
+year, seas: 2011 1 catches:  24871.4 0 39750.5 0 0 0
+year, seas: 2011 2 catches:  0 23189.9 5805.63 0 0 0
+year, seas: 2012 1 catches:  1528.37 0 91425.6 0 0 0
+year, seas: 2012 2 catches:  0 13884.9 1570.78 0 0 0
+year, seas: 2013 1 catches:  921.56 0 57218 0 0 0
+year, seas: 2013 2 catches:  0 5625.03 908.01 0 0 0
+year, seas: 2014 1 catches:  1830.92 0 15216.8 0 0 0
+year, seas: 2014 2 catches:  0 727.71 2193.87 0 0 0
+year, seas: 2015 1 catches:  6.13 0 66.28 0 0 0
+year, seas: 2015 2 catches:  0 185.82 1.29 0 0 0
+year, seas: 2016 1 catches:  283.54 0 173.15 0 0 0
+year, seas: 2016 2 catches:  0 7080.53 0.05 0 0 0
+year, seas: 2017 1 catches:  170.41 0 1.17 0 0 0
+year, seas: 2017 2 catches:  0 6229.43 2.22 0 0 0
+year, seas: 2018 1 catches:  35.31 0 7.86 0 0 0
+year, seas: 2018 2 catches:  0 11819.4 2.51 0 0 0
+year, seas: 2019 1 catches:  130.86 0 7.73 0 0 0
+year, seas: 2019 2 catches:  0 11819.4 2.51 0 0 0
+
+#_show_total_catch_by_fleet
+1 type: 1 MexCal_S1 catch: 407395
+2 type: 1 MexCal_S2 catch: 773546
+3 type: 1 PNW catch: 667316
+4 type: 3 AT_Survey catch: 0
+5 type: 3 DEPM catch: 0
+6 type: 3 TEP_all catch: 0
+
+#_  now read survey characteristics:  fleet_#, svyunits, svyerrtype for each fleet 
+Units:  0=numbers; 1=biomass; 2=F; >=30 for special patterns
+Errtype:  -1=normal; 0=lognormal; >0=T
+SD_Report: 0=no sdreport; 1=enable sdreport
+Fleet Units Err_Type SD_Report
+ 1 1 0 0
+ 2 1 0 0
+ 3 1 0 0
+ 4 1 0 0
+ 5 30 0 0
+ 6 30 0 0
