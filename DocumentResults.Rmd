@@ -9,6 +9,12 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r, include=FALSE}
+library(tidyverse)
+library(r4ss)
+source("plot_comp_sampling.R")
+```
+
 # Evaluation of sardine cohort growth operating model
 
 The following notes document the results of applying a 6 year projection to Peter Kuriyama's cohort growth Stock Synthesis model for Pacific sardine using {SSMSE}. The separate runs progress from a self test to applying additional sampling error in the SSMSE sampling module.
@@ -47,6 +53,11 @@ termYr <- tsSumry %>% filter(model_run %in% c("0_estimate_cohort_growh_OM",
                              year == as.numeric(regmatches(model_run, 
                                                            gregexpr("[[:digit:]]+", model_run))))
 
+termYr <- termYr %>% mutate(model_run = as.character(model_run),
+                            model_run = case_when(!model_run %in% c("0_estimate_cohort_growh_OM", 
+                                                                    "cohortGrowthOMandEM_EM_init") ~"cohortGrowthOMandEM_EM_term",
+                                                  TRUE ~ model_run))
+
 ggplot2::ggplot(data = termYr, 
                 ggplot2::aes(x = year, y = SpawnBio)) +
   ggplot2::geom_vline(xintercept = 2019, color = "gray") +
@@ -56,4 +67,38 @@ ggplot2::ggplot(data = termYr,
   ggplot2::guides(linetype = FALSE) +
   ggplot2::facet_wrap(. ~ iteration) +
   ggplot2::theme_classic()
+
+relSSB_EMtoOM <- termYr %>% select(model_run, year, iteration, SpawnBio) %>%
+                    pivot_wider(id_cols = c(year, iteration),
+                                names_from = model_run, values_from = SpawnBio) %>%
+                    rename(cohort_growth_OM = "0_estimate_cohort_growh_OM") %>%
+                    mutate(diffSSB = case_when(is.na(cohortGrowthOMandEM_EM_term) ~ cohortGrowthOMandEM_EM_init - cohort_growth_OM,
+                                               !is.na(cohortGrowthOMandEM_EM_term) ~ cohortGrowthOMandEM_EM_term - cohort_growth_OM))
+
+ggplot(data = relSSB_EMtoOM, aes(x = year, y = diffSSB)) +
+  ggplot2::geom_vline(xintercept = 2019, color = "gray") +
+  geom_hline(yintercept = 0, color = "black") +
+  ggplot2::geom_line(ggplot2::aes(linetype = as.character(iteration), color = 2))+
+  #ggplot2::scale_color_manual(values = c("#D65F00", "black", rep("blue", 5))) +
+  ggplot2::scale_linetype_manual(values = rep("solid", 50)) +
+  ggplot2::guides(linetype = FALSE) +
+  ggplot2::facet_wrap(. ~ iteration) +
+  ggplot2::theme_classic()
+```
+
+Plots of length and age composition
+```{r}
+plot_comp_sampling(dir = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohortGrowthOMandEM/cohortGrowthselftest", comp_type = "agecomp")
+
+outputSS <- SS_output(
+  dir = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohortGrowthOMandEM/cohortGrowthselftest/2/cohortGrowthOMandEM_EM_2024",
+  dir.mcmc = NULL,
+  repfile = "Report.sso",
+  compfile = "CompReport.sso")
+
+SSplotComps(replist = outputSS, kind = "LEN")
+
+SSplotComps(replist = outputSS, kind = "AGE") # nothing happens
+
+
 ```
