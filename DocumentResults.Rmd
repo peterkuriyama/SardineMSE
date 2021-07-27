@@ -12,7 +12,9 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r, include=FALSE}
 library(tidyverse)
 library(r4ss)
+library(ss3sim)
 source("plot_comp_sampling.R")
+source("plot_index_sampling.R")
 ```
 
 # Evaluation of sardine cohort growth operating model
@@ -44,6 +46,10 @@ ggplot2::ggplot(data = subset(tsSumry, model_run %in% c("0_estimate_cohort_growh
   ggplot2::facet_wrap(. ~ iteration) +
   ggplot2::theme_classic()
 
+# plot of OM and EM and simulated data
+indexPlot <- plot_index_sampling(dir = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohortGrowthOMandEM/cohortGrowthselftest")
+
+indexPlot # !RW: only getting last three iterations, but gets the point across 
 ```
 
 Summary plots of terminal year estimates
@@ -88,7 +94,8 @@ ggplot(data = relSSB_EMtoOM, aes(x = year, y = diffSSB)) +
 
 Plots of length and age composition
 ```{r}
-plot_comp_sampling(dir = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohortGrowthOMandEM/cohortGrowthselftest", comp_type = "agecomp")
+# plot_comp_sampling(dir = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohortGrowthOMandEM/cohortGrowthselftest", comp_type = "agecomp")
+# !!!Error: The comp database from the operating model has no rows, so must not have been any historical data in the OM.
 
 outputSS <- SS_output(
   dir = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohortGrowthOMandEM/cohortGrowthselftest/2/cohortGrowthOMandEM_EM_2024",
@@ -100,5 +107,85 @@ SSplotComps(replist = outputSS, kind = "LEN")
 
 SSplotComps(replist = outputSS, kind = "AGE") # nothing happens
 
+# Try using r4ss supporting function
+tmp <- SSMethod.TA1.8(fit = outputSS, type = "len", 
+                      fleet = 4, fleetnames = outputSS[["FleetNames"]], datonly = FALSE, 
+                                  printit = FALSE)
+# doesn't show compositions by length
 
+unique(outputSS[["lendbase"]]$Yr) # doesn't have data from projection years (2020-2024)
+FleetNames <- outputSS[["FleetNames"]]
+
+# try using ss3sim::get_compfit
+# RW: function doesn't exist in the package? but it's in the index...
+# get_compfit(report.file = outputSS, name = "len_comp_fit_table")
+
+# run_SSMSE uses expected values for OM catch, so use these in figs
+# RW: 'lendbase' only has observed years from historical time series
+# termLenComps <- outputSS[["lendbase"]] %>% filter(Fleet == which(FleetNames == "AT_Survey")) %>%
+#                   select(Yr, Seas, Fleet, Bin, Exp)
+
+# Plot terminal age and length comps for OM and EM by iteration
+termLenComps <- data.frame()
+termAgeComps <- data.frame()
+
+for(i in c(2,4:9)){
+  outputSS <- SS_output(dir = paste0( "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohortGrowthOMandEM/cohortGrowthselftest/", 
+                                     i, "/cohortGrowthOMandEM_EM_2024"),
+                        dir.mcmc = NULL,
+                        repfile = "Report.sso",
+                        compfile = "CompReport.sso", verbose = FALSE, printstats = FALSE)
+  
+  EMLenComps <- outputSS[["batlen"]] %>% filter(Yr == 2024, Seas == 2, `Beg/Mid` == "B") %>%
+                  pivot_longer(cols = c("6", "6.5", "7", "7.5", "8", "8.5", "9", "9.5", "10", "10.5", 
+                                        "11", "11.5", "12", "12.5", "13", "13.5", "14", "14.5", "15", "15.5",
+                                        "16", "16.5", "17", "17.5", "18", "18.5", "19", "19.5", "20", "20.5",
+                                        "21", "21.5", "22", "22.5", "23", "23.5", "24", "24.5", "25", "25.5", 
+                                        "26", "26.5", "27", "27.5", "28", "28.5", "29", "29.5", "30"),
+                               names_to = "Bin", values_to = "Biomass") %>%
+                  mutate(Bin = as.numeric(Bin),
+                         model_run = "cohortGrowthOMandEM_EM_2024",
+                         iteration = i)
+
+  EMAgeComps <- outputSS[["batage"]] %>% filter(Yr == 2024, Seas == 2, `Beg/Mid` == "B") %>%
+                  pivot_longer(cols = c("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"),
+                               names_to = "Age", values_to = "Biomass") %>%
+                  mutate(Age = as.numeric(Age),
+                         model_run = "cohortGrowthOMandEM_EM_2024",
+                         iteration = i)
+  
+  OMoutputSS <- SS_output(dir = paste0( "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohortGrowthOMandEM/cohortGrowthselftest/", 
+                                       i, "/0_estimate_cohort_growh_OM"),
+                          dir.mcmc = NULL,
+                          repfile = "Report.sso",
+                          compfile = "CompReport.sso", verbose = FALSE, printstats = FALSE)
+
+  OMLenComps <- OMoutputSS[["batlen"]] %>% filter(Yr == 2024, Seas == 2, `Beg/Mid` == "B") %>%
+                  pivot_longer(cols = c("6", "6.5", "7", "7.5", "8", "8.5", "9", "9.5", "10", "10.5", 
+                                        "11", "11.5", "12", "12.5", "13", "13.5", "14", "14.5", "15", "15.5",
+                                        "16", "16.5", "17", "17.5", "18", "18.5", "19", "19.5", "20", "20.5",
+                                        "21", "21.5", "22", "22.5", "23", "23.5", "24", "24.5", "25", "25.5", 
+                                        "26", "26.5", "27", "27.5", "28", "28.5", "29", "29.5", "30"),
+                               names_to = "Bin", values_to = "Biomass") %>%
+                  mutate(Bin = as.numeric(Bin),
+                         model_run = "0_estimate_cohort_growh_OM",
+                         iteration = i)
+  OMAgeComps <- OMoutputSS[["batage"]] %>% filter(Yr == 2024, Seas == 2, `Beg/Mid` == "B") %>%
+                  pivot_longer(cols = c("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"),
+                               names_to = "Age", values_to = "Biomass") %>%
+                  mutate(Age = as.numeric(Age),
+                         model_run = "0_estimate_cohort_growh_OM",
+                         iteration = i)
+  termAgeComps <- rbind(termAgeComps, EMAgeComps, OMAgeComps)
+  termLenComps <- rbind(termLenComps, EMLenComps, OMLenComps)
+}
+
+ggplot(termLenComps, mapping = aes(x = Bin, y = Biomass)) +
+  geom_col() +
+  facet_grid(cols = vars(model_run), rows = vars(iteration))
+
+
+ggplot(termAgeComps, mapping = aes(x = Age, y = Biomass)) +
+  geom_col() +
+  facet_grid(cols = vars(model_run), rows = vars(iteration))
 ```
