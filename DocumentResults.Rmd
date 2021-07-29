@@ -223,7 +223,7 @@ ggplot(termAgeComps, mapping = aes(x = Age, y = Biomass)) +
 Make some generalized functions to apply to different scenarios
 ```{r BiomDiagnosticPlots}
 
-# Function to plot absolute spawning biomass from OM, simulated data, and EM in and also relative to OM
+# Function to plot absolute spawning biomass from OM, simulated data, and EM in and also relative error
 # Note: assumes SSMSE_summary_all has been run for a completed scenario
 bDiagPlots <- function(dir, # SSMSE directory (character)
                        scenario, # scenario name (character)
@@ -285,7 +285,7 @@ bDiagPlots <- function(dir, # SSMSE directory (character)
               ggplot2::facet_wrap(. ~ iteration) +
               ggplot2::theme_classic()
 
-  # Calculate SSB relative to the OM actual values
+  # Calculate SSB relative error
   relSSB_EMtoOM <- termYr %>% select(model_run, year, iteration, SpawnBio) %>%
                       pivot_wider(id_cols = c(year, iteration),
                                   names_from = model_run, values_from = SpawnBio) %>%
@@ -295,12 +295,12 @@ bDiagPlots <- function(dir, # SSMSE directory (character)
   relSSB_EMtoOM <- relSSB_EMtoOM %>% add_column(diffSSB = unlist(relSSB_EMtoOM[, initName]))
   histInd <- which(!is.na(relSSB_EMtoOM[,paste0(scenario, "_EM_term")]))
   relSSB_EMtoOM[histInd, "diffSSB"] <- relSSB_EMtoOM[histInd, paste0(scenario, "_EM_term")]
-  relSSB_EMtoOM <- relSSB_EMtoOM %>% mutate(diffSSB = diffSSB - OM)
+  relSSB_EMtoOM <- relSSB_EMtoOM %>% mutate(diffSSB = (diffSSB - OM)/OM)
 
   # Merge the simulated data with the model estimates
   simDat <- simDat %>% convert(int(iteration))
   relSSB_EMtoOM <- relSSB_EMtoOM %>% full_join(y = simDat, by = c("year", "iteration")) %>%
-                      mutate(diffDat = obs - OM)
+                      mutate(diffDat = (obs - OM)/OM)
 
   relBio <- ggplot(data = relSSB_EMtoOM, aes(x = year, y = diffSSB)) +
     ggplot2::geom_vline(xintercept = 2019, color = "gray") +
@@ -311,7 +311,8 @@ bDiagPlots <- function(dir, # SSMSE directory (character)
     ggplot2::scale_linetype_manual(values = rep("solid", 50)) +
     ggplot2::guides(linetype = FALSE) +
     ggplot2::facet_wrap(. ~ iteration) +
-    ggplot2::theme_classic()
+    ggplot2::theme_classic() +
+    ylab("Relative Error (SSB)")
   
   list(absoluteBio, relBio)
 }
@@ -416,6 +417,166 @@ compDiagPlots(dir = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohort
               termYr = 2024)
 ```
 
+```{r RecDiagnosticPlot}
+# pull recruitment from summary dq
+# Function to plot recruitment from OM and EM 
+# Note: assumes SSMSE_summary_all has been run for a completed scenario
+recrDiagPlots <- function(dir, # SSMSE directory (character)
+                          scenario, # scenario name (character)
+                          termYr # terminal year of MSE run
+  ){
+  # read in SSMSE results summary derived quantaties
+  dqSumry <- read.csv(file.path(dir, scenario, paste0("results_dq_", scenario, ".csv")))
+
+  # get the OM, init, and terminal year model directory names
+  omName <- grep("_OM", dqSumry$model_run, value = TRUE)[1]
+  initName <- grep("_init", dqSumry$model_run, value = TRUE)[1]
+  termName <- grep(paste0("_", termYr), dqSumry$model_run, value = TRUE)[1]
+  
+  ggplot2::ggplot(data = subset(dqSumry, model_run %in% c(omName, termName, initName)), 
+                  ggplot2::aes(x = year, y = Value.Recr)) +
+              ggplot2::geom_vline(xintercept = 2019, color = "gray") +
+              ggplot2::geom_line(ggplot2::aes(linetype = as.character(iteration), color = model_run))+
+              ggplot2::scale_color_manual(values = c("#D65F00", "blue", "black")) +
+              ggplot2::scale_linetype_manual(values = rep("solid", 50)) +
+              ggplot2::guides(linetype = FALSE) +
+              ggplot2::facet_wrap(. ~ iteration) +
+              ggplot2::theme_classic()
+  }
+
+recrDiagPlots(dir = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohortGrowthOMandEM",
+              scenario = "cohortGrowthselftest", termYr = 2024)
+```
+
+```{r CatchDiagnosticPlot}
+#TotCatch_ in ss_summary.sso? or outputSS[["catch"]]
+outputSS <- SS_output(
+  dir = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohortGrowthOMandEM/cohortGrowthselftest/2/cohortGrowthOMandEM_EM_2024",
+  dir.mcmc = NULL,
+  repfile = "Report.sso",
+  compfile = "CompReport.sso", verbose = FALSE, printstats = FALSE)
+
+catSmry <- outputSS[["catch"]] %>% group_by(Yr) %>%
+              # summarize totoal catch within year
+              dplyr::summarize(obsCat = sum(Obs),
+                               expCat = sum(Exp))
+
+# Function to plot OM, simulated data, and EM estimated catch for sardine SS models
+catchDiagPlots <- function(dir, # SSMSE directory (character)
+                          scenario, # scenario name (character)
+                          termYr # terminal year of MSE run
+  ){
+
+  # get the iterations
+  iters <- list.dirs(file.path(dir, scenario), recursive = FALSE, full.names = FALSE)
+  
+  # # get the OM, init, and terminal year model directory names
+  omName <- grep("_OM", list.dirs(file.path(dir, scenario, iters[1]),
+                                  recursive = FALSE,
+                                  full.names = FALSE), value = TRUE)
+  # initName <- grep("_init", list.dirs(file.path(dir, scenario, iters[1]),
+  #                                 recursive = FALSE,
+  #                                 full.names = FALSE), value = TRUE)
+  termName <- grep(paste0("_", termYr),
+                   list.dirs(file.path(dir, scenario, iters[1]),
+                                  recursive = FALSE,
+                                  full.names = FALSE), value = TRUE)
+
+  # Extract terminal age and length comps for OM and EM by iteration
+  catch <- data.frame()
+  simDat <- data.frame()
+  for(i in iters){
+    outputSS <- SS_output(dir = file.path(dir, scenario, i, termName),
+                          dir.mcmc = NULL,
+                          repfile = "Report.sso",
+                          compfile = "CompReport.sso", verbose = FALSE, printstats = FALSE)
+  
+    # Get EM estimated catch
+    catchEM <- outputSS[["catch"]] %>% group_by(Yr) %>%
+                  # summarize totoal catch within year
+                  dplyr::summarize(obsCat = sum(Obs),
+                                   expCat = sum(Exp)) %>%
+                  mutate(model_run = termName,
+                         iteration = as.integer(i))
+      
+    # get OM catch
+    OMoutputSS <- SS_output(dir = file.path(dir, scenario, i, omName),
+                            dir.mcmc = NULL,
+                            repfile = "Report.sso",
+                            compfile = "CompReport.sso", verbose = FALSE, printstats = FALSE)
+  
+    catchOM <- OMoutputSS[["catch"]] %>% group_by(Yr) %>%
+                  # summarize totoal catch within year
+                  dplyr::summarize(obsCat = sum(Obs),
+                                   expCat = sum(Exp)) %>%
+                  mutate(model_run = omName,
+                         iteration = as.integer(i))
+    
+    itDat <- SS_readdat(file = file.path(dir, scenario, i, termName, "data.ss_new"),
+                        version = "3.30")[["catch"]] %>%
+                # summarize totoal catch within year
+                group_by(year) %>%
+                dplyr::summarize(catch = sum(catch)) %>%
+                mutate(iteration = as.integer(i),
+                       model_run = paste0(scenario,"_data"))
+
+    catch <- rbind(catch, catchEM, catchOM)
+    simDat <- rbind(simDat, itDat)
+    } # end 'iter' for-loop
+  
+  # catch <- catch %>% select(Yr, expCat, model_run, iteration) %>%
+  #             rename(year = Yr,
+  #                    catch = expCat)
+  simDat <- simDat %>% filter(year > 0)
+  #catch <- rbind(catch, simDat)
+
+  ggplot2::ggplot(data = catch, 
+                  ggplot2::aes(x = Yr, y = expCat)) +
+              ggplot2::geom_vline(xintercept = 2019, color = "gray") +
+              geom_point(data = simDat, mapping = aes(x = year, y = catch), shape = 4, color = "grey") +
+              ggplot2::geom_line(ggplot2::aes(linetype = as.character(iteration), color = model_run))+
+              ggplot2::scale_color_manual(values = c("#D65F00", "blue")) +
+              ggplot2::scale_linetype_manual(values = rep("solid", 50)) +
+              ggplot2::guides(linetype = FALSE) +
+              ggplot2::facet_wrap(. ~ iteration) +
+              ggplot2::theme_classic()
+  }
+```
+
+```{r FmsyDiagnosticPlot}
+# pull recruitment from summary scalar
+# Function to plot Fmsy from OM and EM 
+# Note: assumes SSMSE_summary_all has been run for a completed scenario
+FmsyDiagPlots <- function(dir, # SSMSE directory (character)
+                          scenario, # scenario name (character)
+                          termYr # terminal year of MSE run
+  ){
+  # read in SSMSE results summary derived quantaties
+  sclSumry <- read.csv(file.path(dir, scenario, paste0("results_scalar_", scenario, ".csv")))
+
+  # get the OM, init, and terminal year model directory names
+  omName <- grep("_OM", sclSumry$model_run, value = TRUE)[1]
+  initName <- grep("_init", sclSumry$model_run, value = TRUE)[1]
+  termName <- grep(paste0("_", termYr), sclSumry$model_run, value = TRUE)[1]
+  
+  ggplot2::ggplot(data = sclSumry, #subset(sclSumry, model_run %in% c(omName, termName, initName)), 
+                  ggplot2::aes(x = model_run, y = F_MSY)) +
+              geom_point() +
+              theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+              
+  }
+
+FmsyDiagPlots(dir = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohortGrowthOMandEM",
+              scenario = "cohortGrowthselftest", termYr = 2024)
+```
+
+```{r Age1PlusDiagnosticPlot}
+#SmryBio_ in ss_summary.sso? or outputSS[["timeseries"]]
+# these aren't equal. SpawnBio matches between these files, but not outputSS[["timeseries"]]$Bio_smry
+
+outputSS[["timeseries"]] %>% select(Yr, Era, Seas, Bio_smry, `SmryBio_SX:1_GP:1`, SpawnBio)
+```
+
 ## Self-test with acoustic-trawl and age and length comps specified in projection period
 
 ```{r OMself_wComps}
@@ -426,4 +587,14 @@ bDiagPlots(dir = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohortGro
 compDiagPlots(dir = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohortGrowthOMandEM",
               scenario = "cohortGrowthself_compNsamp",
               termYr = 2024)
+
+recrDiagPlots(dir = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohortGrowthOMandEM",
+              scenario = "cohortGrowthself_compNsamp", termYr = 2024)
+
+catchDiagPlots(dir = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohortGrowthOMandEM",
+              scenario = "cohortGrowthself_compNsamp", termYr = 2024)
+
+FmsyDiagPlots(dir = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohortGrowthOMandEM",
+              scenario = "cohortGrowthself_compNsamp", termYr = 2024)
+
 ```
