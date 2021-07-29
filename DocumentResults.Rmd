@@ -2,7 +2,10 @@
 title: "Sardine MSE Result Notes"
 author: "Robert Wildermuth"
 date: "7/26/2021"
-output: html_document
+output: 
+  html_document:
+    toc: true
+    toc_depth: 3
 ---
 
 ```{r setup, include=FALSE}
@@ -13,6 +16,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(r4ss)
 library(ss3sim)
+library(hablar) # just so I can convert a column data type
 source("plot_comp_sampling.R")
 source("plot_index_sampling.R")
 ```
@@ -30,6 +34,25 @@ tsSumry <- read.csv("C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohort
 # Get rid of duplicated SSB years
 tsSumry <- na.omit(tsSumry)
 
+# bring in simulated data for each iteration to plot with OM and EM vals
+simDat <- data.frame()
+for(i in c(2,4:9)){
+  itDat <- SS_readdat(file = paste0("C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohortGrowthOMandEM/cohortGrowthselftest/",
+                           i, "/cohortGrowthOMandEM_EM_2024/data.ss_new"),
+                      version = "3.30")[["CPUE"]] %>%
+            filter(index == 4) %>%
+            mutate(iteration = i,
+                   model_run = "cohortGrowthselftest_data")
+
+  simDat <- rbind(simDat, itDat)
+}
+  
+# simDat <- SS_readdat(file = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohortGrowthOMandEM/cohortGrowthselftest/2/cohortGrowthOMandEM_EM_2024/data.ss_new",
+#                       version = "3.30")[["CPUE"]] %>%
+#             filter(index == 4) %>%
+#             mutate(#iteration = i,
+#                    model_run = "cohortGrowthselftest_data")
+
 # plots of simulated and estimated biomass trends per iteration
 ggplot2::ggplot(data = subset(tsSumry, model_run %in% c("0_estimate_cohort_growh_OM",  
                                                       "cohortGrowthOMandEM_EM_2020",
@@ -39,6 +62,7 @@ ggplot2::ggplot(data = subset(tsSumry, model_run %in% c("0_estimate_cohort_growh
                                                       "cohortGrowthOMandEM_EM_2024")), 
                 ggplot2::aes(x = year, y = SpawnBio)) +
   ggplot2::geom_vline(xintercept = 2019, color = "gray") +
+  geom_point(data = simDat, mapping = aes(x = year, y = obs), shape = 4, color = "grey") +
   ggplot2::geom_line(ggplot2::aes(linetype = as.character(iteration), color = model_run))+
   ggplot2::scale_color_manual(values = c("#D65F00", rep("black", 4), "blue")) +
   ggplot2::scale_linetype_manual(values = rep("solid", 50)) +
@@ -48,11 +72,12 @@ ggplot2::ggplot(data = subset(tsSumry, model_run %in% c("0_estimate_cohort_growh
 
 # plot of OM and EM and simulated data
 indexPlot <- plot_index_sampling(dir = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohortGrowthOMandEM/cohortGrowthselftest")
+# !!RW: sampled_dataset are different among iterations
 
 indexPlot # !RW: only getting last three iterations, but gets the point across 
 ```
 
-Summary plots of terminal year estimates
+### Summary plots of terminal year estimates
 ```{r}
 termYr <- tsSumry %>% filter(model_run %in% c("0_estimate_cohort_growh_OM", 
                                               "cohortGrowthOMandEM_EM_init") | # or keep end years
@@ -67,6 +92,7 @@ termYr <- termYr %>% mutate(model_run = as.character(model_run),
 ggplot2::ggplot(data = termYr, 
                 ggplot2::aes(x = year, y = SpawnBio)) +
   ggplot2::geom_vline(xintercept = 2019, color = "gray") +
+  geom_point(data = simDat, mapping = aes(x = year, y = obs), shape = 4, color = "grey") +
   ggplot2::geom_line(ggplot2::aes(linetype = as.character(iteration), color = model_run))+
   ggplot2::scale_color_manual(values = c("#D65F00", "black", rep("blue", 5))) +
   ggplot2::scale_linetype_manual(values = rep("solid", 50)) +
@@ -81,9 +107,13 @@ relSSB_EMtoOM <- termYr %>% select(model_run, year, iteration, SpawnBio) %>%
                     mutate(diffSSB = case_when(is.na(cohortGrowthOMandEM_EM_term) ~ cohortGrowthOMandEM_EM_init - cohort_growth_OM,
                                                !is.na(cohortGrowthOMandEM_EM_term) ~ cohortGrowthOMandEM_EM_term - cohort_growth_OM))
 
+relSSB_EMtoOM <- relSSB_EMtoOM %>% full_join(y = simDat, by = c("year", "iteration")) %>%
+                    mutate(diffDat = obs - cohort_growth_OM)
+
 ggplot(data = relSSB_EMtoOM, aes(x = year, y = diffSSB)) +
   ggplot2::geom_vline(xintercept = 2019, color = "gray") +
   geom_hline(yintercept = 0, color = "black") +
+  geom_point(mapping = aes(x = year, y = diffDat), shape = 4, color = "grey") +
   ggplot2::geom_line(ggplot2::aes(linetype = as.character(iteration), color = 2))+
   #ggplot2::scale_color_manual(values = c("#D65F00", "black", rep("blue", 5))) +
   ggplot2::scale_linetype_manual(values = rep("solid", 50)) +
@@ -92,7 +122,7 @@ ggplot(data = relSSB_EMtoOM, aes(x = year, y = diffSSB)) +
   ggplot2::theme_classic()
 ```
 
-Plots of length and age composition
+### Plots of length and age composition
 ```{r}
 # plot_comp_sampling(dir = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohortGrowthOMandEM/cohortGrowthselftest", comp_type = "agecomp")
 # !!!Error: The comp database from the operating model has no rows, so must not have been any historical data in the OM.
@@ -180,6 +210,7 @@ for(i in c(2,4:9)){
   termLenComps <- rbind(termLenComps, EMLenComps, OMLenComps)
 }
 
+# RW: no composition data for last year because none provided in 'sample_struct_list' for run_SSMSE()
 ggplot(termLenComps, mapping = aes(x = Bin, y = Biomass)) +
   geom_col() +
   facet_grid(cols = vars(model_run), rows = vars(iteration))
@@ -188,4 +219,211 @@ ggplot(termLenComps, mapping = aes(x = Bin, y = Biomass)) +
 ggplot(termAgeComps, mapping = aes(x = Age, y = Biomass)) +
   geom_col() +
   facet_grid(cols = vars(model_run), rows = vars(iteration))
+```
+Make some generalized functions to apply to different scenarios
+```{r BiomDiagnosticPlots}
+
+# Function to plot absolute spawning biomass from OM, simulated data, and EM in and also relative to OM
+# Note: assumes SSMSE_summary_all has been run for a completed scenario
+bDiagPlots <- function(dir, # SSMSE directory (character)
+                       scenario, # scenario name (character)
+                       termYr, # terminal year of MSE run
+                       surveyInx # numeric index of the survey fleet for data comparison (e.g., Acoustic-Trawl)
+  ){
+  
+
+  # read in SSMSE results summary
+  tsSumry <- read.csv(file.path(dir, scenario, paste0("results_ts_", scenario, ".csv")))
+
+  # Get rid of duplicated SSB years
+  tsSumry <- na.omit(tsSumry)
+
+  # get the iterations
+  iters <- list.dirs(file.path(dir, scenario), recursive = FALSE, full.names = FALSE)
+
+  # get the OM, init, and terminal year model directory names
+  omName <- grep("_OM", list.dirs(file.path(dir, scenario, iters[1]),
+                                  recursive = FALSE,
+                                  full.names = FALSE), value = TRUE)
+  initName <- grep("_init", list.dirs(file.path(dir, scenario, iters[1]),
+                                  recursive = FALSE,
+                                  full.names = FALSE), value = TRUE)
+  termName <- grep(paste0("_", termYr), 
+                   list.dirs(file.path(dir, scenario, iters[1]),
+                                  recursive = FALSE,
+                                  full.names = FALSE), value = TRUE)
+  
+  # bring in simulated data for each iteration to plot with OM and EM vals
+  simDat <- data.frame()
+  for(i in iters){
+    itDat <- SS_readdat(file = file.path(dir, scenario, i, termName, "data.ss_new"),
+                        version = "3.30")[["CPUE"]] %>%
+              filter(index == surveyInx) %>%
+              mutate(iteration = i,
+                     model_run = paste0(scenario,"_data"))
+
+    simDat <- rbind(simDat, itDat)
+    }
+
+  # Find the estimate of the terminal year for each year of the MSE cycle
+  termYr <- tsSumry %>% filter(model_run %in% c(omName, initName) | # or keep end years
+                               year == as.numeric(regmatches(model_run, 
+                                                             gregexpr("[[:digit:]]+", model_run)))) %>% 
+              mutate(model_run = as.character(model_run),
+                     model_run = case_when(!model_run %in% c(omName, initName) ~ paste0(scenario, "_EM_term"),
+                                           TRUE ~ model_run))
+
+  # plot biomass per iteration
+  absoluteBio <- ggplot2::ggplot(data = termYr, 
+                  ggplot2::aes(x = year, y = SpawnBio)) +
+              ggplot2::geom_vline(xintercept = 2019, color = "gray") +
+              geom_point(data = simDat, mapping = aes(x = year, y = obs), shape = 4, color = "grey") +
+              ggplot2::geom_line(ggplot2::aes(linetype = as.character(iteration), color = model_run))+
+              ggplot2::scale_color_manual(values = c("#D65F00", "black", rep("blue", 5))) +
+              ggplot2::scale_linetype_manual(values = rep("solid", 50)) +
+              ggplot2::guides(linetype = FALSE) +
+              ggplot2::facet_wrap(. ~ iteration) +
+              ggplot2::theme_classic()
+
+  # Calculate SSB relative to the OM actual values
+  relSSB_EMtoOM <- termYr %>% select(model_run, year, iteration, SpawnBio) %>%
+                      pivot_wider(id_cols = c(year, iteration),
+                                  names_from = model_run, values_from = SpawnBio) %>%
+                      rename(OM = all_of(omName))
+  
+  # crazy BS to make a summary column based on conditions in another column
+  relSSB_EMtoOM <- relSSB_EMtoOM %>% add_column(diffSSB = unlist(relSSB_EMtoOM[, initName]))
+  histInd <- which(!is.na(relSSB_EMtoOM[,paste0(scenario, "_EM_term")]))
+  relSSB_EMtoOM[histInd, "diffSSB"] <- relSSB_EMtoOM[histInd, paste0(scenario, "_EM_term")]
+  relSSB_EMtoOM <- relSSB_EMtoOM %>% mutate(diffSSB = diffSSB - OM)
+
+  # Merge the simulated data with the model estimates
+  simDat <- simDat %>% convert(int(iteration))
+  relSSB_EMtoOM <- relSSB_EMtoOM %>% full_join(y = simDat, by = c("year", "iteration")) %>%
+                      mutate(diffDat = obs - OM)
+
+  relBio <- ggplot(data = relSSB_EMtoOM, aes(x = year, y = diffSSB)) +
+    ggplot2::geom_vline(xintercept = 2019, color = "gray") +
+    geom_hline(yintercept = 0, color = "black") +
+    geom_point(mapping = aes(x = year, y = diffDat), shape = 4, color = "grey") +
+    ggplot2::geom_line(ggplot2::aes(linetype = as.character(iteration), color = 2))+
+    #ggplot2::scale_color_manual(values = c("#D65F00", "black", rep("blue", 5))) +
+    ggplot2::scale_linetype_manual(values = rep("solid", 50)) +
+    ggplot2::guides(linetype = FALSE) +
+    ggplot2::facet_wrap(. ~ iteration) +
+    ggplot2::theme_classic()
+  
+  list(absoluteBio, relBio)
+}
+
+#test it out
+bDiagPlots(dir = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohortGrowthOMandEM",
+          scenario = "cohortGrowthselftest",
+          termYr = 2024, surveyInx = 4)
+```
+
+```{r CompDiagnosticPlots}
+# Function to plot length and age composition plots for sardine SS models
+compDiagPlots <- function(dir, # SSMSE directory (character)
+                          scenario, # scenario name (character)
+                          termYr # terminal year of MSE run
+  ){
+
+  # get the iterations
+  iters <- list.dirs(file.path(dir, scenario), recursive = FALSE, full.names = FALSE)
+  
+  # # get the OM, init, and terminal year model directory names
+  omName <- grep("_OM", list.dirs(file.path(dir, scenario, iters[1]),
+                                  recursive = FALSE,
+                                  full.names = FALSE), value = TRUE)
+  # initName <- grep("_init", list.dirs(file.path(dir, scenario, iters[1]),
+  #                                 recursive = FALSE,
+  #                                 full.names = FALSE), value = TRUE)
+  termName <- grep(paste0("_", termYr),
+                   list.dirs(file.path(dir, scenario, iters[1]),
+                                  recursive = FALSE,
+                                  full.names = FALSE), value = TRUE)
+
+  # Extract terminal age and length comps for OM and EM by iteration
+  termLenComps <- data.frame()
+  termAgeComps <- data.frame()
+  for(i in iters){
+    outputSS <- SS_output(dir = file.path(dir, scenario, i, termName),
+                          dir.mcmc = NULL,
+                          repfile = "Report.sso",
+                          compfile = "CompReport.sso", verbose = FALSE, printstats = FALSE)
+  
+    # Get estimation model's estimated compositions
+    EMLenComps <- outputSS[["batlen"]] %>% filter(Yr == termYr, Seas == 2, `Beg/Mid` == "B") %>%
+                    pivot_longer(cols = c("6", "6.5", "7", "7.5", "8", "8.5", "9", "9.5", "10", "10.5", 
+                                          "11", "11.5", "12", "12.5", "13", "13.5", "14", "14.5", "15", "15.5",
+                                          "16", "16.5", "17", "17.5", "18", "18.5", "19", "19.5", "20", "20.5",
+                                          "21", "21.5", "22", "22.5", "23", "23.5", "24", "24.5", "25", "25.5", 
+                                          "26", "26.5", "27", "27.5", "28", "28.5", "29", "29.5", "30"),
+                                 names_to = "Bin", values_to = "Biomass") %>%
+                    mutate(Bin = as.numeric(Bin),
+                           model_run = termName,
+                           iteration = as.integer(i))
+
+    EMAgeComps <- outputSS[["batage"]] %>% filter(Yr == termYr, Seas == 2, `Beg/Mid` == "B") %>%
+                    pivot_longer(cols = c("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"),
+                                 names_to = "Age", values_to = "Biomass") %>%
+                    mutate(Age = as.numeric(Age),
+                           model_run = termName,
+                           iteration = as.integer(i))
+    
+    # get OM compositions
+    OMoutputSS <- SS_output(dir = file.path(dir, scenario, i, omName),
+                            dir.mcmc = NULL,
+                            repfile = "Report.sso",
+                            compfile = "CompReport.sso", verbose = FALSE, printstats = FALSE)
+  
+    OMLenComps <- OMoutputSS[["batlen"]] %>% filter(Yr == termYr, Seas == 2, `Beg/Mid` == "B") %>%
+                    pivot_longer(cols = c("6", "6.5", "7", "7.5", "8", "8.5", "9", "9.5", "10", "10.5", 
+                                          "11", "11.5", "12", "12.5", "13", "13.5", "14", "14.5", "15", "15.5",
+                                          "16", "16.5", "17", "17.5", "18", "18.5", "19", "19.5", "20", "20.5",
+                                          "21", "21.5", "22", "22.5", "23", "23.5", "24", "24.5", "25", "25.5", 
+                                          "26", "26.5", "27", "27.5", "28", "28.5", "29", "29.5", "30"),
+                                 names_to = "Bin", values_to = "Biomass") %>%
+                    mutate(Bin = as.numeric(Bin),
+                           model_run = omName,
+                           iteration = as.integer(i))
+    OMAgeComps <- OMoutputSS[["batage"]] %>% filter(Yr == termYr, Seas == 2, `Beg/Mid` == "B") %>%
+                    pivot_longer(cols = c("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"),
+                                 names_to = "Age", values_to = "Biomass") %>%
+                    mutate(Age = as.numeric(Age),
+                           model_run = omName,
+                           iteration = as.integer(i))
+    termAgeComps <- rbind(termAgeComps, EMAgeComps, OMAgeComps)
+    termLenComps <- rbind(termLenComps, EMLenComps, OMLenComps)
+    }
+
+  # Plot the comps by model and iteration
+  lenCompPlot <- ggplot(termLenComps, mapping = aes(x = Bin, y = Biomass)) +
+                    geom_col() +
+                    facet_grid(cols = vars(model_run), rows = vars(iteration))
+
+  ageCompPlot <- ggplot(termAgeComps, mapping = aes(x = Age, y = Biomass)) +
+                    geom_col() +
+                    facet_grid(cols = vars(model_run), rows = vars(iteration))
+  
+  list(lenCompPlot, ageCompPlot)
+  }
+
+#test it out
+compDiagPlots(dir = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohortGrowthOMandEM",
+              scenario = "cohortGrowthselftest",
+              termYr = 2024)
+```
+
+## Self-test with acoustic-trawl and age and length comps specified in projection period
+
+```{r OMself_wComps}
+bDiagPlots(dir = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohortGrowthOMandEM",
+          scenario = "cohortGrowthself_compNsamp",
+          termYr = 2024, surveyInx = 4)
+
+compDiagPlots(dir = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohortGrowthOMandEM",
+              scenario = "cohortGrowthself_compNsamp",
+              termYr = 2024)
 ```
