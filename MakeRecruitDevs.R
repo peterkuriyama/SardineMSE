@@ -1,6 +1,8 @@
 # Function to produce recruitment deviations for SSMSE::run_SSMSE
 # Created: 7/30/2021, Robert Wildermuth
 
+library(purrr)
+
 MakeRecruitDevs <- function(envtInx = NULL, # numeric vector of either 0/1 regime indicators or covariate values (e.g., SST)
                             hiMean = NULL, # numeric mean of high recruitment regime
                             annChange = NULL, # scalar annual trend in mean recruitment

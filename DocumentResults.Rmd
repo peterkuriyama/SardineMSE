@@ -437,15 +437,49 @@ recrDiagPlots <- function(dir, # SSMSE directory (character)
   initName <- grep("_init", dqSumry$model_run, value = TRUE)[1]
   termName <- grep(paste0("_", termYr), dqSumry$model_run, value = TRUE)[1]
   
-  ggplot2::ggplot(data = subset(dqSumry, model_run %in% c(omName, termName, initName)), 
+  # Find the estimate of the terminal year for each year of the MSE cycle
+  termYr <- dqSumry %>% select(Value.Recr, year, model_run, iteration) %>%
+              filter(model_run %in% c(omName, initName) | # or keep end years
+                     year == as.numeric(regmatches(model_run, 
+                                        gregexpr("[[:digit:]]+", model_run)))) %>% 
+              mutate(model_run = as.character(model_run),
+                     model_run = case_when(!model_run %in% c(omName, initName) ~ paste0(scenario, "_EM_term"),
+                                           TRUE ~ model_run))
+  
+  absoluteRec <- ggplot2::ggplot(data = termYr, 
                   ggplot2::aes(x = year, y = Value.Recr)) +
               ggplot2::geom_vline(xintercept = 2019, color = "gray") +
               ggplot2::geom_line(ggplot2::aes(linetype = as.character(iteration), color = model_run))+
-              ggplot2::scale_color_manual(values = c("#D65F00", "blue", "black")) +
+              ggplot2::scale_color_manual(values = c("#D65F00", "black", "blue")) +
               ggplot2::scale_linetype_manual(values = rep("solid", 50)) +
-              ggplot2::guides(linetype = FALSE) +
+              ggplot2::guides(linetype = "none") +
               ggplot2::facet_wrap(. ~ iteration) +
               ggplot2::theme_classic()
+  
+  # Calculate recruitment relative error
+  relRec_EMtoOM <- termYr %>% pivot_wider(id_cols = c(year, iteration),
+                                          names_from = model_run, values_from = Value.Recr) %>%
+                      rename(OM = all_of(omName))
+  
+  # crazy BS to make a summary column based on conditions in another column
+  relRec_EMtoOM <- relRec_EMtoOM %>% add_column(diffRec = unlist(relRec_EMtoOM[, initName]))
+  histInd <- which(!is.na(relRec_EMtoOM[,paste0(scenario, "_EM_term")]))
+  relRec_EMtoOM[histInd, "diffRec"] <- relRec_EMtoOM[histInd, paste0(scenario, "_EM_term")]
+  relRec_EMtoOM <- relRec_EMtoOM %>% mutate(diffRec = (diffRec - OM)/OM)
+
+  relRec <- ggplot(data = relRec_EMtoOM, aes(x = year, y = diffRec)) +
+    ggplot2::geom_vline(xintercept = 2019, color = "gray") +
+    geom_hline(yintercept = 0, color = "black") +
+    ggplot2::geom_line(ggplot2::aes(linetype = as.character(iteration), color = 2))+
+    #ggplot2::scale_color_manual(values = c("#D65F00", "black", rep("blue", 5))) +
+    ggplot2::scale_linetype_manual(values = rep("solid", 50)) +
+    ggplot2::guides(linetype = "none") +
+    ggplot2::facet_wrap(. ~ iteration) +
+    ggplot2::theme_classic() +
+    ylab("Relative Error (Recruitment)")
+  
+  list(absoluteRec, relRec)
+
   }
 
 recrDiagPlots(dir = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohortGrowthOMandEM",
@@ -534,7 +568,7 @@ catchDiagPlots <- function(dir, # SSMSE directory (character)
   simDat <- simDat %>% filter(year > 0)
   #catch <- rbind(catch, simDat)
 
-  ggplot2::ggplot(data = catch, 
+  absoluteCatch <- ggplot2::ggplot(data = catch, 
                   ggplot2::aes(x = Yr, y = expCat)) +
               ggplot2::geom_vline(xintercept = 2019, color = "gray") +
               geom_point(data = simDat, mapping = aes(x = year, y = catch), shape = 4, color = "grey") +
@@ -544,11 +578,39 @@ catchDiagPlots <- function(dir, # SSMSE directory (character)
               ggplot2::guides(linetype = FALSE) +
               ggplot2::facet_wrap(. ~ iteration) +
               ggplot2::theme_classic()
+  
+  # Calculate catch relative error
+  relCat_EMtoOM <- catch %>% select(model_run, Yr, iteration, expCat) %>%
+                      pivot_wider(id_cols = c(Yr, iteration),
+                                  names_from = model_run, values_from = expCat) %>%
+                      rename(OM = all_of(omName),
+                             EM = all_of(termName)) %>% 
+                      mutate(errCat = (EM - OM)/OM)
+
+  # Merge the simulated data with the model estimates
+  relCat_EMtoOM <- relCat_EMtoOM %>% full_join(y = simDat, by = c("Yr" = "year", "iteration")) %>%
+                      mutate(diffDat = (catch - OM)/OM)
+
+  relCatch <- ggplot(data = relCat_EMtoOM, aes(x = Yr, y = errCat)) +
+    ggplot2::geom_vline(xintercept = 2019, color = "gray") +
+    geom_hline(yintercept = 0, color = "black") +
+    geom_point(mapping = aes(x = Yr, y = diffDat), shape = 4, color = "grey") +
+    ggplot2::geom_line(ggplot2::aes(linetype = as.character(iteration), color = 2))+
+    #ggplot2::scale_color_manual(values = c("#D65F00", "black", rep("blue", 5))) +
+    ggplot2::scale_linetype_manual(values = rep("solid", 50)) +
+    ggplot2::guides(linetype = "none") +
+    ggplot2::facet_wrap(. ~ iteration) +
+    ggplot2::theme_classic() +
+    ylab("Relative Error (Catch)")
+  
+  list(absoluteCatch, relCatch)
 }
 
 catchDiagPlots(dir = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohortGrowthOMandEM",
               scenario = "cohortGrowthselftest", termYr = 2024)
 ```
+
+The catch errors are minuscule. Using the right outputs?
 
 ```{r FmsyDiagnosticPlot}
 # pull recruitment from summary scalar
@@ -597,13 +659,14 @@ age1plusDiagPlots <- function(dir, # SSMSE directory (character)
   omName <- grep("_OM", list.dirs(file.path(dir, scenario, iters[1]),
                                   recursive = FALSE,
                                   full.names = FALSE), value = TRUE)
-  # initName <- grep("_init", list.dirs(file.path(dir, scenario, iters[1]),
-  #                                 recursive = FALSE,
-  #                                 full.names = FALSE), value = TRUE)
-  termName <- grep(paste0("_", termYr),
-                   list.dirs(file.path(dir, scenario, iters[1]),
+  initName <- grep("_init", list.dirs(file.path(dir, scenario, iters[1]),
                                   recursive = FALSE,
                                   full.names = FALSE), value = TRUE)
+  
+  termNames <- list.dirs(file.path(dir, scenario, iters[1]),
+                                  recursive = FALSE,
+                                  full.names = FALSE)
+  termNames <- termNames[which(!termNames %in% c(omName, initName))]
 
   # Extract terminal summary biomass for OM and EM by iteration
   smryBio <- data.frame()
@@ -624,16 +687,32 @@ age1plusDiagPlots <- function(dir, # SSMSE directory (character)
     #   vec <- strsplit(dat[ind], "[[:blank:]]+")
     #   as.numeric(vec[[1]])
       
-    outputSS <- SS_output(dir = file.path(dir, scenario, i, termName),
+    initOutputSS <- SS_output(dir = file.path(dir, scenario, i, initName),
                           dir.mcmc = NULL,
                           repfile = "Report.sso",
                           compfile = "CompReport.sso", verbose = FALSE, printstats = FALSE)
   
     # Get EM estimated Age1+
-    smryEM <- outputSS[["timeseries"]] %>% select(Yr, Era, Seas, Bio_smry) %>%
-                  filter(Era == "TIME", Seas == 2) %>% # for now, just pull end-of-year (season 2) vals
-                  mutate(model_run = termName,
+    smryEM <- initOutputSS[["sprseries"]] %>% select(Yr, Era, Bio_Smry.1) %>%
+                  mutate(model_run = paste0(scenario, "_EM_term"),
                          iteration = as.integer(i))
+    
+    # Next get the forecast summary age 1+ biomass for each projected EM year
+    for(y in max(smryEM$Yr):termYr){
+      outputSS <- SS_output(dir = file.path(dir, scenario, i, 
+                                            grep(y, termNames, value = TRUE)),
+                          dir.mcmc = NULL,
+                          repfile = "Report.sso",
+                          compfile = "CompReport.sso", verbose = FALSE, printstats = FALSE)
+      
+      nxtYrAge1Plus <- outputSS[["sprseries"]] %>% select(Yr, Era, Bio_Smry.1) %>%
+                          mutate(model_run = paste0(scenario, "_EM_term"),
+                                 iteration = as.integer(i)) %>%
+                          filter(Yr == y+1)
+      
+      # add this to the EM time series
+      smryEM <- rbind(smryEM, nxtYrAge1Plus)
+    }
     
     OMoutputSS <- SS_output(dir = file.path(dir, scenario, i, omName),
                           dir.mcmc = NULL,
@@ -641,23 +720,45 @@ age1plusDiagPlots <- function(dir, # SSMSE directory (character)
                           compfile = "CompReport.sso", verbose = FALSE, printstats = FALSE)
   
     # Get OM Age1+
-    smryOM <- OMoutputSS[["timeseries"]] %>% select(Yr, Era, Seas, Bio_smry) %>%
-                  filter(Era == "TIME", Seas == 2) %>% # for now, just pull end-of-year (season 2) vals
+    # 'sprseries' has the annual values, 'timeseries' has by season
+    smryOM <- OMoutputSS[["sprseries"]] %>% select(Yr, Era, Bio_Smry.1) %>%
+                  filter(Era == "TIME") %>% 
                   mutate(model_run = omName,
                          iteration = as.integer(i))
     
     smryBio <- rbind(smryBio, smryEM, smryOM)
     }
   
-  ggplot2::ggplot(data = smryBio, 
-                  ggplot2::aes(x = Yr, y = Bio_smry)) +
+  absoluteSmry <- ggplot2::ggplot(data = smryBio, 
+                  ggplot2::aes(x = Yr, y = Bio_Smry.1)) +
               ggplot2::geom_vline(xintercept = 2019, color = "gray") +
               ggplot2::geom_line(ggplot2::aes(linetype = as.character(iteration), color = model_run))+
               ggplot2::scale_color_manual(values = c("#D65F00", "blue")) +
               ggplot2::scale_linetype_manual(values = rep("solid", 50)) +
-              ggplot2::guides(linetype = FALSE) +
+              ggplot2::guides(linetype = "none") +
               ggplot2::facet_wrap(. ~ iteration) +
               ggplot2::theme_classic()
+  
+  # Calculate Summary biomass relative error
+  relSmry_EMtoOM <- smryBio %>% select(model_run, Yr, iteration, Bio_Smry.1) %>%
+                      pivot_wider(id_cols = c(Yr, iteration),
+                                  names_from = model_run, values_from = Bio_Smry.1) %>%
+                      rename(OM = all_of(omName),
+                             EM = all_of(paste0(scenario, "_EM_term"))) %>% 
+                      mutate(errSmryBio = (EM - OM)/OM)
+  
+  relSmry <- ggplot(data = relSmry_EMtoOM, aes(x = Yr, y = errSmryBio)) +
+    ggplot2::geom_vline(xintercept = 2019, color = "gray") +
+    geom_hline(yintercept = 0, color = "black") +
+    ggplot2::geom_line(ggplot2::aes(linetype = as.character(iteration), color = 2))+
+    #ggplot2::scale_color_manual(values = c("#D65F00", "black", rep("blue", 5))) +
+    ggplot2::scale_linetype_manual(values = rep("solid", 50)) +
+    ggplot2::guides(linetype = "none") +
+    ggplot2::facet_wrap(. ~ iteration) +
+    ggplot2::theme_classic() +
+    ylab("Relative Error (Summary Biomass)")
+  
+  list(absoluteSmry, relSmry)
 }
 
 age1plusDiagPlots(dir = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohortGrowthOMandEM",
