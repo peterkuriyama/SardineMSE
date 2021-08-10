@@ -35,7 +35,7 @@ sample_struct <- create_sample_struct(dat = datfile, nyrs = 6)
 # create_sample_strct() has trouble IDing SE for survey CPUE
 # define an index for the Acoustic-Trawl survey as in Desiree's code
 #specify number of years of MSE loop
-nyrs = 2
+nyrs = 6
 
 #specify the start year of data inputs
 yrsrt = datfile$endyr +1
@@ -87,7 +87,7 @@ sample_struct_list <- list("researchModel" = sample_struct)
 EMmodelPath <- "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/EM/4_shortEM_constgrowth_constselex"
 # EM starter.ss file must indicate init values are to be pulled from control.ss file, not ss.par
   
-run_SSMSE(scen_name_vec = "cohortGrowthself_compNsamp",# name of the scenario
+run_SSMSE(scen_name_vec = "cohortGrowth_compNsamp",# name of the scenario
           out_dir_scen_vec = mseOutputPath, # directory in which to run the scenario
           iter_vec = c(5), # run with 5 iterations for now
           OM_name_vec = NULL, # specify directories instead
@@ -106,6 +106,7 @@ run_SSMSE(scen_name_vec = "cohortGrowthself_compNsamp",# name of the scenario
           sample_struct_list = sample_struct_list, # How to sample data for running the EM.
           seed = 1234) #Set a fixed integer seed that allows replication
 
+# ~1.5 hrs for 5 its.
 
 # Summarize results -------------------------------------------------------
 

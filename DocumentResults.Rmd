@@ -240,6 +240,7 @@ bDiagPlots <- function(dir, # SSMSE directory (character)
   tsSumry <- read.csv(file.path(dir, scenario, paste0("results_ts_", scenario, ".csv")))
 
   # Get rid of duplicated SSB years
+  tsSumry <- tsSumry %>% select(SpawnBio, year, iteration, model_run)
   tsSumry <- na.omit(tsSumry)
 
   # get the iterations
@@ -285,7 +286,7 @@ bDiagPlots <- function(dir, # SSMSE directory (character)
               ggplot2::geom_line(ggplot2::aes(linetype = as.character(iteration), color = model_run))+
               ggplot2::scale_color_manual(values = c("#D65F00", "black", rep("blue", 5))) +
               ggplot2::scale_linetype_manual(values = rep("solid", 50)) +
-              ggplot2::guides(linetype = FALSE) +
+              ggplot2::guides(linetype = "none") +
               ggplot2::facet_wrap(. ~ iteration) +
               ggplot2::theme_classic()
 
@@ -832,5 +833,30 @@ FmsyDiagPlots(dir = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohort
 
 age1plusDiagPlots(dir = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohortGrowthOMandEM",
               scenario = "cohortGrowthself_compNsamp", termYr = 2024)
+
+```
+
+## Test with AT and comp data and fixed parameter EM
+
+```{r fixedEM_wComps}
+bDiagPlots(dir = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohortGrowthOMfixedParamsEM",
+          scenario = "cohortGrowth_compNsamp",
+          termYr = 2024, surveyInx = 4)
+
+compDiagPlots(dir = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohortGrowthOMfixedParamsEM",
+              scenario = "cohortGrowth_compNsamp",
+              termYr = 2024, surveyInx = 4)
+
+recrDiagPlots(dir = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohortGrowthOMfixedParamsEM",
+              scenario = "cohortGrowth_compNsamp", termYr = 2024)
+
+catchDiagPlots(dir = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohortGrowthOMfixedParamsEM",
+              scenario = "cohortGrowth_compNsamp", termYr = 2024)
+
+FmsyDiagPlots(dir = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohortGrowthOMfixedParamsEM",
+              scenario = "cohortGrowth_compNsamp", termYr = 2024)
+
+age1plusDiagPlots(dir = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohortGrowthOMfixedParamsEM",
+              scenario = "cohortGrowth_compNsamp", termYr = 2024)
 
 ```
