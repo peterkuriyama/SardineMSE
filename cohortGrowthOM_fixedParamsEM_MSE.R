@@ -10,12 +10,12 @@ library(foreach) #if using run_parallel = TRUE
 library(doParallel) #if using run_parallel = TRUE
 
 # directory for MSE output
-mseOutputPath <- "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohortGrowthOMfixedParamsEM"
+mseOutputPath <- "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/constGrowthOMfixedParamsEM"
 
 # Operating Model - Research Model ----------------------------------------
 
 # directory for OM SS code
-OMmodelPath <- "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/0_estimate_cohort_growh"
+OMmodelPath <- "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/constGrowth_test2"
 # RW: need to re-save data.ss_new as data.ss to fix formatting for SS_readdat()
 
 # ----- Look at forecasting ---- 
@@ -87,12 +87,12 @@ sample_struct_list <- list("researchModel" = sample_struct)
 EMmodelPath <- "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/EM/4_shortEM_constgrowth_constselex"
 # EM starter.ss file must indicate init values are to be pulled from control.ss file, not ss.par
   
-run_SSMSE(scen_name_vec = "cohortGrowth_compNsamp",# name of the scenario
+run_SSMSE(scen_name_vec = "constGrowth_compNsamp",# name of the scenario
           out_dir_scen_vec = mseOutputPath, # directory in which to run the scenario
           iter_vec = c(5), # run with 5 iterations for now
           OM_name_vec = NULL, # specify directories instead
           OM_in_dir_vec = OMmodelPath, # OM files
-          EM_name_vec = "cohortGrowthOMfixedParamsEM", # cod is included in package data
+          EM_name_vec = "constGrowthOMfixedParamsEM", # cod is included in package data
           EM_in_dir_vec = EMmodelPath, # EM files
           MS_vec = "EM",       # The management strategy is specified in the EM
           use_SS_boot_vec = TRUE, # use the SS bootstrap module for sampling
