@@ -859,6 +859,20 @@ FmsyDiagPlots(dir = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohort
 age1plusDiagPlots(dir = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohortGrowthOMfixedParamsEM",
               scenario = "cohortGrowth_compNsamp", termYr = 2024)
 
+# Look at growth and selectivity parameters
+# outputSS <- SS_output(dir = file.path("C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohortGrowthOMfixedParamsEM",
+#                                       "cohortGrowth_compNsamp", 1, "0_estimate_cohort_growh_OM"),
+#                       dir.mcmc = NULL,
+#                       repfile = "Report.sso",
+#                       compfile = "CompReport.sso", verbose = FALSE, printstats = FALSE)
+# SS_plots(outputSS, plot = c(1, 2, 16, 17, 20, 25, 26))
+# 
+# outputEM <- SS_output(dir = file.path("C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohortGrowthOMfixedParamsEM",
+#                                       "cohortGrowth_compNsamp", 1, "cohortGrowthOMfixedParamsEM_EM_2024"),
+#                       dir.mcmc = NULL,
+#                       repfile = "Report.sso",
+#                       compfile = "CompReport.sso", verbose = FALSE, printstats = FALSE)
+# SS_plots(outputEM, plot = c(1, 2, 16, 17, 20, 25, 26))
 ```
 
 ## Constant growth OM with AT and comp data and fixed parameter EM
