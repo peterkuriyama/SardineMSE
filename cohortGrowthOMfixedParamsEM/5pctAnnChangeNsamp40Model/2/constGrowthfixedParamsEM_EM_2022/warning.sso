@@ -1,0 +1,12 @@
+#V3.30.16.00;_2020_09_03;_safe;_Stock_Synthesis_by_Richard_Methot_(NOAA)_using_ADMB_12.2
+#Stock Synthesis (SS) is a work of the U.S. Government and is not subject to copyright protection in the United States.
+#Foreign copyrights may apply. See copyright.txt for more information.
+Tue Aug 31 11:30:34 2021
+
+settle_month is less than spawn_month, so logical age at settlement calculated to be: 1  for settle_time 1.  Does not match read value of 0 are you sure? 
+setting in starter does not request all priors, and 1 parameters have priors and are not estimated, so their prior not included in obj_fun.
+Final gradient: 1.90464 is larger than final_conv: 1e-05
+ warning: poor convergence in Fspr search 0.4 0.450199
+ warning: Fmult = 40 cannot get high enough to achieve low SPR target: 0.4; SPR achieved is: 0.450199
+Number_of_active_parameters_on_or_near_bounds: 2
+ N warnings: 6
