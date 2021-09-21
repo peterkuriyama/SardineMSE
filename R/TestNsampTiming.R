@@ -6,6 +6,8 @@ library(foreach) #if using run_parallel = TRUE
 library(doParallel) #if using run_parallel = TRUE
 
 source("MakeRecruitDevs.R")
+source("R/SourceDiagnosticPlots.R")
+
 
 # define SD of recruitment deviations as 'sigmaR' from SS control file
 devSD <- 1
@@ -26,7 +28,7 @@ mseOutputPath <- "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohortGro
 OMmodelPath <- "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/0_estimate_cohort_growh"
 
 # Define Observation Model ------------------------------------------------
-datfile <- SS_readdat(file = paste0(OMmodelPath, "/data.ss"), version = "3.30")
+datfile <- SS_readdat(file = paste0(OMmodelPath, "/filled_dat_marginals.ss"), version = "3.30")
 sample_struct <- create_sample_struct(dat = datfile, nyrs = nyrs)
 
 # create_sample_strct() has trouble IDing SE for survey CPUE
@@ -58,7 +60,7 @@ sample_struct$lencomp = data.frame(Yr = rep(c(yrsrt:yrend),nldat),
                                    FltSvy = c(rep(4,nyrs),rep(1,nyrs),rep(2,nyrs),rep(3,nyrs)),
                                    Sex = rep(0,nyrs*nldat),
                                    Part = rep(0,nyrs*nldat),
-                                   Nsamp = c(rep(10,nyrs),rep(10,nyrs),rep(10,nyrs),rep(10,nyrs)))
+                                   Nsamp = c(rep(100,nyrs),rep(100,nyrs),rep(100,nyrs),rep(100,nyrs)))
 
 #for age comps same surveys as as lcomps
 nadat=4
@@ -70,7 +72,7 @@ sample_struct$agecomp = data.frame(Yr = rep(c(yrsrt:yrend),nadat),
                                    Ageerr = c(rep(4,nyrs),rep(4,nyrs),rep(4,nyrs),rep(4,nyrs)),
                                    Lbin_lo = c(rep(-1,nyrs),rep(-1,nyrs),rep(-1,nyrs),rep(-1,nyrs)),
                                    Lbin_hi = c(rep(-1,nyrs),rep(-1,nyrs),rep(-1,nyrs),rep(-1,nyrs)),
-                                   Nsamp = c(rep(10,nyrs),rep(10,nyrs),rep(10,nyrs),rep(10,nyrs)))
+                                   Nsamp = c(rep(100,nyrs),rep(100,nyrs),rep(100,nyrs),rep(100,nyrs)))
 
 
 sample_struct_list <- list("5pctAnnChangeNsamp10Model" = sample_struct)
@@ -79,6 +81,7 @@ sample_struct_list <- list("5pctAnnChangeNsamp10Model" = sample_struct)
 #run_res_path <- file.path("C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE", "results")
 # dir.create(mseOutputPath)
 
+# EM starts in 1981 to check high data quality again
 EMmodelPath <- "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/EM/4_shortEM_constgrowth_constselex"
 # EM starter.ss file must indicate init values are to be pulled from control.ss file, not ss.par
 
@@ -242,7 +245,11 @@ compDiagPlots(dir = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohort
 
 compDiagPlots(dir = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohortGrowthOMfixedParamsEM",
               scenario = "5pctAnnChangeNsamp40Model",
-              termYr = 2028)
+              termYr = 2028, biomass = FALSE)
+
+compDiagPlots(dir = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohortGrowthOMfixedParamsEM",
+              scenario = "5pctAnnChangeNsamp100Model",
+              termYr = 2028, biomass = FALSE)
 
 age1plusDiagPlots(dir = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohortGrowthOMfixedParamsEM",
                   scenario = "5pctAnnChangeNsamp10Model", termYr = 2028)
@@ -252,3 +259,6 @@ age1plusDiagPlots(dir = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/co
 
 age1plusDiagPlots(dir = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohortGrowthOMfixedParamsEM",
                   scenario = "5pctAnnChangeNsamp40Model", termYr = 2028)
+
+age1plusDiagPlots(dir = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohortGrowthOMfixedParamsEM",
+                  scenario = "5pctAnnChangeNsamp100Model", termYr = 2028)

@@ -1,7 +1,7 @@
 # Source diagnostic plots
 
-source("age1plusDiagPlots.R")
-source("FmsyDiagPlots.R")
-source("recrDiagPlots.R")
-source("compDiagPlots.R")
-source("bDiagPlots.R")
+source("R/age1plusDiagPlots.R")
+source("R/FmsyDiagPlots.R")
+source("R/recrDiagPlots.R")
+source("R/compDiagPlots.R")
+source("R/bDiagPlots.R")
