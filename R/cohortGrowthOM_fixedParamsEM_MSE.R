@@ -89,7 +89,7 @@ EMmodelPath <- "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/EM/4_shortE
   
 run_SSMSE(scen_name_vec = "constGrowth_compNsamp",# name of the scenario
           out_dir_scen_vec = mseOutputPath, # directory in which to run the scenario
-          iter_vec = c(5), # run with 5 iterations for now
+          iter_vec = c(2), # run with 5 iterations for now
           OM_name_vec = NULL, # specify directories instead
           OM_in_dir_vec = OMmodelPath, # OM files
           EM_name_vec = "constGrowthOMfixedParamsEM", # cod is included in package data

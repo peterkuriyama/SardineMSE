@@ -15,7 +15,7 @@ mseOutputPath <- "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/margComps
 # Operating Model - Research Model ----------------------------------------
 
 # directory for OM SS code
-OMmodelPath <- "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/OM_20210917"
+OMmodelPath <- "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/OM/margComp_20210921"
 # RW: need to re-save data.ss_new as data.ss to fix formatting for SS_readdat()
 
 # ----- Look at forecasting ---- 
@@ -99,7 +99,7 @@ EMmodelPath <- "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/EM/4_shortE
   
 run_SSMSE(scen_name_vec = "margComps_highDatQual",# name of the scenario
           out_dir_scen_vec = mseOutputPath, # directory in which to run the scenario
-          iter_vec = c(6), # run with 5 iterations for now
+          iter_vec = c(2), # run with 5 iterations for now
           OM_name_vec = NULL, # specify directories instead
           OM_in_dir_vec = OMmodelPath, # OM files
           EM_name_vec = "margCompsOMfixedSelexEM", # cod is included in package data
@@ -108,9 +108,9 @@ run_SSMSE(scen_name_vec = "margComps_highDatQual",# name of the scenario
           use_SS_boot_vec = TRUE, # use the SS bootstrap module for sampling
           nyrs_vec = nyrs,        # Years to project OM forward
           nyrs_assess_vec = 1, # Years between assessments
-          rec_dev_pattern = "rand", # Use random recruitment devs
-          scope = "2", # to use the same recruitment devs across scenarios.
-          impl_error_pattern = "none", # Don't use implementation error
+          # rec_dev_pattern = "rand", # Use random recruitment devs
+          # scope = "2", # to use the same recruitment devs across scenarios.
+          # impl_error_pattern = "none", # Don't use implementation error
           run_EM_last_yr = FALSE, # Run the EM in 106
           run_parallel = TRUE, # Run iterations in parallel
           sample_struct_list = sample_struct_list, # How to sample data for running the EM.
