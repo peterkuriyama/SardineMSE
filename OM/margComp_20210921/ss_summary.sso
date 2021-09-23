@@ -3,7 +3,7 @@
 #Foreign copyrights may apply. See copyright.txt for more information.
 filled_dat_marginals.ss #_DataFile 
 om.ctl #_Control 
-Run_Date: Tue Sep 21 15:57:17 2021
+Run_Date: Wed Sep 22 11:00:07 2021
 Final_phase: 1  N_iterations: 8
 #_LIKELIHOOD 
 Label logL*Lambda

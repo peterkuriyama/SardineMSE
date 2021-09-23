@@ -38,6 +38,7 @@ datfile <- SS_readdat(file = paste0(OMmodelPath, "/filled_dat_marginals.ss"), ve
 nyrs <- 10
 
 sample_struct <- create_sample_struct(dat = datfile, nyrs = nyrs)
+traceback()
 
 #specify the start year of data inputs
 yrsrt = datfile$endyr +1
@@ -94,12 +95,12 @@ sample_struct_list <- list("researchModel" = sample_struct)
 # dir.create(mseOutputPath)
 
 # EM starts in 1981 to test a high data quality scenario
-EMmodelPath <- "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/EM/4_shortEM_constgrowth_constselex"
+EMmodelPath <- "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/EM/EM_alldat"
 # EM starter.ss file must indicate init values are to be pulled from control.ss file, not ss.par
   
 run_SSMSE(scen_name_vec = "margComps_highDatQual",# name of the scenario
           out_dir_scen_vec = mseOutputPath, # directory in which to run the scenario
-          iter_vec = c(2), # run with 5 iterations for now
+          iter_vec = c(8), # run with 5 iterations for now
           OM_name_vec = NULL, # specify directories instead
           OM_in_dir_vec = OMmodelPath, # OM files
           EM_name_vec = "margCompsOMfixedSelexEM", # cod is included in package data
@@ -108,13 +109,13 @@ run_SSMSE(scen_name_vec = "margComps_highDatQual",# name of the scenario
           use_SS_boot_vec = TRUE, # use the SS bootstrap module for sampling
           nyrs_vec = nyrs,        # Years to project OM forward
           nyrs_assess_vec = 1, # Years between assessments
-          # rec_dev_pattern = "rand", # Use random recruitment devs
-          # scope = "2", # to use the same recruitment devs across scenarios.
-          # impl_error_pattern = "none", # Don't use implementation error
+          rec_dev_pattern = "rand", # Use random recruitment devs
+          scope = "2", # to use the same recruitment devs across scenarios.
+          impl_error_pattern = "none", # Don't use implementation error
           run_EM_last_yr = FALSE, # Run the EM in 106
           run_parallel = TRUE, # Run iterations in parallel
           sample_struct_list = sample_struct_list, # How to sample data for running the EM.
-          seed = 1234) #Set a fixed integer seed that allows replication
+          seed = 12343) #Set a fixed integer seed that allows replication
 
 # ~1.5 hrs for 5 its.
 
