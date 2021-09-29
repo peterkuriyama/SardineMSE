@@ -124,6 +124,12 @@ run_SSMSE(scen_name_vec = "margComps_highDatQual",# name of the scenario
 # Summarize 1 iteration of output
 sumry <- SSMSE_summary_all(mseOutputPath)
 
+omOut <- SS_output(dir = paste0(mseOutputPath, "/margComps_highDatQual/7/margComp_20210921_OM"))
+SS_plots(replist = omOut, plot = c(1,2, 16:20, 25, 26))
+
+termEMOut <- SS_output(dir = paste0(mseOutputPath, "/margComps_highDatQual/7/margCompsOMfixedSelexEM_EM_2028"))
+SS_plots(replist = termEMOut, plot = c(1,2, 16:20, 25, 26))
+
 sumry$ts[, c("model_run", "year", "SpawnBio", "iteration")]
 # Get rid of duplicated SSB years
 tsMod <- na.omit(sumry$ts)

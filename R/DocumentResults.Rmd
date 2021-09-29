@@ -20,7 +20,13 @@ library(ss3sim)
 library(hablar) # just so I can convert a column data type
 source("plot_comp_sampling.R")
 source("plot_index_sampling.R")
-source("SourceDiagnosticPlots.R")
+
+source("age1plusDiagPlots.R")
+source("FmsyDiagPlots.R")
+source("recrDiagPlots.R")
+source("catchDiagPlots.R")
+source("compDiagPlots.R")
+source("bDiagPlots.R")
 ```
 
 # Evaluation of sardine cohort growth operating model
@@ -355,4 +361,43 @@ FmsyDiagPlots(dir = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/constG
 age1plusDiagPlots(dir = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/constGrowthOMfixedParamsEM",
               scenario = "constGrowth_compNsamp", termYr = 2024)
 
+```
+
+## Sample size test with cohort growth OM model
+
+```{r sampleSizeTest}
+age1plusDiagPlots(dir = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohortGrowthOMfixedParamsEM",
+                  scenario = "5pctAnnChangeNsamp10Model", termYr = 2028)
+
+age1plusDiagPlots(dir = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohortGrowthOMfixedParamsEM",
+                  scenario = "5pctAnnChangeNsamp20Model", termYr = 2028)
+
+age1plusDiagPlots(dir = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohortGrowthOMfixedParamsEM",
+                  scenario = "5pctAnnChangeNsamp40Model", termYr = 2028)
+
+age1plusDiagPlots(dir = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/cohortGrowthOMfixedParamsEM",
+                  scenario = "5pctAnnChangeNsamp100Model", termYr = 2028)
+```
+
+## Marginal compositions OM and fixed selectivity EM with high data quality
+```{r margComps_highDatQual}
+bDiagPlots(dir = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/margCompsOMfixedSelexEM",
+          scenario = "margComps_highDatQual",
+          termYr = 2028, surveyInx = 4)
+
+compDiagPlots(dir = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/margCompsOMfixedSelexEM",
+              scenario = "margComps_highDatQual",
+              termYr = 2028, surveyInx = 4)
+
+recrDiagPlots(dir = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/margCompsOMfixedSelexEM",
+              scenario = "margComps_highDatQual", termYr = 2028)
+
+catchDiagPlots(dir = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/margCompsOMfixedSelexEM",
+              scenario = "margComps_highDatQual", termYr = 2028)
+
+FmsyDiagPlots(dir = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/margCompsOMfixedSelexEM",
+              scenario = "margComps_highDatQual", termYr = 2028)
+
+age1plusDiagPlots(dir = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/margCompsOMfixedSelexEM",
+              scenario = "margComps_highDatQual", termYr = 2028)
 ```

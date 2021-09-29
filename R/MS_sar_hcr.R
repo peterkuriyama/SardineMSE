@@ -23,7 +23,7 @@
 MS_sar_hcr = function(EM_out_dir = NULL, 
                        init_loop = TRUE, OM_dat,
                        verbose = FALSE, nyrs_assess, dat_yrs,
-                       sample_struct = NULL, interim_struct = NULL, seed = NULL){
+                       sample_struct = NULL, interim_struct = NULL, seed = NULL, ...){
 
 new_datfile_name <- "init_dat.ss"
 # change the name of data file.
