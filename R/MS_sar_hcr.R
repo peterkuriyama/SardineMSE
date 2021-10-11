@@ -31,6 +31,12 @@ start <- SS_readstarter(file.path(EM_out_dir, "starter.ss"),
                         verbose = FALSE
 )
 
+
+# test creating folders ---------------------------------------------------
+#dir.create()
+check_dir(EM_out_dir)
+
+
 if (init_loop) {
   # copy over raw data file from the OM to EM folder
   SS_writedat(OM_dat,
@@ -130,6 +136,7 @@ SS_writeforecast(fcast,
 # given all checks for th einput files are good, run the EM
 run_EM(EM_dir = EM_out_dir, verbose = verbose, check_converged = TRUE)
 
+#browser()
 #extract the required output, use EM_out_dir as input
 EM_out = SS_output(EM_out_dir)
 
@@ -204,7 +211,7 @@ catch_bio = catch_df # catch in biomass. In this case, catch is in biomass for b
 catch_F = NULL # catch in terms of F, can be left as NULL.
 discards <- NULL # discards can be left as NULL since there are no discards
 #Put the new catches in the format needed by SSMSE according to parse_MS function
-catch_list <- list(catch = catch,
+catch_list <- list(catch = catch_df,
                    catch_bio = catch_bio, 
                    catch_F = catch_F,
                    discards = discards)

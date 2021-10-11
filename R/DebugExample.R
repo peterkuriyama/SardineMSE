@@ -5,13 +5,13 @@ library(tidyverse)
 library(r4ss)
 library(foreach) #if using run_parallel = TRUE
 library(doParallel) #if using run_parallel = TRUE
-
-library(SSMSE) # v0.1.0
-  # RW: This works with old run_SSMSE() formatting, though now it gives updates 
-  #     for each year of the EM applied?
-
-  # RW: These don't
-library(SSMSE, lib.loc = "C:/Users/rwildermuth/Documents/R/libversions") # v0.2.0
+# 
+# library(SSMSE) # v0.1.0
+#   # RW: This works with old run_SSMSE() formatting, though now it gives updates 
+#   #     for each year of the EM applied?
+# 
+#   # RW: These don't
+# library(SSMSE, lib.loc = "C:/Users/rwildermuth/Documents/R/libversions") # v0.2.0
 devtools::load_all(path = "C:/Users/rwildermuth/Documents/SSMSE")
 
 source("R/MS_sar_hcr.R")
@@ -34,7 +34,7 @@ datfile <- SS_readdat(file = paste0(OMmodelPath, "/filled_dat_marginals.ss"), ve
 # create_sample_strct() has trouble IDing SE for survey CPUE
 # define an index for the Acoustic-Trawl survey as in Desiree's code
 #specify number of years of MSE loop
-nyrs <- 5
+nyrs <- 2
 
 #sample_struct <- create_sample_struct(dat = datfile, nyrs = nyrs)
 #traceback()
@@ -97,16 +97,16 @@ sample_struct_list <- list("SardineHCR" = sample_struct)
 EMmodelPath <- "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/EM/EM_alldat"
 # EM starter.ss file must indicate init values are to be pulled from control.ss file, not ss.par
 
-run_SSMSE(scen_name_vec = "margComps_Fcast0.1.0", #"margComps_SardineHCR",# name of the scenario
+run_SSMSE(scen_name_vec = "margComps_SardineMS0.1moduitls",# name of the scenario
           out_dir_scen_vec = mseOutputPath, # directory in which to run the scenario
           iter_vec = c(1), # run with 5 iterations for now
           OM_name_vec = NULL, # specify directories instead
           OM_in_dir_vec = OMmodelPath, # OM files
           EM_name_vec = "margCompsOMfixedSelexEM", # cod is included in package data
           EM_in_dir_vec = EMmodelPath, # EM files
-          MS_vec = "EM",
-          # MS_vec = "MS_sar_hcr",       # The management strategy is specified in the custom function
-          # custom_MS_source = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/R/MS_sar_hcr.R", # file location of the MS function
+          # MS_vec = "EM",
+          MS_vec = "MS_sar_hcr",       # The management strategy is specified in the custom function
+          custom_MS_source = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/R/MS_sar_hcr.R", # file location of the MS function
           use_SS_boot_vec = TRUE, # use the SS bootstrap module for sampling
           nyrs_vec = nyrs,        # Years to project OM forward
           nyrs_assess_vec = 1, # Years between assessments
