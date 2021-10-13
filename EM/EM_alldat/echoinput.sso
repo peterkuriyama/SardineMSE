@@ -2,7 +2,7 @@
 #V3.30.17.00;_2021_06_11;_safe;_Stock_Synthesis_by_Richard_Methot_(NOAA)_using_ADMB_12.3
 #Stock Synthesis (SS) is a work of the U.S. Government and is not subject to copyright protection in the United States.
 #Foreign copyrights may apply. See copyright.txt for more information.
-Tue Sep 21 11:39:40 2021
+Tue Oct 12 13:33:55 2021
 
 om.dat  datfilename
 om.ctl  ctlfilename
@@ -530,7 +530,7 @@ next read 4 values for:  control rule shape(0, 1, 2, 3 or 4), inflection (like 0
 2021 # echoed value
 
 #next enter 0, or stddev of implementation error
-0 # echoed value
+1e-05 # echoed value
 
 #next select rebuilding program output (0/1)
 0 # echoed value
@@ -940,7 +940,7 @@ read timevary block parameter:  0 9 2.9235 -1 99 0 -4
  create parm for block 8
  block method 2
 read timevary block parameter:  0 11 9.5227 -1 99 0 -4
-timevary_setup 5 24 6 2 2 0 0 0 0 0 0 0 96 0
+timevary_setup 5 24 6 2 2 0 0 0 0 0 0 0 97 0
  now read 0/1 for 2D_AR
 0  #_ 0/1 to request experimental 2D_AR selectivity smoother options  
 N_selparm: 24 with timevary: 32 with TV and 2D_AR: 32 timevary parm range for sel: 6 13 13
@@ -1004,28 +1004,28 @@ Recalc_flag_for_age_selex_recalc_by_year
  18 4 1 0 1
 0 # extra stdev reporting: 0 = skip, 1 = read specs for reporting stdev for selectivity, size, and numbers, 2 = add option for M, dyn. Bzero & Smrybio 
 End of control file successful! 999
-N parameters: 180
-Parameters plus derived quant: 406
+N parameters: 181
+Parameters plus derived quant: 407
 Adjust the phases 
  requested turn_off phase: 10
 Fcast_dev_phase (read and adjusted): 0 5
-ParCount 180   Active parameters: 149
+ParCount 181   Active parameters: 150
 Turn_off_phase 10
  max_phase 5
-406
-parm 180 covar 149
-deriv_start 180 149
-parm 222 covar 191
-parm 264 covar 233
-parm 304 covar 273
-parm 344 covar 313
-parm 384 covar 353
-parm 401 covar 370  after benchmark 
-parm 403 covar 372  after forecast 
+407
+parm 181 covar 150
+deriv_start 181 150
+parm 223 covar 192
+parm 265 covar 234
+parm 305 covar 274
+parm 345 covar 314
+parm 385 covar 354
+parm 402 covar 371  after benchmark 
+parm 404 covar 373  after forecast 
  do ln(SPB) std labels for 3 years
  do Svy_sdreport labels 0
-parm 406 covar 375  after all derived quantities 
-Active parameters plus derived quantities:  375
+parm 407 covar 376  after all derived quantities 
+Active parameters plus derived quantities:  376
  N_WTage_rd 0
  last year read for -2 through Nfleet:   0 0 0 0 0 0 0 0 0
  latest fill year for -2 through Nfleet:   0 0 0 0 0 0 0 0 0
@@ -1099,7 +1099,7 @@ base SR_parm 0
 block pattern 1
 result by year:  -2.25458 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 timevary #: 4
-setup:   5 24 6 2 2 0 0 0 0 0 0 0 96 0
+setup:   5 24 6 2 2 0 0 0 0 0 0 0 97 0
 base selparm 1.5196
 6 timevary_parm: 4.77883
 7 timevary_parm: 7.06132
@@ -1180,7 +1180,7 @@ base SR_parm 0
 block pattern 2
 result by year:  -2.25458 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 timevary #: 4
-setup:   5 24 6 2 2 0 0 0 0 0 0 0 96 0
+setup:   5 24 6 2 2 0 0 0 0 0 0 0 97 0
 base selparm 1.5196
 6 timevary_parm: 4.77883
 7 timevary_parm: 7.06132

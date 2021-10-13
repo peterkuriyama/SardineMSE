@@ -138,7 +138,7 @@ run_EM(EM_dir = EM_out_dir, verbose = verbose, check_converged = TRUE)
 
 #browser()
 #extract the required output, use EM_out_dir as input
-EM_out = SS_output(EM_out_dir)
+EM_out = SS_output(EM_out_dir, verbose = FALSE)
 
 #Extract the timeseries data for the forecast period (1 yr for sardine)
 EMts = EM_out$sprseries %>% filter(Era=="FORE")
@@ -196,8 +196,7 @@ if (HG==0) {
     fleet = fcast$ForeCatch$Fleet,
     catch = catch_hg0,
     catch_se = rep(new_EM_dat$catch$catch_se[1],6))
-}
-else {
+} else {
   catch_df = data.frame(
     year = rep((mod_endyr+1),6),
     seas = fcast$ForeCatch$Seas,

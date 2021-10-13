@@ -3,8 +3,8 @@
 #Foreign copyrights may apply. See copyright.txt for more information.
 om.dat #_DataFile 
 om.ctl #_Control 
-Run_Date: Tue Sep 21 11:39:40 2021
-Final_phase: 6  N_iterations: 1578
+Run_Date: Tue Oct 12 13:33:55 2021
+Final_phase: 6  N_iterations: 1582
 #_LIKELIHOOD 
 Label logL*Lambda
 TOTAL_LogL 364.928
@@ -94,6 +94,7 @@ Main_RecrDev_2017 -0.945131 0.117942 Act 0.405487
 Main_RecrDev_2018 0.138022 0.164635 Act 0.513802
 Late_RecrDev_2019 0 1 Act 0.5
 ForeRecr_2020 0 1 Act 0.5
+Impl_err_2020 0 1e-05 Act 0.5
 #_Init_F
 InitF_seas_2_flt_2MexCal_S2 0.210718 0.130996 Act 0.0150513
 #_Catchability

@@ -1,0 +1,11 @@
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2021
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2020 
+run mceval objfun B_yr 2020 
+1 0 598541 N_at_Age  1 1  5.30415e+06 2.7686e+06 1.46453e+06 535489 261369 141778 76201.8 41268.4 22327.3 12129.3 14425.5
+1 0 598541 F/Fmsy  0.0363505
+1 0 598541 B/Bmsy  0.505095
+1 0 598541 F/Fmsy_stdev 0 
+1 0 598541 B/Bmsy_stdev 0 

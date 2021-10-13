@@ -4,14 +4,14 @@
 #_user_support_available_at:NMFS.Stock.Synthesis@noaa.gov
 #_user_info_available_at:https://vlab.noaa.gov/group/stock-synthesis
 
-StartTime: Tue Sep 21 11:39:40 2021
-EndTime: Tue Sep 21 11:43:26 2021
-This run took: 0 hours, 3 minutes, 46 seconds.
+StartTime: Tue Oct 12 13:33:55 2021
+EndTime: Tue Oct 12 13:37:20 2021
+This run took: 0 hours, 3 minutes, 25 seconds.
 Data_File: om.dat
 Control_File: om.ctl
 
 Convergence_Level: 3.59468e-05 is_final_gradient
-Hessian: 401.344 is ln(determinant).
+Hessian: 424.37 is ln(determinant).
 
 Data_Comments
 #C data file created using the SS_writedat function in the R package r4ss
@@ -269,121 +269,122 @@ Num Label Value Active_Cnt  Phase Min Max Init  Used  Status  Parm_StDev Gradien
 66 Main_RecrDev_2018 0.138022 49 1 -5 5 0 0 act 0.164635 4.97505e-08 dev 
 67 Late_RecrDev_2019 0 50 6 -5 5 0 0 act 1 0 dev 
 68 ForeRecr_2020 0 51 6 -5 5 0 0 act 1 0 dev 
-69 InitF_seas_2_flt_2MexCal_S2 0.210718 52 1 0 14 10 10 OK  0.130996 2.19746e-07 No_prior 
-70 LnQ_base_AT_Survey(4) 0 _ -2 -3 3 0 0 NA _ _  No_prior 
-71 LnQ_base_DEPM(5) -1.83 _ -2 -3 3 -1.83 -1.83 NA _ _  No_prior 
-72 LnQ_base_TEP_all(6) -0.59 _ -2 -3 3 -0.59 -0.59 NA _ _  No_prior 
-73 Size_inflection_MexCal_S1(1) 10.769 53 3 0 30 14.0042 14.0042 OK  0.13267 -9.38651e-07 No_prior 
-74 Size_95%width_MexCal_S1(1) 0.819322 54 3 0 10 2.0029 2.0029 OK  0.180182 -2.76788e-07 No_prior 
-75 AgeSel_P1_MexCal_S1(1) 0.499995 55 3 -10 11 1.00004 1.00004 OK  234.784 -1.52239e-09 No_prior 
-76 AgeSel_P2_MexCal_S1(1) 1.3215 56 3 -10 11 0.837451 0.837451 OK  0.170256 -4.00736e-07 No_prior 
-77 AgeSel_P3_MexCal_S1(1) 0.870414 57 3 -10 15 -0.884887 -0.884887 OK  0.0610044 -1.05674e-06 No_prior 
-78 AgeSel_P4_MexCal_S1(1) -1.02178 58 3 -10 11 -0.635305 -0.635305 OK  0.13004 -7.34349e-07 No_prior 
-79 AgeSel_P5_MexCal_S1(1) -0.77882 59 3 -10 11 0.91816 0.91816 OK  0.330777 -9.82749e-07 No_prior 
-80 AgeSel_P6_MexCal_S1(1) -0.408742 60 3 -10 11 -0.111484 -0.111484 OK  0.47234 -4.12798e-07 No_prior 
-81 AgeSel_P7_MexCal_S1(1) -0.333586 61 3 -10 11 -0.989063 -0.989063 OK  0.695492 4.52566e-08 No_prior 
-82 AgeSel_P8_MexCal_S1(1) -0.409844 62 3 -10 11 -1.49305 -1.49305 OK  1.20119 1.64705e-07 No_prior 
-83 AgeSel_P9_MexCal_S1(1) -3.94636 63 3 -10 11 -1.89536 -1.89536 OK  8.55671 -9.35628e-10 No_prior 
-84 AgeSel_P1_MexCal_S2(2) 1.99999 _ -3 -10 11 1.99999 1.99999 NA _ _  No_prior 
-85 AgeSel_P2_MexCal_S2(2) 1.46595 64 3 -10 15 0.769735 0.769735 OK  0.0602096 3.26012e-07 No_prior 
-86 AgeSel_P3_MexCal_S2(2) -0.164068 65 3 -10 11 0.135819 0.135819 OK  0.0595444 -4.08308e-07 No_prior 
-87 AgeSel_P4_MexCal_S2(2) -0.251909 66 3 -10 11 -0.104782 -0.104782 OK  0.117769 -5.5259e-07 No_prior 
-88 AgeSel_P5_MexCal_S2(2) -1.5421 67 3 -10 11 -1.03412 -1.03412 OK  0.440083 -6.91312e-07 No_prior 
-89 AgeSel_P6_MexCal_S2(2) 0.780385 68 3 -10 11 0.213999 0.213999 OK  0.523596 1.47676e-08 No_prior 
-90 AgeSel_P7_MexCal_S2(2) -1.4204 69 3 -10 11 -1.7739 -1.7739 OK  0.95439 -1.04475e-06 No_prior 
-91 AgeSel_P8_MexCal_S2(2) 0.510251 70 3 -10 11 -0.285435 -0.285435 OK  1.25634 -4.66665e-07 No_prior 
-92 AgeSel_P9_MexCal_S2(2) -2.77856 71 3 -10 11 -6.97878 -6.97878 OK  3.20789 2.93285e-08 No_prior 
-93 Age_inflection_PNW(3) 2.61584 72 4 0 10 5.00095 5.00095 OK  0.0350165 -9.53646e-07 No_prior 
-94 Age_95%width_PNW(3) 0.994154 73 4 -5 15 0.483799 0.483799 OK  0.0338715 7.3865e-07 No_prior 
-95 AgeSel_P1_AT_Survey(4) 0 _ -3 0 9 0 0 NA _ _  No_prior 
-96 AgeSel_P2_AT_Survey(4) 1.5196 _ -4 0 11 1.5196 1.5196 NA _ _  No_prior 
-97 AgeSel_P2_AT_Survey(4)_BLK2repl_2012 4.77883 _ -4 0 9 4.77883 4.77883 NA _ _  No_prior 
-98 AgeSel_P2_AT_Survey(4)_BLK2repl_2013 7.06132 _ -4 0 9 7.06132 7.06132 NA _ _  No_prior 
-99 AgeSel_P2_AT_Survey(4)_BLK2repl_2014 3.964 _ -4 0 9 3.964 3.964 NA _ _  No_prior 
-100 AgeSel_P2_AT_Survey(4)_BLK2repl_2015 0 _ -4 0 9 0 0 NA _ _  No_prior 
-101 AgeSel_P2_AT_Survey(4)_BLK2repl_2016 2.3765 _ -4 0 9 2.3765 2.3765 NA _ _  No_prior 
-102 AgeSel_P2_AT_Survey(4)_BLK2repl_2017 0 _ -4 0 9 0 0 NA _ _  No_prior 
-103 AgeSel_P2_AT_Survey(4)_BLK2repl_2018 2.9235 _ -4 0 9 2.9235 2.9235 NA _ _  No_prior 
-104 AgeSel_P2_AT_Survey(4)_BLK2repl_2019 9.5227 _ -4 0 11 9.5227 9.5227 NA _ _  No_prior 
-105 L_at_Amax_Fem_GP_1_DEVmult_1982 0.506652 74 4 -10 10 0 0 act 0.848907 5.49584e-08 dev 
-106 L_at_Amax_Fem_GP_1_DEVmult_1983 0.377351 75 4 -10 10 0 0 act 0.86421 -8.0908e-08 dev 
-107 L_at_Amax_Fem_GP_1_DEVmult_1984 0.537192 76 4 -10 10 0 0 act 0.878774 -8.05473e-08 dev 
-108 L_at_Amax_Fem_GP_1_DEVmult_1985 0.872025 77 4 -10 10 0 0 act 0.845073 -5.55533e-08 dev 
-109 L_at_Amax_Fem_GP_1_DEVmult_1986 0.545553 78 4 -10 10 0 0 act 0.828105 -2.67087e-07 dev 
-110 L_at_Amax_Fem_GP_1_DEVmult_1987 1.20603 79 4 -10 10 0 0 act 0.820581 6.35589e-08 dev 
-111 L_at_Amax_Fem_GP_1_DEVmult_1988 0.337339 80 4 -10 10 0 0 act 0.827132 -5.20487e-08 dev 
-112 L_at_Amax_Fem_GP_1_DEVmult_1989 0.632463 81 4 -10 10 0 0 act 0.799869 2.09258e-07 dev 
-113 L_at_Amax_Fem_GP_1_DEVmult_1990 -0.215071 82 4 -10 10 0 0 act 0.790539 -2.36103e-07 dev 
-114 L_at_Amax_Fem_GP_1_DEVmult_1991 -0.0301637 83 4 -10 10 0 0 act 0.810253 3.54985e-08 dev 
-115 L_at_Amax_Fem_GP_1_DEVmult_1992 -0.237914 84 4 -10 10 0 0 act 0.864438 -1.68629e-07 dev 
-116 L_at_Amax_Fem_GP_1_DEVmult_1993 -0.0436393 85 4 -10 10 0 0 act 0.903555 -2.1822e-07 dev 
-117 L_at_Amax_Fem_GP_1_DEVmult_1994 -0.0546152 86 4 -10 10 0 0 act 0.92384 -2.32689e-08 dev 
-118 L_at_Amax_Fem_GP_1_DEVmult_1995 -0.534179 87 4 -10 10 0 0 act 0.920647 6.30017e-08 dev 
-119 L_at_Amax_Fem_GP_1_DEVmult_1996 -0.594135 88 4 -10 10 0 0 act 0.915328 1.41392e-08 dev 
-120 L_at_Amax_Fem_GP_1_DEVmult_1997 -0.554294 89 4 -10 10 0 0 act 0.907936 -2.12819e-07 dev 
-121 L_at_Amax_Fem_GP_1_DEVmult_1998 -0.535266 90 4 -10 10 0 0 act 0.947027 -7.57451e-08 dev 
-122 L_at_Amax_Fem_GP_1_DEVmult_1999 -0.41899 91 4 -10 10 0 0 act 0.919754 -1.19592e-07 dev 
-123 L_at_Amax_Fem_GP_1_DEVmult_2000 0.255802 92 4 -10 10 0 0 act 0.901899 5.82573e-08 dev 
-124 L_at_Amax_Fem_GP_1_DEVmult_2001 0.767537 93 4 -10 10 0 0 act 0.853443 7.31522e-08 dev 
-125 L_at_Amax_Fem_GP_1_DEVmult_2002 0.862374 94 4 -10 10 0 0 act 0.872765 2.70033e-08 dev 
-126 L_at_Amax_Fem_GP_1_DEVmult_2003 0.224535 95 4 -10 10 0 0 act 0.935876 4.09795e-08 dev 
-127 L_at_Amax_Fem_GP_1_DEVmult_2004 -0.314232 96 4 -10 10 0 0 act 0.943808 5.27167e-08 dev 
-128 L_at_Amax_Fem_GP_1_DEVmult_2005 -0.810459 97 4 -10 10 0 0 act 0.959025 -6.85328e-08 dev 
-129 L_at_Amax_Fem_GP_1_DEVmult_2006 -0.929769 98 4 -10 10 0 0 act 0.934239 -1.33895e-07 dev 
-130 L_at_Amax_Fem_GP_1_DEVmult_2007 -1.40016 99 4 -10 10 0 0 act 0.945583 -4.51148e-08 dev 
-131 L_at_Amax_Fem_GP_1_DEVmult_2008 -1.68795 100 4 -10 10 0 0 act 0.930125 -1.89835e-07 dev 
-132 L_at_Amax_Fem_GP_1_DEVmult_2009 -1.5999 101 4 -10 10 0 0 act 0.930452 -5.66397e-08 dev 
-133 L_at_Amax_Fem_GP_1_DEVmult_2010 -1.01279 102 4 -10 10 0 0 act 0.930098 6.44645e-08 dev 
-134 L_at_Amax_Fem_GP_1_DEVmult_2011 -0.703669 103 4 -10 10 0 0 act 0.913936 -3.10462e-07 dev 
-135 L_at_Amax_Fem_GP_1_DEVmult_2012 -0.108127 104 4 -10 10 0 0 act 0.90368 -7.20646e-08 dev 
-136 L_at_Amax_Fem_GP_1_DEVmult_2013 0.404214 105 4 -10 10 0 0 act 0.905426 1.60291e-07 dev 
-137 L_at_Amax_Fem_GP_1_DEVmult_2014 0.323096 106 4 -10 10 0 0 act 0.925974 -2.68303e-07 dev 
-138 L_at_Amax_Fem_GP_1_DEVmult_2015 0.506378 107 4 -10 10 0 0 act 0.857172 -1.66127e-07 dev 
-139 L_at_Amax_Fem_GP_1_DEVmult_2016 0.963005 108 4 -10 10 0 0 act 0.87543 -1.99278e-07 dev 
-140 L_at_Amax_Fem_GP_1_DEVmult_2017 1.39224 109 4 -10 10 0 0 act 0.83149 -2.96607e-07 dev 
-141 L_at_Amax_Fem_GP_1_DEVmult_2018 0.44667 110 4 -10 10 0 0 act 0.826425 1.67412e-07 dev 
-142 L_at_Amax_Fem_GP_1_DEVmult_2019 0.19419 111 4 -10 10 0 0 act 0.98878 5.98128e-08 dev 
-143 CohortGrowDev_DEVmult_1982 0.674327 112 5 -10 10 0 0 act 0.617188 3.23081e-07 dev 
-144 CohortGrowDev_DEVmult_1983 1.99344 113 5 -10 10 0 0 act 0.38157 -2.01134e-07 dev 
-145 CohortGrowDev_DEVmult_1984 2.61014 114 5 -10 10 0 0 act 0.448826 -2.16332e-07 dev 
-146 CohortGrowDev_DEVmult_1985 1.13485 115 5 -10 10 0 0 act 0.513763 -1.99485e-07 dev 
-147 CohortGrowDev_DEVmult_1986 3.50089 116 5 -10 10 0 0 act 0.47114 1.32395e-07 dev 
-148 CohortGrowDev_DEVmult_1987 0.909452 117 5 -10 10 0 0 act 0.45576 -2.60677e-07 dev 
-149 CohortGrowDev_DEVmult_1988 2.99413 118 5 -10 10 0 0 act 0.44365 -3.61848e-07 dev 
-150 CohortGrowDev_DEVmult_1989 0.45566 119 5 -10 10 0 0 act 0.461727 -9.23875e-08 dev 
-151 CohortGrowDev_DEVmult_1990 0.724717 120 5 -10 10 0 0 act 0.667006 6.10361e-08 dev 
-152 CohortGrowDev_DEVmult_1991 -1.32695 121 5 -10 10 0 0 act 0.427068 3.77517e-09 dev 
-153 CohortGrowDev_DEVmult_1992 -0.481829 122 5 -10 10 0 0 act 0.481108 -1.81533e-07 dev 
-154 CohortGrowDev_DEVmult_1993 -0.531216 123 5 -10 10 0 0 act 0.359601 -2.15656e-07 dev 
-155 CohortGrowDev_DEVmult_1994 -1.29741 124 5 -10 10 0 0 act 0.331585 2.03468e-07 dev 
-156 CohortGrowDev_DEVmult_1995 -1.23121 125 5 -10 10 0 0 act 0.540507 -6.8574e-08 dev 
-157 CohortGrowDev_DEVmult_1996 -1.27124 126 5 -10 10 0 0 act 0.502474 -1.74208e-07 dev 
-158 CohortGrowDev_DEVmult_1997 -1.99114 127 5 -10 10 0 0 act 0.428713 -2.34227e-07 dev 
-159 CohortGrowDev_DEVmult_1998 -1.18871 128 5 -10 10 0 0 act 0.383595 -2.93277e-07 dev 
-160 CohortGrowDev_DEVmult_1999 -0.0473282 129 5 -10 10 0 0 act 0.666959 -1.48995e-07 dev 
-161 CohortGrowDev_DEVmult_2000 -1.88078 130 5 -10 10 0 0 act 0.584786 2.4853e-07 dev 
-162 CohortGrowDev_DEVmult_2001 -0.369639 131 5 -10 10 0 0 act 0.390866 7.52594e-08 dev 
-163 CohortGrowDev_DEVmult_2002 -0.714114 132 5 -10 10 0 0 act 0.80443 3.2971e-08 dev 
-164 CohortGrowDev_DEVmult_2003 -4.06285 133 5 -10 10 0 0 act 0.321083 -4.19993e-07 dev 
-165 CohortGrowDev_DEVmult_2004 -4.54004 134 5 -10 10 0 0 act 0.412172 2.04824e-07 dev 
-166 CohortGrowDev_DEVmult_2005 -4.76457 135 5 -10 10 0 0 act 0.338523 -4.09319e-07 dev 
-167 CohortGrowDev_DEVmult_2006 -4.11207 136 5 -10 10 0 0 act 0.388182 -3.23586e-07 dev 
-168 CohortGrowDev_DEVmult_2007 -2.83479 137 5 -10 10 0 0 act 0.451038 -1.6592e-07 dev 
-169 CohortGrowDev_DEVmult_2008 -2.10223 138 5 -10 10 0 0 act 0.605296 -7.22043e-08 dev 
-170 CohortGrowDev_DEVmult_2009 -1.91039 139 5 -10 10 0 0 act 0.424551 9.98583e-09 dev 
-171 CohortGrowDev_DEVmult_2010 0.191512 140 5 -10 10 0 0 act 0.377438 -4.48701e-07 dev 
-172 CohortGrowDev_DEVmult_2011 0.486171 141 5 -10 10 0 0 act 0.875472 -5.68973e-08 dev 
-173 CohortGrowDev_DEVmult_2012 -0.130725 142 5 -10 10 0 0 act 0.976247 -4.00394e-08 dev 
-174 CohortGrowDev_DEVmult_2013 -0.212576 143 5 -10 10 0 0 act 0.637513 8.00762e-08 dev 
-175 CohortGrowDev_DEVmult_2014 0.614497 144 5 -10 10 0 0 act 0.483921 1.21929e-07 dev 
-176 CohortGrowDev_DEVmult_2015 2.99321 145 5 -10 10 0 0 act 0.344376 -1.66838e-07 dev 
-177 CohortGrowDev_DEVmult_2016 2.77014 146 5 -10 10 0 0 act 0.561003 5.93285e-08 dev 
-178 CohortGrowDev_DEVmult_2017 -1.29502 147 5 -10 10 0 0 act 0.414621 -1.13869e-07 dev 
-179 CohortGrowDev_DEVmult_2018 0.503355 148 5 -10 10 0 0 act 0.694327 4.21351e-08 dev 
-180 CohortGrowDev_DEVmult_2019 0.0711024 149 5 -10 10 0 0 act 0.941611 -2.20751e-07 dev 
+69 Impl_err_2020 0 52 6 -1 1 0 0 act 1e-05 0 dev 
+70 InitF_seas_2_flt_2MexCal_S2 0.210718 53 1 0 14 10 10 OK  0.130996 2.19746e-07 No_prior 
+71 LnQ_base_AT_Survey(4) 0 _ -2 -3 3 0 0 NA _ _  No_prior 
+72 LnQ_base_DEPM(5) -1.83 _ -2 -3 3 -1.83 -1.83 NA _ _  No_prior 
+73 LnQ_base_TEP_all(6) -0.59 _ -2 -3 3 -0.59 -0.59 NA _ _  No_prior 
+74 Size_inflection_MexCal_S1(1) 10.769 54 3 0 30 14.0042 14.0042 OK  0.13267 -9.38651e-07 No_prior 
+75 Size_95%width_MexCal_S1(1) 0.819322 55 3 0 10 2.0029 2.0029 OK  0.180182 -2.76788e-07 No_prior 
+76 AgeSel_P1_MexCal_S1(1) 0.499995 56 3 -10 11 1.00004 1.00004 OK  234.784 -1.52239e-09 No_prior 
+77 AgeSel_P2_MexCal_S1(1) 1.3215 57 3 -10 11 0.837451 0.837451 OK  0.170256 -4.00736e-07 No_prior 
+78 AgeSel_P3_MexCal_S1(1) 0.870414 58 3 -10 15 -0.884887 -0.884887 OK  0.0610044 -1.05674e-06 No_prior 
+79 AgeSel_P4_MexCal_S1(1) -1.02178 59 3 -10 11 -0.635305 -0.635305 OK  0.13004 -7.34349e-07 No_prior 
+80 AgeSel_P5_MexCal_S1(1) -0.77882 60 3 -10 11 0.91816 0.91816 OK  0.330777 -9.82749e-07 No_prior 
+81 AgeSel_P6_MexCal_S1(1) -0.408742 61 3 -10 11 -0.111484 -0.111484 OK  0.47234 -4.12798e-07 No_prior 
+82 AgeSel_P7_MexCal_S1(1) -0.333586 62 3 -10 11 -0.989063 -0.989063 OK  0.695492 4.52566e-08 No_prior 
+83 AgeSel_P8_MexCal_S1(1) -0.409844 63 3 -10 11 -1.49305 -1.49305 OK  1.20119 1.64705e-07 No_prior 
+84 AgeSel_P9_MexCal_S1(1) -3.94636 64 3 -10 11 -1.89536 -1.89536 OK  8.55671 -9.35628e-10 No_prior 
+85 AgeSel_P1_MexCal_S2(2) 1.99999 _ -3 -10 11 1.99999 1.99999 NA _ _  No_prior 
+86 AgeSel_P2_MexCal_S2(2) 1.46595 65 3 -10 15 0.769735 0.769735 OK  0.0602096 3.26012e-07 No_prior 
+87 AgeSel_P3_MexCal_S2(2) -0.164068 66 3 -10 11 0.135819 0.135819 OK  0.0595444 -4.08308e-07 No_prior 
+88 AgeSel_P4_MexCal_S2(2) -0.251909 67 3 -10 11 -0.104782 -0.104782 OK  0.117769 -5.5259e-07 No_prior 
+89 AgeSel_P5_MexCal_S2(2) -1.5421 68 3 -10 11 -1.03412 -1.03412 OK  0.440083 -6.91312e-07 No_prior 
+90 AgeSel_P6_MexCal_S2(2) 0.780385 69 3 -10 11 0.213999 0.213999 OK  0.523596 1.47676e-08 No_prior 
+91 AgeSel_P7_MexCal_S2(2) -1.4204 70 3 -10 11 -1.7739 -1.7739 OK  0.95439 -1.04475e-06 No_prior 
+92 AgeSel_P8_MexCal_S2(2) 0.510251 71 3 -10 11 -0.285435 -0.285435 OK  1.25634 -4.66665e-07 No_prior 
+93 AgeSel_P9_MexCal_S2(2) -2.77856 72 3 -10 11 -6.97878 -6.97878 OK  3.20789 2.93285e-08 No_prior 
+94 Age_inflection_PNW(3) 2.61584 73 4 0 10 5.00095 5.00095 OK  0.0350165 -9.53646e-07 No_prior 
+95 Age_95%width_PNW(3) 0.994154 74 4 -5 15 0.483799 0.483799 OK  0.0338715 7.3865e-07 No_prior 
+96 AgeSel_P1_AT_Survey(4) 0 _ -3 0 9 0 0 NA _ _  No_prior 
+97 AgeSel_P2_AT_Survey(4) 1.5196 _ -4 0 11 1.5196 1.5196 NA _ _  No_prior 
+98 AgeSel_P2_AT_Survey(4)_BLK2repl_2012 4.77883 _ -4 0 9 4.77883 4.77883 NA _ _  No_prior 
+99 AgeSel_P2_AT_Survey(4)_BLK2repl_2013 7.06132 _ -4 0 9 7.06132 7.06132 NA _ _  No_prior 
+100 AgeSel_P2_AT_Survey(4)_BLK2repl_2014 3.964 _ -4 0 9 3.964 3.964 NA _ _  No_prior 
+101 AgeSel_P2_AT_Survey(4)_BLK2repl_2015 0 _ -4 0 9 0 0 NA _ _  No_prior 
+102 AgeSel_P2_AT_Survey(4)_BLK2repl_2016 2.3765 _ -4 0 9 2.3765 2.3765 NA _ _  No_prior 
+103 AgeSel_P2_AT_Survey(4)_BLK2repl_2017 0 _ -4 0 9 0 0 NA _ _  No_prior 
+104 AgeSel_P2_AT_Survey(4)_BLK2repl_2018 2.9235 _ -4 0 9 2.9235 2.9235 NA _ _  No_prior 
+105 AgeSel_P2_AT_Survey(4)_BLK2repl_2019 9.5227 _ -4 0 11 9.5227 9.5227 NA _ _  No_prior 
+106 L_at_Amax_Fem_GP_1_DEVmult_1982 0.506652 75 4 -10 10 0 0 act 0.848907 5.49584e-08 dev 
+107 L_at_Amax_Fem_GP_1_DEVmult_1983 0.377351 76 4 -10 10 0 0 act 0.86421 -8.0908e-08 dev 
+108 L_at_Amax_Fem_GP_1_DEVmult_1984 0.537192 77 4 -10 10 0 0 act 0.878774 -8.05473e-08 dev 
+109 L_at_Amax_Fem_GP_1_DEVmult_1985 0.872025 78 4 -10 10 0 0 act 0.845073 -5.55533e-08 dev 
+110 L_at_Amax_Fem_GP_1_DEVmult_1986 0.545553 79 4 -10 10 0 0 act 0.828105 -2.67087e-07 dev 
+111 L_at_Amax_Fem_GP_1_DEVmult_1987 1.20603 80 4 -10 10 0 0 act 0.820581 6.35589e-08 dev 
+112 L_at_Amax_Fem_GP_1_DEVmult_1988 0.337339 81 4 -10 10 0 0 act 0.827132 -5.20487e-08 dev 
+113 L_at_Amax_Fem_GP_1_DEVmult_1989 0.632463 82 4 -10 10 0 0 act 0.799869 2.09258e-07 dev 
+114 L_at_Amax_Fem_GP_1_DEVmult_1990 -0.215071 83 4 -10 10 0 0 act 0.790539 -2.36103e-07 dev 
+115 L_at_Amax_Fem_GP_1_DEVmult_1991 -0.0301637 84 4 -10 10 0 0 act 0.810253 3.54985e-08 dev 
+116 L_at_Amax_Fem_GP_1_DEVmult_1992 -0.237914 85 4 -10 10 0 0 act 0.864438 -1.68629e-07 dev 
+117 L_at_Amax_Fem_GP_1_DEVmult_1993 -0.0436393 86 4 -10 10 0 0 act 0.903555 -2.1822e-07 dev 
+118 L_at_Amax_Fem_GP_1_DEVmult_1994 -0.0546152 87 4 -10 10 0 0 act 0.92384 -2.32689e-08 dev 
+119 L_at_Amax_Fem_GP_1_DEVmult_1995 -0.534179 88 4 -10 10 0 0 act 0.920647 6.30017e-08 dev 
+120 L_at_Amax_Fem_GP_1_DEVmult_1996 -0.594135 89 4 -10 10 0 0 act 0.915328 1.41392e-08 dev 
+121 L_at_Amax_Fem_GP_1_DEVmult_1997 -0.554294 90 4 -10 10 0 0 act 0.907936 -2.12819e-07 dev 
+122 L_at_Amax_Fem_GP_1_DEVmult_1998 -0.535266 91 4 -10 10 0 0 act 0.947027 -7.57451e-08 dev 
+123 L_at_Amax_Fem_GP_1_DEVmult_1999 -0.41899 92 4 -10 10 0 0 act 0.919754 -1.19592e-07 dev 
+124 L_at_Amax_Fem_GP_1_DEVmult_2000 0.255802 93 4 -10 10 0 0 act 0.901899 5.82573e-08 dev 
+125 L_at_Amax_Fem_GP_1_DEVmult_2001 0.767537 94 4 -10 10 0 0 act 0.853443 7.31522e-08 dev 
+126 L_at_Amax_Fem_GP_1_DEVmult_2002 0.862374 95 4 -10 10 0 0 act 0.872765 2.70033e-08 dev 
+127 L_at_Amax_Fem_GP_1_DEVmult_2003 0.224535 96 4 -10 10 0 0 act 0.935876 4.09795e-08 dev 
+128 L_at_Amax_Fem_GP_1_DEVmult_2004 -0.314232 97 4 -10 10 0 0 act 0.943808 5.27167e-08 dev 
+129 L_at_Amax_Fem_GP_1_DEVmult_2005 -0.810459 98 4 -10 10 0 0 act 0.959025 -6.85328e-08 dev 
+130 L_at_Amax_Fem_GP_1_DEVmult_2006 -0.929769 99 4 -10 10 0 0 act 0.934239 -1.33895e-07 dev 
+131 L_at_Amax_Fem_GP_1_DEVmult_2007 -1.40016 100 4 -10 10 0 0 act 0.945583 -4.51148e-08 dev 
+132 L_at_Amax_Fem_GP_1_DEVmult_2008 -1.68795 101 4 -10 10 0 0 act 0.930125 -1.89835e-07 dev 
+133 L_at_Amax_Fem_GP_1_DEVmult_2009 -1.5999 102 4 -10 10 0 0 act 0.930452 -5.66397e-08 dev 
+134 L_at_Amax_Fem_GP_1_DEVmult_2010 -1.01279 103 4 -10 10 0 0 act 0.930098 6.44645e-08 dev 
+135 L_at_Amax_Fem_GP_1_DEVmult_2011 -0.703669 104 4 -10 10 0 0 act 0.913936 -3.10462e-07 dev 
+136 L_at_Amax_Fem_GP_1_DEVmult_2012 -0.108127 105 4 -10 10 0 0 act 0.90368 -7.20646e-08 dev 
+137 L_at_Amax_Fem_GP_1_DEVmult_2013 0.404214 106 4 -10 10 0 0 act 0.905426 1.60291e-07 dev 
+138 L_at_Amax_Fem_GP_1_DEVmult_2014 0.323096 107 4 -10 10 0 0 act 0.925974 -2.68303e-07 dev 
+139 L_at_Amax_Fem_GP_1_DEVmult_2015 0.506378 108 4 -10 10 0 0 act 0.857172 -1.66127e-07 dev 
+140 L_at_Amax_Fem_GP_1_DEVmult_2016 0.963005 109 4 -10 10 0 0 act 0.87543 -1.99278e-07 dev 
+141 L_at_Amax_Fem_GP_1_DEVmult_2017 1.39224 110 4 -10 10 0 0 act 0.83149 -2.96607e-07 dev 
+142 L_at_Amax_Fem_GP_1_DEVmult_2018 0.44667 111 4 -10 10 0 0 act 0.826425 1.67412e-07 dev 
+143 L_at_Amax_Fem_GP_1_DEVmult_2019 0.19419 112 4 -10 10 0 0 act 0.98878 5.98128e-08 dev 
+144 CohortGrowDev_DEVmult_1982 0.674327 113 5 -10 10 0 0 act 0.617188 3.23081e-07 dev 
+145 CohortGrowDev_DEVmult_1983 1.99344 114 5 -10 10 0 0 act 0.38157 -2.01134e-07 dev 
+146 CohortGrowDev_DEVmult_1984 2.61014 115 5 -10 10 0 0 act 0.448826 -2.16332e-07 dev 
+147 CohortGrowDev_DEVmult_1985 1.13485 116 5 -10 10 0 0 act 0.513763 -1.99485e-07 dev 
+148 CohortGrowDev_DEVmult_1986 3.50089 117 5 -10 10 0 0 act 0.47114 1.32395e-07 dev 
+149 CohortGrowDev_DEVmult_1987 0.909452 118 5 -10 10 0 0 act 0.45576 -2.60677e-07 dev 
+150 CohortGrowDev_DEVmult_1988 2.99413 119 5 -10 10 0 0 act 0.44365 -3.61848e-07 dev 
+151 CohortGrowDev_DEVmult_1989 0.45566 120 5 -10 10 0 0 act 0.461727 -9.23875e-08 dev 
+152 CohortGrowDev_DEVmult_1990 0.724717 121 5 -10 10 0 0 act 0.667006 6.10361e-08 dev 
+153 CohortGrowDev_DEVmult_1991 -1.32695 122 5 -10 10 0 0 act 0.427068 3.77517e-09 dev 
+154 CohortGrowDev_DEVmult_1992 -0.481829 123 5 -10 10 0 0 act 0.481108 -1.81533e-07 dev 
+155 CohortGrowDev_DEVmult_1993 -0.531216 124 5 -10 10 0 0 act 0.359601 -2.15656e-07 dev 
+156 CohortGrowDev_DEVmult_1994 -1.29741 125 5 -10 10 0 0 act 0.331585 2.03468e-07 dev 
+157 CohortGrowDev_DEVmult_1995 -1.23121 126 5 -10 10 0 0 act 0.540507 -6.8574e-08 dev 
+158 CohortGrowDev_DEVmult_1996 -1.27124 127 5 -10 10 0 0 act 0.502474 -1.74208e-07 dev 
+159 CohortGrowDev_DEVmult_1997 -1.99114 128 5 -10 10 0 0 act 0.428713 -2.34227e-07 dev 
+160 CohortGrowDev_DEVmult_1998 -1.18871 129 5 -10 10 0 0 act 0.383595 -2.93277e-07 dev 
+161 CohortGrowDev_DEVmult_1999 -0.0473282 130 5 -10 10 0 0 act 0.666959 -1.48995e-07 dev 
+162 CohortGrowDev_DEVmult_2000 -1.88078 131 5 -10 10 0 0 act 0.584786 2.4853e-07 dev 
+163 CohortGrowDev_DEVmult_2001 -0.369639 132 5 -10 10 0 0 act 0.390866 7.52594e-08 dev 
+164 CohortGrowDev_DEVmult_2002 -0.714114 133 5 -10 10 0 0 act 0.80443 3.2971e-08 dev 
+165 CohortGrowDev_DEVmult_2003 -4.06285 134 5 -10 10 0 0 act 0.321083 -4.19993e-07 dev 
+166 CohortGrowDev_DEVmult_2004 -4.54004 135 5 -10 10 0 0 act 0.412172 2.04824e-07 dev 
+167 CohortGrowDev_DEVmult_2005 -4.76457 136 5 -10 10 0 0 act 0.338523 -4.09319e-07 dev 
+168 CohortGrowDev_DEVmult_2006 -4.11207 137 5 -10 10 0 0 act 0.388182 -3.23586e-07 dev 
+169 CohortGrowDev_DEVmult_2007 -2.83479 138 5 -10 10 0 0 act 0.451038 -1.6592e-07 dev 
+170 CohortGrowDev_DEVmult_2008 -2.10223 139 5 -10 10 0 0 act 0.605296 -7.22043e-08 dev 
+171 CohortGrowDev_DEVmult_2009 -1.91039 140 5 -10 10 0 0 act 0.424551 9.98583e-09 dev 
+172 CohortGrowDev_DEVmult_2010 0.191512 141 5 -10 10 0 0 act 0.377438 -4.48701e-07 dev 
+173 CohortGrowDev_DEVmult_2011 0.486171 142 5 -10 10 0 0 act 0.875472 -5.68973e-08 dev 
+174 CohortGrowDev_DEVmult_2012 -0.130725 143 5 -10 10 0 0 act 0.976247 -4.00394e-08 dev 
+175 CohortGrowDev_DEVmult_2013 -0.212576 144 5 -10 10 0 0 act 0.637513 8.00762e-08 dev 
+176 CohortGrowDev_DEVmult_2014 0.614497 145 5 -10 10 0 0 act 0.483921 1.21929e-07 dev 
+177 CohortGrowDev_DEVmult_2015 2.99321 146 5 -10 10 0 0 act 0.344376 -1.66838e-07 dev 
+178 CohortGrowDev_DEVmult_2016 2.77014 147 5 -10 10 0 0 act 0.561003 5.93285e-08 dev 
+179 CohortGrowDev_DEVmult_2017 -1.29502 148 5 -10 10 0 0 act 0.414621 -1.13869e-07 dev 
+180 CohortGrowDev_DEVmult_2018 0.503355 149 5 -10 10 0 0 act 0.694327 4.21351e-08 dev 
+181 CohortGrowDev_DEVmult_2019 0.0711024 150 5 -10 10 0 0 act 0.941611 -2.20751e-07 dev 
 #
-Number_of_parameters: 180
-Active_count: 149
+Number_of_parameters: 181
+Active_count: 150
 Number_of_active_parameters_on_or_near_bounds: 0
 
  DERIVED_QUANTITIES report:6

@@ -1,5 +1,8 @@
 library(tidyverse)
-library(SSMSE)
+library(devtools)
+#library(SSMSE)
+devtools::load_all(path = "C:/Users/rwildermuth/Documents/SSMSE")
+
 library(r4ss)
 library(foreach) #if using run_parallel = TRUE
 library(doParallel) #if using run_parallel = TRUE
@@ -57,7 +60,7 @@ catch <- data.frame(Yr = rep(c(yrsrt:yrend),ncdat),
 #the .dat file specifies month...but here it is labeled as season?
 #specify the number of lengthcomp surveys
 nldat=4
-lencomp = data.frame(Yr = rep(c(2020:2029),nldat), 
+lencomp = data.frame(Yr = rep(c(yrsrt:yrend),nldat), 
                      Seas = c(rep(1,nyrs),rep(4,nyrs),rep(10,nyrs),rep(4,nyrs)),
                      FltSvy = c(rep(4,nyrs),rep(1,nyrs),rep(2,nyrs),rep(3,nyrs)),
                      Sex = rep(0,nyrs*nldat),
@@ -66,7 +69,7 @@ lencomp = data.frame(Yr = rep(c(2020:2029),nldat),
 
 #for age comps same surveys as as lcomps
 nadat=4
-agecomp = data.frame(Yr = rep(c(2020:2029),nadat), 
+agecomp = data.frame(Yr = rep(c(yrsrt:yrend),nadat), 
                      Seas = c(rep(1,nyrs),rep(4,nyrs),rep(10,nyrs),rep(4,nyrs)),
                      FltSvy = c(rep(4,nyrs),rep(1,nyrs),rep(2,nyrs),rep(3,nyrs)),
                      Sex = rep(0,nyrs*nadat),
@@ -89,7 +92,7 @@ EMmodelPath <- "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/EM/EM_allda
 
 run_SSMSE(scen_name_vec = "margComps_SardineHCR",# name of the scenario
           out_dir_scen_vec = mseOutputPath, # directory in which to run the scenario
-          iter_vec = c(1), # run with 5 iterations for now
+          iter_vec = c(2), # run with 5 iterations for now
           OM_name_vec = NULL, # specify directories instead
           OM_in_dir_vec = OMmodelPath, # OM files
           EM_name_vec = "margCompsOMfixedSelexEM", # cod is included in package data
@@ -103,7 +106,7 @@ run_SSMSE(scen_name_vec = "margComps_SardineHCR",# name of the scenario
           scope = "2", # to use the same recruitment devs across scenarios.
           impl_error_pattern = "none", # Don't use implementation error
           run_EM_last_yr = FALSE, # Run the EM in 106
-          run_parallel = TRUE, # Run iterations in parallel
+          run_parallel = FALSE, # Run iterations in parallel
           sample_struct_list = sample_struct_list, # How to sample data for running the EM.
           seed = 12343) #Set a fixed integer seed that allows replication
 
