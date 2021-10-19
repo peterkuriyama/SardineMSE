@@ -4,10 +4,10 @@
 #_user_support_available_at:NMFS.Stock.Synthesis@noaa.gov
 #_user_info_available_at:https://vlab.noaa.gov/group/stock-synthesis
 
-StartTime: Tue Oct 12 16:06:02 2021
-EndTime: Tue Oct 12 16:07:44 2021
-This run took: 0 hours, 1 minutes, 42 seconds.
-Data_File: data.ss
+StartTime: Mon Oct 18 21:15:58 2021
+EndTime: Mon Oct 18 21:16:40 2021
+This run took: 0 hours, 0 minutes, 42 seconds.
+Data_File: dat.ss
 Control_File: om.ctl
 
 Convergence_Level: 3.13908e-14 is_final_gradient

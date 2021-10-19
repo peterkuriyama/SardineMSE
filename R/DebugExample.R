@@ -14,6 +14,7 @@ library(doParallel) #if using run_parallel = TRUE
 # remotes::install_github("nmfs-fish-tools/SSMSE")
 # library(SSMSE, lib.loc = "C:/Users/rwildermuth/Documents/R/libversions") # v0.2.0
 devtools::load_all(path = "C:/Users/rwildermuth/Documents/SSMSE")
+packageVersion("SSMSE")
 
 source("R/MS_sar_hcr.R")
 source("R/SourceDiagnosticPlots.R")
@@ -98,16 +99,16 @@ sample_struct_list <- list("SardineHCR" = sample_struct)
 EMmodelPath <- "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/EM/EM_alldat"
 # EM starter.ss file must indicate init values are to be pulled from control.ss file, not ss.par
 
-out <- run_SSMSE(scen_name_vec = "margComps_Fcast0.2", #"margComps_SardineHCR",# name of the scenario
+out <- run_SSMSE(scen_name_vec = "margComps_SardineMS0.2", #"margComps_SardineHCR",# name of the scenario
                  out_dir_scen_vec = mseOutputPath, # directory in which to run the scenario
                  iter_vec = c(1), # run with 5 iterations for now
                  OM_name_vec = NULL, # specify directories instead
                  OM_in_dir_vec = OMmodelPath, # OM files
                  EM_name_vec = "margCompsOMfixedSelexEM", # cod is included in package data
                  EM_in_dir_vec = EMmodelPath, # EM files
-                 MS_vec = "EM",
-                 # MS_vec = "MS_sar_hcr",       # The management strategy is specified in the custom function
-                 # custom_MS_source = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/R/MS_sar_hcr.R", # file location of the MS function
+                 # MS_vec = "EM",
+                 MS_vec = "MS_sar_hcr",       # The management strategy is specified in the custom function
+                 custom_MS_source = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/R/MS_sar_hcr.R", # file location of the MS function
                  use_SS_boot_vec = TRUE, # use the SS bootstrap module for sampling
                  nyrs_vec = nyrs,        # Years to project OM forward
                  nyrs_assess_vec = 1, # Years between assessments

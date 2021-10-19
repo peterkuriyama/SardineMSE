@@ -24,18 +24,11 @@ MS_sar_hcr = function(EM_out_dir = NULL,
                        init_loop = TRUE, OM_dat,
                        verbose = FALSE, nyrs_assess, dat_yrs,
                        sample_struct = NULL, interim_struct = NULL, seed = NULL, ...){
-
 new_datfile_name <- "init_dat.ss"
 # change the name of data file.
 start <- SS_readstarter(file.path(EM_out_dir, "starter.ss"),
                         verbose = FALSE
 )
-
-
-# test creating folders ---------------------------------------------------
-#dir.create()
-check_dir(EM_out_dir)
-
 
 if (init_loop) {
   # copy over raw data file from the OM to EM folder
@@ -52,7 +45,7 @@ if (init_loop) {
                   overwrite = TRUE, warn = FALSE
   )
   # make sure the data file has the correct formatting 
-  new_EM_dat <- change_dat(
+  new_EM_dat <- SSMSE:::change_dat(
     OM_datfile = new_datfile_name,
     EM_datfile = orig_datfile_name,
     EM_dir = EM_out_dir,
@@ -68,11 +61,12 @@ if (init_loop) {
   } else {
     sample_struct_sub <- NULL
   }
-  new_EM_dat <- add_new_dat(
+  new_EM_dat <- SSMSE:::add_new_dat(
     OM_dat = OM_dat,
     EM_datfile = new_datfile_name,
     sample_struct = sample_struct_sub,
     EM_dir = EM_out_dir,
+    nyrs_assess = nyrs_assess,
     do_checks = TRUE,
     new_datfile_name = new_datfile_name,
     verbose = verbose
@@ -94,7 +88,7 @@ fcast <- SS_readforecast(file.path(EM_out_dir, "forecast.ss"),
                          verbose = FALSE
 )
 # check that it can be used in the EM
-check_EM_forecast(fcast,
+SSMSE:::check_EM_forecast(fcast,
                   n_flts_catch = length(which(new_EM_dat[["fleetinfo"]][, "type"] %in%
                                                 c(1, 2)))
 )
@@ -123,7 +117,7 @@ fcast$InputBasis=2
 #specify the forecast year
 fcast$ForeCatch$Year = rep((mod_endyr+1),6)
 #extract observed catch for last year of data
-fcatch = new_EM_dat$catch %>% filter(year==mod_endyr)
+fcatch = new_EM_dat$catch %>% dplyr::filter(year==mod_endyr)
 #specify the forecast catch as being the same as that in the latest observed year
 fcast$ForeCatch$`Catch or F`= fcatch$catch
 
@@ -136,12 +130,11 @@ SS_writeforecast(fcast,
 # given all checks for th einput files are good, run the EM
 run_EM(EM_dir = EM_out_dir, verbose = verbose, check_converged = TRUE)
 
-#browser()
 #extract the required output, use EM_out_dir as input
-EM_out = SS_output(EM_out_dir, verbose = FALSE)
+EM_out = SS_output(EM_out_dir, verbose = FALSE, printstats = FALSE, hidewarn = TRUE)
 
 #Extract the timeseries data for the forecast period (1 yr for sardine)
-EMts = EM_out$sprseries %>% filter(Era=="FORE")
+EMts = EM_out$sprseries %>% dplyr::filter(Era=="FORE")
 
 #obtain the forecast Age 1+ biomass for the next year from the EM
 #as in the EM starter file the minimum age to calculate summary biomass is set at 1, Bio_Smry.1 can be used
@@ -196,7 +189,8 @@ if (HG==0) {
     fleet = fcast$ForeCatch$Fleet,
     catch = catch_hg0,
     catch_se = rep(new_EM_dat$catch$catch_se[1],6))
-} else {
+}
+else {
   catch_df = data.frame(
     year = rep((mod_endyr+1),6),
     seas = fcast$ForeCatch$Seas,
