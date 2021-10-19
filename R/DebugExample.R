@@ -124,3 +124,8 @@ out <- run_SSMSE(scen_name_vec = "margComps_SardineMS0.2", #"margComps_SardineHC
 
 # Summarize 1 iteration of output
 sumry <- SSMSE_summary_all(mseOutputPath)
+
+testFcastOM <- SS_output("C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/debugExample/margComps_Fcast0.2/5/margComp_20210921_OM")
+SS_plots(testFcastOM)
+testFcastEM <- SS_output("C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/debugExample/margComps_Fcast0.2/5/margCompsOMfixedSelexEM_EM_2021")
+SS_plots(testFcastEM)

@@ -1,4 +1,4 @@
-#V3.30.16.00;_2020_09_03;_safe;_Stock_Synthesis_by_Richard_Methot_(NOAA)_using_ADMB_12.2
+#V3.30.15.09-safe;_2020_07_06;_Stock_Synthesis_by_Richard_Methot_(NOAA)_using_ADMB_12.0
 #Stock Synthesis (SS) is a work of the U.S. Government and is not subject to copyright protection in the United States.
 #Foreign copyrights may apply. See copyright.txt for more information.
 #_user_support_available_at:NMFS.Stock.Synthesis@noaa.gov
@@ -18,10 +18,8 @@ om.ctl
 2 # write to cumreport.sso (0=no,1=like&timeseries; 2=add survey fits)
 0 # Include prior_like for non-estimated parameters (0,1) 
 1 # Use Soft Boundaries to aid convergence (0,1) (recommended)
-#
-1 # Number of datafiles to produce: 1st is input, 2nd is estimates, 3rd and higher are bootstrap, 0 turns off all *.ss_new output
+1 # Number of datafiles to produce: 1st is input, 2nd is estimates, 3rd and higher are bootstrap
 10 # Turn off estimation for parameters entering after this phase
-#
 10 # MCeval burn interval
 2 # MCeval thin interval
 0 # jitter initial parm value by this fraction
@@ -30,7 +28,7 @@ om.ctl
 0 # N individual STD years 
 #vector of year values 
 
-1e-05 # final convergence criteria (e.g. 1.0e-04) 
+1e-005 # final convergence criteria (e.g. 1.0e-04) 
 0 # retrospective year relative to end year (e.g. -4)
 1 # min age for calc of summary biomass
 1 # Depletion basis:  denom is: 0=skip; 1=rel X*SPB0; 2=rel SPBmsy; 3=rel X*SPB_styr; 4=rel X*SPB_endyr

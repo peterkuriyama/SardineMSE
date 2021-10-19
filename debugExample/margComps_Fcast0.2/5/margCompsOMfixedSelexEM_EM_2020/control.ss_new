@@ -1,4 +1,4 @@
-#V3.30.16.00;_2020_09_03;_safe;_Stock_Synthesis_by_Richard_Methot_(NOAA)_using_ADMB_12.2
+#V3.30.15.09-safe;_2020_07_06;_Stock_Synthesis_by_Richard_Methot_(NOAA)_using_ADMB_12.0
 #Stock Synthesis (SS) is a work of the U.S. Government and is not subject to copyright protection in the United States.
 #Foreign copyrights may apply. See copyright.txt for more information.
 #_user_support_available_at:NMFS.Stock.Synthesis@noaa.gov
@@ -33,7 +33,7 @@
  1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006 2007 2008 2009 2010 2011 2012 2013 2014
 #
 # controls for all timevary parameters 
-1 #_time-vary parm bound check (1=warn relative to base parm bounds; 3=no bound check); Also see env (3) and dev (5) options to constrain with base bounds
+1 #_env/block/dev_adjust_method for all time-vary parms (1=warn relative to base parm bounds; 3=no bound check)
 #
 # AUTOGEN
  1 1 1 1 1 # autogen: 1st element for biology, 2nd for SR, 3rd for Q, 4th reserved, 5th for selex
@@ -66,20 +66,20 @@
 0 #_First_Mature_Age
 1 #_fecundity option:(1)eggs=Wt*(a+b*Wt);(2)eggs=a*L^b;(3)eggs=a*Wt^b; (4)eggs=a+b*L; (5)eggs=a+b*W
 0 #_hermaphroditism option:  0=none; 1=female-to-male age-specific fxn; -1=male-to-female age-specific fxn
-1 #_parameter_offset_approach for M, G, CV_G:  1- direct, no offset; 2- male=fem_parm*exp(male_parm); 3: male=female*exp(parm) then old=young*exp(parm)
+1 #_parameter_offset_approach (1=none, 2= M, G, CV_G as offset from female-GP1, 3=like SS2 V1.x)
 #
 #_growth_parms
 #_ LO HI INIT PRIOR PR_SD PR_type PHASE env_var&link dev_link dev_minyr dev_maxyr dev_PH Block Block_Fxn
 # Sex: 1  BioPattern: 1  NatMort
  0.199 0.936 0.585 0 99 0 -2 0 0 0 0 0 0 0 # NatM_p_1_Fem_GP_1
 # Sex: 1  BioPattern: 1  Growth
- 3 30 3.28157 0 99 0 3 0 0 0 0 0 0 0 # L_at_Amin_Fem_GP_1
- 15 40 28.2451 0 99 0 3 0 1 1982 2019 4 0 0 # L_at_Amax_Fem_GP_1
- 0.05 0.99 0.64832 0 99 0 3 0 0 0 0 0 0 0 # VonBert_K_Fem_GP_1
- 0.05 0.5 0.499223 0 99 0 3 0 0 0 0 0 0 0 # CV_young_Fem_GP_1
- 0.01 0.1 0.0130942 0 99 0 3 0 0 0 0 0 0 0 # CV_old_Fem_GP_1
+ 3 30 8 0 99 0 3 0 0 0 0 0 0 0 # L_at_Amin_Fem_GP_1
+ 15 40 26.7199 0 99 0 3 0 1 1982 2019 4 0 0 # L_at_Amax_Fem_GP_1
+ 0.05 0.99 0.721427 0 99 0 3 0 0 0 0 0 0 0 # VonBert_K_Fem_GP_1
+ 0.05 0.5 0.164739 0 99 0 3 0 0 0 0 0 0 0 # CV_young_Fem_GP_1
+ 0.01 0.1 0.0396945 0 99 0 3 0 0 0 0 0 0 0 # CV_old_Fem_GP_1
 # Sex: 1  BioPattern: 1  WtLen
- -3 3 7.5242e-06 0 99 0 -3 0 0 0 0 0 0 0 # Wtlen_1_Fem_GP_1
+ -3 3 7.5242e-006 0 99 0 -3 0 0 0 0 0 0 0 # Wtlen_1_Fem_GP_1
  -3 5 3.2332 0 99 0 -3 0 0 0 0 0 0 0 # Wtlen_2_Fem_GP_1
 # Sex: 1  BioPattern: 1  Maturity&Fecundity
  9 19 15.44 0 99 0 -3 0 0 0 0 0 0 0 # Mat50%_Fem_GP_1
@@ -94,7 +94,7 @@
 #  Age Error from parameters
 #  catch multiplier
 #  fraction female, by GP
- 1e-06 0.999999 0.5 0.5 0.5 0 -99 0 0 0 0 0 0 0 # FracFemale_GP_1
+ 1e-006 0.999999 0.5 0.5 0.5 0 -99 0 0 0 0 0 0 0 # FracFemale_GP_1
 #
 # timevary MG parameters 
 #_ LO HI INIT PRIOR PR_SD PR_type  PHASE
@@ -113,13 +113,13 @@
 0  # 0/1 to use steepness in initial equ recruitment calculation
 0  #  future feature:  0/1 to make realized sigmaR a function of SR curvature
 #_          LO            HI          INIT         PRIOR         PR_SD       PR_type      PHASE    env-var    use_dev   dev_mnyr   dev_mxyr     dev_PH      Block    Blk_Fxn #  parm_name
-             3            25       13.2615             0            99             0          1          0          0          0          0          0          0          0 # SR_LN(R0)
+             3            25       15.3516             0            99             0          1          0          0          0          0          0          0          0 # SR_LN(R0)
            0.2             1           0.5             0            99             0         -5          0          0          0          0          0          0          0 # SR_BH_steep
              0             2             1             0            99             0         -3          0          0          0          0          0          0          0 # SR_sigmaR
            -15            15             0             0            99             0         -1          0          0          0          0          0          1          2 # SR_regime
              0             0             0             0            99             0         -3          0          0          0          0          0          0          0 # SR_autocorr
 # timevary SR parameters
- -15 15 -0.155832 0 99 0 4 # SR_regime_BLK1repl_1980
+ -15 15 -2.25458 0 99 0 4 # SR_regime_BLK1repl_1980
 1 #do_recdev:  0=none; 1=devvector (R=F(SSB)+dev); 2=deviations (R=F(SSB)+dev); 3=deviations (R=R0*dev; dev2=R-f(SSB)); 4=like 3 with sum(dev2) adding penalty
 1983 # first year of main recr_devs; early devs can preceed this era
 2018 # last year of main recr_devs; forecast devs start in following year
@@ -146,7 +146,7 @@
 #
 # all recruitment deviations
 #  1977E 1978E 1979E 1980E 1981E 1982E 1983R 1984R 1985R 1986R 1987R 1988R 1989R 1990R 1991R 1992R 1993R 1994R 1995R 1996R 1997R 1998R 1999R 2000R 2001R 2002R 2003R 2004R 2005R 2006R 2007R 2008R 2009R 2010R 2011R 2012R 2013R 2014R 2015R 2016R 2017R 2018R 2019F 2020F 2021F
-#  -0.643287 -1.29842 3.14995 0.0649208 0.710174 1.08121 0.703208 0.119262 0.546132 1.20895 0.218464 1.26255 0.69784 1.15452 0.212396 1.27275 1.03156 0.925904 1.16642 1.85268 1.84094 0.0497489 -0.839938 -2.37966 -3.95583 -2.17431 -1.94003 -1.35451 -1.63492 0.043001 -0.997353 -0.975158 -0.102884 -0.234392 1.55484 -3.39565 5.01555 4.9209 -1.71517 -2.16508 -1.74126 -0.191476 0.462671 0 0
+#  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 # implementation error by year in forecast:  0
 #
 #Fishing Mortality info 
@@ -161,14 +161,14 @@
 #
 #_initial_F_parms; count = 1
 #_ LO HI INIT PRIOR PR_SD  PR_type  PHASE
- 0 14 10.2727 0 99 0 1 # InitF_seas_2_flt_2MexCal_S2
+ 0 14 10 0 99 0 1 # InitF_seas_2_flt_2MexCal_S2
 #2021 2162
 # F rates by fleet
 # Yr:  1981 1981 1982 1982 1983 1983 1984 1984 1985 1985 1986 1986 1987 1987 1988 1988 1989 1989 1990 1990 1991 1991 1992 1992 1993 1993 1994 1994 1995 1995 1996 1996 1997 1997 1998 1998 1999 1999 2000 2000 2001 2001 2002 2002 2003 2003 2004 2004 2005 2005 2006 2006 2007 2007 2008 2008 2009 2009 2010 2010 2011 2011 2012 2012 2013 2013 2014 2014 2015 2015 2016 2016 2017 2017 2018 2018 2019 2019 2020 2020 2021 2021
 # seas:  1 2 1 2 1 2 1 2 1 2 1 2 1 2 1 2 1 2 1 2 1 2 1 2 1 2 1 2 1 2 1 2 1 2 1 2 1 2 1 2 1 2 1 2 1 2 1 2 1 2 1 2 1 2 1 2 1 2 1 2 1 2 1 2 1 2 1 2 1 2 1 2 1 2 1 2 1 2 1 2 1 2
-# MexCal_S1 0.00142173 0 0.0132322 0 0.0333232 0 0.00943577 0 0.086836 0 0.0485802 0 0.23638 0 0.172579 0 0.558978 0 0.466151 0 2.40995 0 4 0 0.141674 0 0.829053 0 0.950362 0 2.40638 0 4 0 1.37939 0 2.58099 0 4 0 4 0 4 0 4 0 4 0 4 0 4 0 4 0 4 0 4 0 4 0 4 0 4 0 4 0 4 0 4 0 4 0 4 0 4 0 4 0 3.1863e-06 0 6.10749e-09 0
-# MexCal_S2 0 0.0103714 0 0.0561591 0 0.0208814 0 0.32506 0 0.123887 0 0.412267 0 0.342352 0 0.176653 0 1.14386 0 0.8286 0 1.65157 0 4 0 2.39523 0 4 0 4 0 4 0 4 0 4 0 4 0 4 0 4 0 4 0 4 0 4 0 4 0 4 0 4 0 4 0 4 0 4 0 4 0 4 0 4 0 4 0 4 0 4 0 4 0 4 0 4 0 5.36982e-06 0 1.02929e-08
-# PNW 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.000338438 2.42909e-05 0 0 0 0 0.0043672 0 0 0.0152443 0.00870626 0.000393167 0.203213 0.0474876 0.370521 0.430976 4 4 4 4 4 4 4 4 4 4 4 4 4 0 4 0 4 0 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 1.42319e-07 1.02806e-05 2.72797e-10 1.97058e-08
+# MexCal_S1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.966356 0
+# MexCal_S2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+# PNW 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 #
 #_Q_setup for fleets with cpue or survey data
 #_1:  fleet number
@@ -244,8 +244,8 @@
 #
 #_          LO            HI          INIT         PRIOR         PR_SD       PR_type      PHASE    env-var    use_dev   dev_mnyr   dev_mxyr     dev_PH      Block    Blk_Fxn  #  parm_name
 # 1   MexCal_S1 LenSelex
-             0            30       15.1769             0            99             0          3          0          0          0          0          0          0          0  #  Size_inflection_MexCal_S1(1)
-             0            10       3.26133             0            99             0          3          0          0          0          0          0          0          0  #  Size_95%width_MexCal_S1(1)
+             0            30       14.0042             0            99             0          3          0          0          0          0          0          0          0  #  Size_inflection_MexCal_S1(1)
+             0            10        2.0029             0            99             0          3          0          0          0          0          0          0          0  #  Size_95%width_MexCal_S1(1)
 # 2   MexCal_S2 LenSelex
 # 3   PNW LenSelex
 # 4   AT_Survey LenSelex
@@ -253,27 +253,27 @@
 # 6   TEP_all LenSelex
 # 1   MexCal_S1 AgeSelex
            -10            11       1.00004            -1            99             0          3          0          0          0          0          0          0          0  #  AgeSel_P1_MexCal_S1(1)
-           -10            11       2.94878            -1            99             0          3          0          0          0          0          0          0          0  #  AgeSel_P2_MexCal_S1(1)
-           -10            15     -0.996603            -1            99             0          3          0          0          0          0          0          0          0  #  AgeSel_P3_MexCal_S1(1)
-           -10            11      -1.82287            -1            99             0          3          0          0          0          0          0          0          0  #  AgeSel_P4_MexCal_S1(1)
-           -10            11     -0.236066            -1            99             0          3          0          0          0          0          0          0          0  #  AgeSel_P5_MexCal_S1(1)
-           -10            11        1.6663            -1            99             0          3          0          0          0          0          0          0          0  #  AgeSel_P6_MexCal_S1(1)
-           -10            11       1.42674            -1            99             0          3          0          0          0          0          0          0          0  #  AgeSel_P7_MexCal_S1(1)
-           -10            11      -2.35302            -1            99             0          3          0          0          0          0          0          0          0  #  AgeSel_P8_MexCal_S1(1)
-           -10            11      -2.31968            -1            99             0          3          0          0          0          0          0          0          0  #  AgeSel_P9_MexCal_S1(1)
+           -10            11      0.837451            -1            99             0          3          0          0          0          0          0          0          0  #  AgeSel_P2_MexCal_S1(1)
+           -10            15     -0.884887            -1            99             0          3          0          0          0          0          0          0          0  #  AgeSel_P3_MexCal_S1(1)
+           -10            11     -0.635305            -1            99             0          3          0          0          0          0          0          0          0  #  AgeSel_P4_MexCal_S1(1)
+           -10            11       0.91816            -1            99             0          3          0          0          0          0          0          0          0  #  AgeSel_P5_MexCal_S1(1)
+           -10            11     -0.111484            -1            99             0          3          0          0          0          0          0          0          0  #  AgeSel_P6_MexCal_S1(1)
+           -10            11     -0.989063            -1            99             0          3          0          0          0          0          0          0          0  #  AgeSel_P7_MexCal_S1(1)
+           -10            11      -1.49305            -1            99             0          3          0          0          0          0          0          0          0  #  AgeSel_P8_MexCal_S1(1)
+           -10            11      -1.89536            -1            99             0          3          0          0          0          0          0          0          0  #  AgeSel_P9_MexCal_S1(1)
 # 2   MexCal_S2 AgeSelex
            -10            11       1.99999            -1            99             0         -3          0          0          0          0          0          0          0  #  AgeSel_P1_MexCal_S2(2)
-           -10            15     0.0823302            -1            99             0          3          0          0          0          0          0          0          0  #  AgeSel_P2_MexCal_S2(2)
-           -10            11      -4.56198            -1            99             0          3          0          0          0          0          0          0          0  #  AgeSel_P3_MexCal_S2(2)
-           -10            11        2.4786            -1            99             0          3          0          0          0          0          0          0          0  #  AgeSel_P4_MexCal_S2(2)
-           -10            11      -1.73787            -1            99             0          3          0          0          0          0          0          0          0  #  AgeSel_P5_MexCal_S2(2)
-           -10            11       2.04866            -1            99             0          3          0          0          0          0          0          0          0  #  AgeSel_P6_MexCal_S2(2)
-           -10            11      -2.60291            -1            99             0          3          0          0          0          0          0          0          0  #  AgeSel_P7_MexCal_S2(2)
-           -10            11     -0.646482            -1            99             0          3          0          0          0          0          0          0          0  #  AgeSel_P8_MexCal_S2(2)
-           -10            11       -6.9806            -1            99             0          3          0          0          0          0          0          0          0  #  AgeSel_P9_MexCal_S2(2)
+           -10            15      0.769735            -1            99             0          3          0          0          0          0          0          0          0  #  AgeSel_P2_MexCal_S2(2)
+           -10            11      0.135819            -1            99             0          3          0          0          0          0          0          0          0  #  AgeSel_P3_MexCal_S2(2)
+           -10            11     -0.104782            -1            99             0          3          0          0          0          0          0          0          0  #  AgeSel_P4_MexCal_S2(2)
+           -10            11      -1.03412            -1            99             0          3          0          0          0          0          0          0          0  #  AgeSel_P5_MexCal_S2(2)
+           -10            11      0.213999            -1            99             0          3          0          0          0          0          0          0          0  #  AgeSel_P6_MexCal_S2(2)
+           -10            11       -1.7739            -1            99             0          3          0          0          0          0          0          0          0  #  AgeSel_P7_MexCal_S2(2)
+           -10            11     -0.285435            -1            99             0          3          0          0          0          0          0          0          0  #  AgeSel_P8_MexCal_S2(2)
+           -10            11      -6.97878            -1            99             0          3          0          0          0          0          0          0          0  #  AgeSel_P9_MexCal_S2(2)
 # 3   PNW AgeSelex
-             0            10       3.19781             0            99             0          4          0          0          0          0          0          0          0  #  Age_inflection_PNW(3)
-            -5            15      0.899639             0            99             0          4          0          0          0          0          0          0          0  #  Age_95%width_PNW(3)
+             0            10       5.00095             0            99             0          4          0          0          0          0          0          0          0  #  Age_inflection_PNW(3)
+            -5            15      0.483799             0            99             0          4          0          0          0          0          0          0          0  #  Age_95%width_PNW(3)
 # 4   AT_Survey AgeSelex
              0             9             0            -1            99             0         -3          0          0          0          0          0          0          0  #  AgeSel_P1_AT_Survey(4)
              0            11        1.5196            -1            99             0         -4          0          0          0          0          0          2          2  #  AgeSel_P2_AT_Survey(4)
@@ -301,8 +301,8 @@
 # deviation vectors for timevary parameters
 #  base   base first block   block  env  env   dev   dev   dev   dev   dev
 #  type  index  parm trend pattern link  var  vectr link _mnyr  mxyr phase  dev_vector
-#      1     3     1     0     0     0     0     1     1  1982  2019     4 0.308208 -0.280288 -1.38661 -0.891931 -1.15695 -1.14415 -1.29298 -0.636304 -0.494566 -0.167672 -1.03264 -0.924206 -0.593887 -1.28607 -2.46491 -1.17402 -1.44421 -1.19565 1.55799 1.40426 -0.00718178 -0.834109 -0.712772 -0.696663 -0.661949 -0.501234 -0.642938 1.31908 1.64467 -0.215948 1.35375 0.937199 -0.335796 3.16804 3.91039 1.08826 0.282653 -0.176414
-#      1    13     3     0     0     0     0     2     1  1982  2019     5 0.0900588 -0.442762 -0.611291 -0.661483  0.848 -0.129245 0.708796 0.478903 -0.12741 -0.771555 0.23369 0.953748 -0.0760976 0.11092 -2.01547 1.54323 -0.389423 3.4103 4.57329 4.83295 2.05099 2.9182 0.58172 0.849993 0.0230987 -0.911103 -0.714595 -0.334951 0.342829 -1.13279 -1.67214 -0.0391779 -0.504857 -0.456452 -0.79314 0.17184 -1.33453 0.239704
+#      1     3     1     0     0     0     0     1     1  1982  2019     4      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0
+#      1    13     3     0     0     0     0     2     1  1982  2019     5      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0
 #      2     4     5     1     2     0     0     0     0     0     0     0
 #      5    24     6     2     2     0     0     0     0     0     0     0
      #
