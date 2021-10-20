@@ -1,19 +1,20 @@
 # De-bugging custom MS for SSMSE
 
-library(devtools)
-library(tidyverse)
+# library(devtools)
+# library(tidyverse)
+library(dplyr)
 library(r4ss)
 library(foreach) #if using run_parallel = TRUE
 library(doParallel) #if using run_parallel = TRUE
-# 
-# library(SSMSE) # v0.1.0
+# # 
+library(SSMSE) # v0.1.0
 #   # RW: This works with old run_SSMSE() formatting, though now it gives updates 
 #   #     for each year of the EM applied?
 # 
 #   # RW: These don't
 # remotes::install_github("nmfs-fish-tools/SSMSE")
 # library(SSMSE, lib.loc = "C:/Users/rwildermuth/Documents/R/libversions") # v0.2.0
-devtools::load_all(path = "C:/Users/rwildermuth/Documents/SSMSE")
+# devtools::load_all(path = "C:/Users/rwildermuth/Documents/SSMSE")
 packageVersion("SSMSE")
 
 source("R/MS_sar_hcr.R")
@@ -25,13 +26,14 @@ mseOutputPath <- "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/debugExam
 # Operating Model - Research Model ----------------------------------------
 
 # directory for OM SS code
-OMmodelPath <- "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/OM/margComp_20210921"
+OMmodelPath <- "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/OM/OM_20211019"
+# OMmodelPath <- "C:/Users/rwildermuth/Desktop/OM_20211019"
 # RW: need to re-save data.ss_new as data.ss to fix formatting for SS_readdat()
 
 
 # Define Observation Model ------------------------------------------------
 # Run test of marginal comps OM
-datfile <- SS_readdat(file = paste0(OMmodelPath, "/dat.ss"), version = "3.30")
+datfile <- SS_readdat(file = paste0(OMmodelPath, "/filled_dat_marginals.ss"), version = "3.30")
 
 # create_sample_strct() has trouble IDing SE for survey CPUE
 # define an index for the Acoustic-Trawl survey as in Desiree's code
@@ -101,7 +103,7 @@ EMmodelPath <- "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/EM/EM_allda
 
 out <- run_SSMSE(scen_name_vec = "margComps_SardineMS0.2", #"margComps_SardineHCR",# name of the scenario
                  out_dir_scen_vec = mseOutputPath, # directory in which to run the scenario
-                 iter_vec = c(1), # run with 5 iterations for now
+                 iter_vec = c(2), # run with 5 iterations for now
                  OM_name_vec = NULL, # specify directories instead
                  OM_in_dir_vec = OMmodelPath, # OM files
                  EM_name_vec = "margCompsOMfixedSelexEM", # cod is included in package data
@@ -116,7 +118,7 @@ out <- run_SSMSE(scen_name_vec = "margComps_SardineMS0.2", #"margComps_SardineHC
                  # scope = "2", # to use the same recruitment devs across scenarios.
                  # impl_error_pattern = "none", # Don't use implementation error
                  # run_EM_last_yr = FALSE, # Run the EM in 106
-                 run_parallel = FALSE, # Run iterations in parallel
+                 run_parallel = TRUE, # Run iterations in parallel
                  sample_struct_list = sample_struct_list, # How to sample data for running the EM.
                  seed = 12343) #Set a fixed integer seed that allows replication
 
@@ -128,4 +130,8 @@ sumry <- SSMSE_summary_all(mseOutputPath)
 testFcastOM <- SS_output("C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/debugExample/margComps_Fcast0.2/5/margComp_20210921_OM")
 SS_plots(testFcastOM)
 testFcastEM <- SS_output("C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/debugExample/margComps_Fcast0.2/5/margCompsOMfixedSelexEM_EM_2021")
+SS_plots(testFcastEM)
+
+testFcastEM <- SS_output("C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/debugExample/margComps_Fcast0.2/5/margCompsOMfixedSelexEM_EM_2020",
+                         covar = FALSE)
 SS_plots(testFcastEM)
