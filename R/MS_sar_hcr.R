@@ -155,7 +155,10 @@ if (bio1 < cutoff) {HG = 0 } else {HG = (bio1-cutoff)*Emsy*distribution}
 if (HG > 200000) {HG = 200000} 
 #catches when hg is set to 0
 #check with the SSMSE team if the seed for this is already set somewhere else in the cod e(e.g. when the futre rec devs are generated)
-catch_hg0 = c(rnorm(1, mean = 125, sd = 100),0,0,rnorm(1, mean =7000, sd = 4000),rnorm(1, mean =51, sd = 73), rnorm(1,mean =1.7, sd = 1))
+#catch_hg0 = c(rnorm(1, mean = 125, sd = 100),0,0,rnorm(1, mean =7000, sd = 4000),rnorm(1, mean =51, sd = 73), rnorm(1,mean =1.7, sd = 1))
+catch_hg0 <- c(rlnorm(1, mean = 4.8, sd = 4.6),0,0,
+               rlnorm(1, mean =8, sd = 2),rlnorm(1, mean =3.9, sd = 2), 
+               rlnorm(1,mean = 0.5, sd = 0.1))
 
 #catch ratio - based on average catch ratio from 2006-2011
 #This period was selected as allocation scheme changed in 2006. Also at the start of the time series 
