@@ -18,13 +18,14 @@ mseOutputPath <- "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/margComps
 
 # directory for OM SS code
 OMmodelPath <- "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/OM/OM_20211019"
+OMmodelPath <- "C:/Users/rwildermuth/Desktop/OM_K"
 # RW: need to re-save data.ss_new as data.ss to fix formatting for SS_readdat()
 
 
 # Define Observation Model ------------------------------------------------
 # Run test of marginal comps OM
-datfile <- SS_readdat(file = paste0(OMmodelPath, "/filled_dat_marginals.ss"), version = "3.30")
-
+# datfile <- SS_readdat(file = paste0(OMmodelPath, "/filled_dat_marginals.ss"), version = "3.30")
+datfile <- SS_readdat(file = paste0(OMmodelPath, "/dat.ss"), version = "3.30")
 # create_sample_strct() has trouble IDing SE for survey CPUE
 # define an index for the Acoustic-Trawl survey as in Desiree's code
 #specify number of years of MSE loop
@@ -89,15 +90,17 @@ sample_struct_list <- list("SardineHCR" = sample_struct)
 
 # EM starts in 1981 to test a high data quality scenario
 EMmodelPath <- "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/EM/EM_alldat"
+EMmodelPath <- "C:/Users/rwildermuth/Desktop/EM_K"
 # EM starter.ss file must indicate init values are to be pulled from control.ss file, not ss.par
 
 out <- run_SSMSE(scen_name_vec = "margComps_SardineHCR",# name of the scenario
                   out_dir_scen_vec = mseOutputPath, # directory in which to run the scenario
-                  iter_vec = c(6), # run with 5 iterations for now
+                  iter_vec = c(1), # run with 5 iterations for now
                   OM_name_vec = NULL, # specify directories instead
                   OM_in_dir_vec = OMmodelPath, # OM files
                   EM_name_vec = "margCompsOMfixedSelexEM", # cod is included in package data
                   EM_in_dir_vec = EMmodelPath, # EM files
+                  # MS_vec = "no_catch",
                   MS_vec = "MS_sar_hcr",       # The management strategy is specified in the custom function
                   custom_MS_source = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/R/MS_sar_hcr.R", # file location of the MS function
                   use_SS_boot_vec = TRUE, # use the SS bootstrap module for sampling
@@ -119,7 +122,7 @@ out <- run_SSMSE(scen_name_vec = "margComps_SardineHCR",# name of the scenario
 #     Look at time series to diagnose
 
 # Summarize 1 iteration of output
-sumry <- SSMSE_summary_all(mseOutputPath, scenarios = "margComps_SardineHCR")
+sumry <- SSMSE_summary_all(mseOutputPath, scenarios = "margComps_noCatch")
 
 recrDiagPlots(dir = mseOutputPath,
               scenario = "margComps_SardineHCR", termYr = 2022)

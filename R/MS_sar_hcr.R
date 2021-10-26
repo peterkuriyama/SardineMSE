@@ -45,7 +45,7 @@ if (init_loop) {
                   overwrite = TRUE, warn = FALSE
   )
   # make sure the data file has the correct formatting 
-  new_EM_dat <- SSMSE:::change_dat(
+  new_EM_dat <- change_dat(
     OM_datfile = new_datfile_name,
     EM_datfile = orig_datfile_name,
     EM_dir = EM_out_dir,
@@ -61,7 +61,7 @@ if (init_loop) {
   } else {
     sample_struct_sub <- NULL
   }
-  new_EM_dat <- SSMSE:::add_new_dat(
+  new_EM_dat <- add_new_dat(
     OM_dat = OM_dat,
     EM_datfile = new_datfile_name,
     sample_struct = sample_struct_sub,
@@ -88,7 +88,7 @@ fcast <- SS_readforecast(file.path(EM_out_dir, "forecast.ss"),
                          verbose = FALSE
 )
 # check that it can be used in the EM
-SSMSE:::check_EM_forecast(fcast,
+check_EM_forecast(fcast,
                   n_flts_catch = length(which(new_EM_dat[["fleetinfo"]][, "type"] %in%
                                                 c(1, 2)))
 )
@@ -131,7 +131,7 @@ SS_writeforecast(fcast,
 run_EM(EM_dir = EM_out_dir, verbose = verbose, check_converged = TRUE)
 
 #extract the required output, use EM_out_dir as input
-EM_out = SS_output(EM_out_dir, verbose = FALSE, printstats = FALSE, hidewarn = TRUE)
+EM_out = SS_output(EM_out_dir, verbose = FALSE)
 
 #Extract the timeseries data for the forecast period (1 yr for sardine)
 EMts = EM_out$sprseries %>% dplyr::filter(Era=="FORE")
@@ -156,9 +156,12 @@ if (HG > 200000) {HG = 200000}
 #catches when hg is set to 0
 #check with the SSMSE team if the seed for this is already set somewhere else in the cod e(e.g. when the futre rec devs are generated)
 #catch_hg0 = c(rnorm(1, mean = 125, sd = 100),0,0,rnorm(1, mean =7000, sd = 4000),rnorm(1, mean =51, sd = 73), rnorm(1,mean =1.7, sd = 1))
-catch_hg0 <- c(rlnorm(1, mean = 4.8, sd = 4.6),0,0,
-               rlnorm(1, mean =8, sd = 2),rlnorm(1, mean =3.9, sd = 2), 
-               rlnorm(1,mean = 0.5, sd = 0.1))
+
+# catch_hg0 <- c(rlnorm(1, mean = 4.8, sd = 4.6),0,0,
+#                rlnorm(1, mean =8, sd = 2),rlnorm(1, mean =3.9, sd = 2), 
+#                rlnorm(1,mean = 0.5, sd = 0.1))
+
+catch_hg0 = c(0,0,0,0,0,0)
 
 #catch ratio - based on average catch ratio from 2006-2011
 #This period was selected as allocation scheme changed in 2006. Also at the start of the time series 

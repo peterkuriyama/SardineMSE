@@ -26,19 +26,19 @@ mseOutputPath <- "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/debugExam
 # Operating Model - Research Model ----------------------------------------
 
 # directory for OM SS code
-OMmodelPath <- "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/OM/OM_20211019"
-# OMmodelPath <- "C:/Users/rwildermuth/Desktop/OM_20211019"
+# OMmodelPath <- "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/OM/OM_20211019"
+OMmodelPath <- "C:/Users/rwildermuth/Desktop/OM_K"
 # RW: need to re-save data.ss_new as data.ss to fix formatting for SS_readdat()
 
 
 # Define Observation Model ------------------------------------------------
 # Run test of marginal comps OM
-datfile <- SS_readdat(file = paste0(OMmodelPath, "/filled_dat_marginals.ss"), version = "3.30")
+datfile <- SS_readdat(file = paste0(OMmodelPath, "/dat.ss"), version = "3.30")
 
 # create_sample_strct() has trouble IDing SE for survey CPUE
 # define an index for the Acoustic-Trawl survey as in Desiree's code
 #specify number of years of MSE loop
-nyrs <- 3
+nyrs <- 100
 
 #sample_struct <- create_sample_struct(dat = datfile, nyrs = nyrs)
 #traceback()
@@ -92,36 +92,61 @@ agecomp = data.frame(Yr = rep(c(yrsrt:yrend),nadat),
 
 sample_struct <- list(catch = catch, CPUE = CPUE, lencomp = lencomp, agecomp = agecomp)
 sample_struct_list <- list("SardineHCR" = sample_struct)
+
+# figure out the recruitment deviation input ---------------
+
+# define scenario name
+scenName <- "margComps_noCatch100yrsPDOrec"
+iters <- 1
+
+template <- create_future_om_list(example_type = "custom")
+
+recdevPDO <- read.csv("C:/Users/rwildermuth/Documents/FutureSeas/Recruitment Index/recdevPDO2120.csv")
+# remove last row
+recdevPDO <- recdevPDO[-nrow(recdevPDO), ]
+
+recdevInput <- template[[1]]
+recdevInput$pars <- "rec_devs"
+
+input <- data.frame(scen = rep(scenName, length.out = iters*nrow(recdevPDO)),
+                    iter = rep(1:iters, each = nrow(recdevPDO)),
+                    yr = rep(recdevPDO$Year, times = iters),
+                    value = rep(0.15, length.out = iters*nrow(recdevPDO)))
+                    # value = rep(recdevPDO$recDevPDO, times = iters))
+input$par <- "rec_devs"
+recdevInput$input <- input %>% select(par, scen, iter, yr, value)
+
+
 # Run the OM --------------------------------------------------------------
 
 #run_res_path <- file.path("C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE", "results")
 # dir.create(mseOutputPath)
 
 # EM starts in 1981 to test a high data quality scenario
-EMmodelPath <- "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/EM/EM_alldat"
+# EMmodelPath <- "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/EM/EM_alldat"
+EMmodelPath <- "C:/Users/rwildermuth/Desktop/EM_K"
 # EM starter.ss file must indicate init values are to be pulled from control.ss file, not ss.par
 
-out <- run_SSMSE(scen_name_vec = "margComps_SardineMS0.2", #"margComps_SardineHCR",# name of the scenario
+startTime <- Sys.time()
+out <- run_SSMSE(scen_name_vec = scenName, #"margComps_SardineHCR",# name of the scenario
                  out_dir_scen_vec = mseOutputPath, # directory in which to run the scenario
-                 iter_vec = c(2), # run with 5 iterations for now
+                 iter_vec = c(iters), # run with 5 iterations for now
                  OM_name_vec = NULL, # specify directories instead
                  OM_in_dir_vec = OMmodelPath, # OM files
                  EM_name_vec = "margCompsOMfixedSelexEM", # cod is included in package data
                  EM_in_dir_vec = EMmodelPath, # EM files
                  # MS_vec = "EM",
-                 MS_vec = "MS_sar_hcr",       # The management strategy is specified in the custom function
-                 custom_MS_source = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/R/MS_sar_hcr.R", # file location of the MS function
+                 MS_vec = "no_catch",
+                 # MS_vec = "MS_sar_hcr",       # The management strategy is specified in the custom function
+                 # custom_MS_source = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/R/MS_sar_hcr.R", # file location of the MS function
                  use_SS_boot_vec = TRUE, # use the SS bootstrap module for sampling
                  nyrs_vec = nyrs,        # Years to project OM forward
                  nyrs_assess_vec = 1, # Years between assessments
-                 # rec_dev_pattern = "rand", # Use random recruitment devs
-                 # scope = "2", # to use the same recruitment devs across scenarios.
-                 # impl_error_pattern = "none", # Don't use implementation error
-                 # run_EM_last_yr = FALSE, # Run the EM in 106
-                 run_parallel = TRUE, # Run iterations in parallel
+                 future_om_list = list(recdevInput),
+                 run_parallel = FALSE, # Run iterations in parallel
                  sample_struct_list = sample_struct_list, # How to sample data for running the EM.
-                 seed = 12343) #Set a fixed integer seed that allows replication
-
+                 seed = 1234) #Set a fixed integer seed that allows replication
+endTime <- Sys.time()
 # Summarize results -------------------------------------------------------
 
 # Summarize 1 iteration of output
