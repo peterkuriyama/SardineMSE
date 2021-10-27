@@ -37,7 +37,8 @@ ggplot(data = moPDO, aes(x=Year, y=expPDO)) +
 
 # Create recrtuitment deviation time series for PDO projection ------------
 
-newDat <- rbind(data.frame(Year = 2020, expPDO = moPDO[moPDO$Year == 2020, "expPDO"]),
+# Need to start with year 2019
+newDat <- rbind(moPDO[moPDO$Year %in% 2019:2020, c("Year", "expPDO")],
                 newDat)
 
 newDat$recDevPDO <- MakeRecruitDevs(envtInx = newDat$expPDO,

@@ -32,7 +32,7 @@ catchDiagPlots <- function(dir, # SSMSE directory (character)
     
     # Get EM estimated catch
     catchEM <- outputSS[["catch"]] %>% group_by(Yr) %>%
-      # summarize totoal catch within year
+      # summarize total catch within year
       dplyr::summarize(obsCat = sum(Obs),
                        expCat = sum(Exp)) %>%
       mutate(model_run = termName,
