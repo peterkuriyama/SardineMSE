@@ -1,4 +1,5 @@
-# De-bugging custom MS for SSMSE
+# Code to run recruitment using the PDO index, no catch scenario for 100 yrs
+# Created: 10/27/21, Robert Wildermuth
 
 # library(devtools)
 # library(tidyverse)
@@ -7,27 +8,17 @@ library(r4ss)
 library(foreach) #if using run_parallel = TRUE
 library(doParallel) #if using run_parallel = TRUE
 # # 
-library(SSMSE) # v0.1.0
-#   # RW: This works with old run_SSMSE() formatting, though now it gives updates 
-#   #     for each year of the EM applied?
-# 
-#   # RW: These don't
-# remotes::install_github("nmfs-fish-tools/SSMSE")
-# library(SSMSE, lib.loc = "C:/Users/rwildermuth/Documents/R/libversions") # v0.2.0
-# devtools::load_all(path = "C:/Users/rwildermuth/Documents/SSMSE")
+library(SSMSE) 
 packageVersion("SSMSE")
 
-source("R/MS_sar_hcr.R")
-source("R/SourceDiagnosticPlots.R")
-
 # directory for MSE output
-mseOutputPath <- "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/debugExample"
+mseOutputPath <- "AFSresults"
 
 # Operating Model - Research Model ----------------------------------------
 
 # directory for OM SS code
 # OMmodelPath <- "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/OM/OM_20211019"
-OMmodelPath <- "C:/Users/rwildermuth/Desktop/OM_K"
+OMmodelPath <- "OM_K"
 # RW: need to re-save data.ss_new as data.ss to fix formatting for SS_readdat()
 
 
@@ -38,10 +29,7 @@ datfile <- SS_readdat(file = paste0(OMmodelPath, "/dat.ss"), version = "3.30")
 # create_sample_strct() has trouble IDing SE for survey CPUE
 # define an index for the Acoustic-Trawl survey as in Desiree's code
 #specify number of years of MSE loop
-nyrs <- 10
-
-#sample_struct <- create_sample_struct(dat = datfile, nyrs = nyrs)
-#traceback()
+nyrs <- 100
 
 #specify the start year of data inputs
 yrsrt = datfile$endyr +1
@@ -93,15 +81,15 @@ agecomp = data.frame(Yr = rep(c(yrsrt:yrend),nadat),
 sample_struct <- list(catch = catch, CPUE = CPUE, lencomp = lencomp, agecomp = agecomp)
 sample_struct_list <- list("SardineHCR" = sample_struct)
 
-# figure out the recruitment deviation input ---------------
+# define the recruitment deviation input ---------------
 
 # define scenario name
 scenName <- "margComps_noCatchPDOrec"
-iters <- 1
+iters <- 100
 
 template <- create_future_om_list(example_type = "custom")
 
-recdevPDO <- read.csv("C:/Users/rwildermuth/Documents/FutureSeas/Recruitment Index/recdevPDO2120.csv")
+recdevPDO <- read.csv("dat/recdevPDO2120.csv")
 # remove last row
 recdevPDO <- recdevPDO %>% filter(Year <= yrend - 1)
 
@@ -116,27 +104,12 @@ input <- data.frame(scen = rep(scenName, length.out = iters*nrow(recdevPDO)),
 input$par <- "rec_devs"
 recdevInput$input <- input %>% select(par, scen, iter, yr, value)
 
-# use random recdevs with sd same as to historical
-template_mod_change <- create_future_om_list(example_type = "model_change")
-rec_dev_specify <- template_mod_change[[1]]
-rec_dev_specify$pars <- "rec_devs"
-rec_dev_specify$scen <- c("replicate", "all") # noe: could change this to c("random", "all") if did not want to replicate the same recdevs sequences across scenarios
-rec_dev_specify$input$first_yr_averaging <- 1981
-rec_dev_specify$input$last_yr_averaging <- 2019
-rec_dev_specify$input$last_yr_orig_val <- 2019
-rec_dev_specify$input$first_yr_final_val <- 2020
-rec_dev_specify$input$ts_param <- "sd"
-rec_dev_specify$input$value <- NA
-rand_dev_list <- list(rec_dev_specify)
 
 # Run the OM --------------------------------------------------------------
 
-#run_res_path <- file.path("C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE", "results")
-# dir.create(mseOutputPath)
-
 # EM starts in 1981 to test a high data quality scenario
 # EMmodelPath <- "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/EM/EM_alldat"
-EMmodelPath <- "C:/Users/rwildermuth/Desktop/EM_K"
+EMmodelPath <- "EM_K"
 # EM starter.ss file must indicate init values are to be pulled from control.ss file, not ss.par
 
 startTime <- Sys.time()
@@ -154,8 +127,8 @@ out <- run_SSMSE(scen_name_vec = scenName, #"margComps_SardineHCR",# name of the
                  use_SS_boot_vec = TRUE, # use the SS bootstrap module for sampling
                  nyrs_vec = nyrs,        # Years to project OM forward
                  nyrs_assess_vec = 1, # Years between assessments
-                 future_om_list = rand_dev_list, #list(recdevInput),# 
-                 run_parallel = FALSE, # Run iterations in parallel
+                 future_om_list = list(recdevInput), 
+                 run_parallel = TRUE, # Run iterations in parallel
                  sample_struct_list = sample_struct_list, # How to sample data for running the EM.
                  seed = 1234) #Set a fixed integer seed that allows replication
 endTime <- Sys.time()
@@ -163,12 +136,3 @@ endTime <- Sys.time()
 
 # Summarize 1 iteration of output
 sumry <- SSMSE_summary_all(mseOutputPath)
-
-testFcastOM <- SS_output("C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/debugExample/margComps_Fcast0.2/5/margComp_20210921_OM")
-SS_plots(testFcastOM)
-testFcastEM <- SS_output("C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/debugExample/margComps_Fcast0.2/5/margCompsOMfixedSelexEM_EM_2021")
-SS_plots(testFcastEM)
-
-testFcastEM <- SS_output("C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/debugExample/margComps_Fcast0.2/5/margCompsOMfixedSelexEM_EM_2020",
-                         covar = FALSE)
-SS_plots(testFcastEM)
