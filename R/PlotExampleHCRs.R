@@ -10,6 +10,6 @@ y <- function(x, Fmsy){
 y5 <- sapply(x, y, Fmsy = 0.05)
 y20 <- sapply(x, y, Fmsy = 0.2)  
 
-plot(x, y5, type = "l", xlab = "Biomass (mt)", ylab = "Catch (mt)")
-abline(h = 200000, col = 2)
-lines(x, y20, col = "blue")
+plot(x, y5, type = "l", xlab = "Biomass (mt)", ylab = "Catch (mt)", lwd = 4)
+abline(h = 200000, col = 2, lwd = 4)
+lines(x, y20, col = "blue", lwd = 4)
