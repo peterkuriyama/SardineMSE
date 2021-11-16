@@ -1,0 +1,38 @@
+THIS FORECAST FOR PURPOSES OF GETTING DISPLAY QUANTITIES
+4:  Forecast_using_ave_F_from:_2024_2024
+Annual_Forecast_Fmult: 1.34643
+Fmultiplier_during_selected_relF_years_was: 1.34643
+Selectivity_averaged_over_yrs:_2024_to_2024
+Recruitment_averaged_over_yrs:_1981_to_2024
+Cap_totalcatch_by_fleet 
+ 0 0 0 0 0 0
+Cap_totalcatch_by_area 
+ 0
+Assign_fleets_to_allocation_groups_(0_means_not_in_a_group) 
+ 0 0 0 0 0 0
+Calculated_number_of_allocation_groups 0
+2:_Caps_&_Alloc_use_dead_catchbio
+#_Relative_F_among_fleets
+based_on_years:_2024 _to_ 2024
+Seasonal_apicalF=Fmult*Alloc*seas_dur_(can_be>ann_F_because_of_selex)
+seas seas_dur  MexCal_S1 MexCal_S2 PNW
+1 0.5 0.0128544 0 0.00119251
+2 0.5 0 0.658628 0.000539025
+#
+N_forecast_yrs: 1
+OY_Control_Rule  Inflection: 0.001 Intercept: 0.0001 Scale: 1; Policy (1): ramp scales catch as f(B) and buffer (H4010_scale) applied to F
+#
+FORECAST:_With_Constant_F=Fofl;_No_Input_Catches_or_Adjustments;_Equil_Recr;_No_inpl_error
+pop year ABC_Loop season Ramp&Buffer bio-all bio-Smry SpawnBio Depletion recruit-0  sel(B):_1 dead(B):_1 retain(B):_1 sel(N):_1 dead(N):_1 retain(N):_1 F:_1 R/C sel(B):_2 dead(B):_2 retain(B):_2 sel(N):_2 dead(N):_2 retain(N):_2 F:_2 R/C sel(B):_3 dead(B):_3 retain(B):_3 sel(N):_3 dead(N):_3 retain(N):_3 F:_3 R/C Catch_Cap Total_Catch ann_F
+1 2025 1 1 1 265953 158612 0 0 0  1621.86 1621.86 1621.86 23259.1 23259.1 23259.1 0.0128544 R   0 0 0 0 0 0 0 R   37.949 37.949 37.949 257.247 257.247 257.247 0.00119251 R  NA  NA  NA 
+1 2025 1 2 1 698051 143514 203057 0.311683 4.25461e+06  0 0 0 0 0 0 0 R   176267 176267 176267 3.599e+06 3.599e+06 3.599e+06 0.658628 R   12.713 12.713 12.713 85.3474 85.3474 85.3474 0.000539025 R  NA  177939  NA 
+FORECAST:_With_F=Fabc;_With_Input_Catches_and_Catch_Adjustments;_Equil_Recr;_No_inpl_error
+pop year ABC_Loop season Ramp&Buffer bio-all bio-Smry SpawnBio Depletion recruit-0  sel(B):_1 dead(B):_1 retain(B):_1 sel(N):_1 dead(N):_1 retain(N):_1 F:_1 R/C sel(B):_2 dead(B):_2 retain(B):_2 sel(N):_2 dead(N):_2 retain(N):_2 F:_2 R/C sel(B):_3 dead(B):_3 retain(B):_3 sel(N):_3 dead(N):_3 retain(N):_3 F:_3 R/C Catch_Cap Total_Catch ann_F
+1 2025 1 1 1 265953 158612 0 0 0  1621.86 1621.86 1621.86 23259.1 23259.1 23259.1 0.0128544 R   0 0 0 0 0 0 0 R   37.949 37.949 37.949 257.247 257.247 257.247 0.00119251 R  NA  NA  NA 
+1 2025 1 2 1 698051 143514 203057 0.311683 4.25461e+06  0 0 0 0 0 0 0 R   176267 176267 176267 3.599e+06 3.599e+06 3.599e+06 0.658628 R   12.713 12.713 12.713 85.3474 85.3474 85.3474 0.000539025 R  NA  177939  NA 
+1 2025 2 1 1 265953 158612 0 0 0  1621.86 1621.86 1621.86 23259.1 23259.1 23259.1 0.0128544 R   0 0 0 0 0 0 0 R   37.949 37.949 37.949 257.247 257.247 257.247 0.00119251 R  NA  NA  NA 
+1 2025 2 2 1 698051 143514 203057 0.311683 4.25461e+06  0 0 0 0 0 0 0 R   176267 176267 176267 3.599e+06 3.599e+06 3.599e+06 0.658628 R   12.713 12.713 12.713 85.3474 85.3474 85.3474 0.000539025 R  NA  177939  NA 
+1 2025 3 1 1 265953 158612 0 0 0  1621.86 1621.86 1621.86 23259.1 23259.1 23259.1 0.0128544 R   0 0 0 0 0 0 0 R   37.949 37.949 37.949 257.247 257.247 257.247 0.00119251 R  NA  NA  NA 
+1 2025 3 2 1 698051 143514 203057 0.311683 4.25461e+06  0 0 0 0 0 0 0 R   176267 176267 176267 3.599e+06 3.599e+06 3.599e+06 0.658628 R   12.713 12.713 12.713 85.3474 85.3474 85.3474 0.000539025 R  NA  177939  NA 
+#
+ FORECAST: in Bzero report with fishery onoff= 0

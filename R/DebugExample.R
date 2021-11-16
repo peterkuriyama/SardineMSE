@@ -38,7 +38,7 @@ datfile <- SS_readdat(file = paste0(OMmodelPath, "/dat.ss"), version = "3.30")
 # create_sample_strct() has trouble IDing SE for survey CPUE
 # define an index for the Acoustic-Trawl survey as in Desiree's code
 #specify number of years of MSE loop
-nyrs <- 10
+nyrs <- 5
 
 #sample_struct <- create_sample_struct(dat = datfile, nyrs = nyrs)
 #traceback()
@@ -96,8 +96,8 @@ sample_struct_list <- list("SardineHCR" = sample_struct)
 # figure out the recruitment deviation input ---------------
 
 # define scenario name
-scenName <- "margComps_noCatchPDOrec"
-iters <- 1
+scenName <- "margComps_noCatchRandRec"
+iters <- 2
 
 template <- create_future_om_list(example_type = "custom")
 
@@ -154,7 +154,7 @@ out <- run_SSMSE(scen_name_vec = scenName, #"margComps_SardineHCR",# name of the
                  use_SS_boot_vec = TRUE, # use the SS bootstrap module for sampling
                  nyrs_vec = nyrs,        # Years to project OM forward
                  nyrs_assess_vec = 1, # Years between assessments
-                 future_om_list = list(recdevInput),# rand_dev_list, #
+                 future_om_list =  rand_dev_list, #list(recdevInput),#
                  run_parallel = FALSE, # Run iterations in parallel
                  sample_struct_list = sample_struct_list, # How to sample data for running the EM.
                  seed = 1234) #Set a fixed integer seed that allows replication
