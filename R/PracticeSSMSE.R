@@ -6,12 +6,12 @@ library(SSMSE)
 library(r4ss)
 
 # directory for MSE output
-mseOutputPath <- "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/PracticeMSE_OMresearch_EMconstantgrowth"
+mseOutputPath <- "C:/Users/Robert W/Documents/FutureSeas/SardineMSE/constGrowthOMandEM"
 
 # Operating Model - Research Model ----------------------------------------
 
 # directory for OM SS code
-OMmodelPath <- "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/constGrowth_test2"
+OMmodelPath <- "C:/Users/Robert W/Documents/FutureSeas/SardineMSE/constGrowth_test2"
 
 # Create the OM - This modifies and re-runs the OM. Not needed now
 # develop_OMs(OM_in_dir = OMmodelPath, out_dir = mseOutputPath,
@@ -1076,10 +1076,10 @@ sample_struct$agecomp <- NULL
 sample_struct_list <- list("constGrowth" = sample_struct)
 # Run the OM --------------------------------------------------------------
 
-run_res_path <- file.path("C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE", "results")
+run_res_path <- file.path("C:/Users/Robert W/Documents/FutureSeas/SardineMSE", "results")
 # dir.create(run_res_path)
 run_SSMSE(scen_name_vec = "constGrowth",# name of the scenario
-          out_dir_scen_vec = run_res_path, # directory in which to run the scenario
+          out_dir_scen_vec = mseOutputPath, # directory in which to run the scenario
           iter_vec = c(2), # run with 2 iterations for now
           OM_name_vec = NULL, # specify directories instead
           OM_in_dir_vec = OMmodelPath, # OM files
@@ -1089,9 +1089,9 @@ run_SSMSE(scen_name_vec = "constGrowth",# name of the scenario
           use_SS_boot_vec = TRUE, # use the SS bootstrap module for sampling
           nyrs_vec = 2,        # Years to project OM forward
           nyrs_assess_vec = 1, # Years between assessments
-          rec_dev_pattern = "rand", # Use random recruitment devs
-          scope = "2", # to use the same recruitment devs across scenarios.
-          impl_error_pattern = "none", # Don't use implementation error
+          # rec_dev_pattern = "rand", # Use random recruitment devs
+          # scope = "2", # to use the same recruitment devs across scenarios.
+          # impl_error_pattern = "none", # Don't use implementation error
           run_EM_last_yr = FALSE, # Run the EM in 106
           run_parallel = FALSE, # Run iterations in parallel
           sample_struct_list = sample_struct_list, # How to sample data for running the EM.

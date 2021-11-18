@@ -2,6 +2,8 @@
 
 # library(devtools)
 # library(tidyverse)
+# library(here)
+# set_here(path = "C:/Users/Robert W/Documents/FutureSeas")
 library(dplyr)
 library(r4ss)
 library(foreach) #if using run_parallel = TRUE
@@ -21,13 +23,13 @@ source("R/MS_sar_hcr.R")
 source("R/SourceDiagnosticPlots.R")
 
 # directory for MSE output
-mseOutputPath <- "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/debugExample"
+mseOutputPath <- "C:/Users/Robert W/Documents/FutureSeas/SardineMSE/debugExample"
 
 # Operating Model - Research Model ----------------------------------------
 
 # directory for OM SS code
-# OMmodelPath <- "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/OM/OM_20211019"
-OMmodelPath <- "C:/Users/rwildermuth/Desktop/OM_K"
+# OMmodelPath <- "C:/Users/Robert W/Documents/FutureSeas/SardineMSE/OM/OM_20211019"
+OMmodelPath <- "C:/Users/Robert W/Documents/FutureSeas/SardineMSE/OM/OM_K"
 # RW: need to re-save data.ss_new as data.ss to fix formatting for SS_readdat()
 
 
@@ -96,12 +98,14 @@ sample_struct_list <- list("SardineHCR" = sample_struct)
 # figure out the recruitment deviation input ---------------
 
 # define scenario name
-scenName <- "margComps_noCatchRandRec"
+scenName <- "margComps_EMPDORec"
 iters <- 2
+
+### Define custom rec devs based on environment
 
 template <- create_future_om_list(example_type = "custom")
 
-recdevPDO <- read.csv("C:/Users/rwildermuth/Documents/FutureSeas/Recruitment Index/recdevPDO2120.csv")
+recdevPDO <- read.csv("C:/Users/Robert W/Documents/FutureSeas/Recruitment Index/recdevPDO2120.csv")
 # remove last row
 recdevPDO <- recdevPDO %>% filter(Year <= yrend - 1)
 
@@ -114,9 +118,10 @@ input <- data.frame(scen = rep(scenName, length.out = iters*nrow(recdevPDO)),
                     # value = rep(0.15, length.out = iters*nrow(recdevPDO)))
                     value = rep(recdevPDO$recDevPDO, times = iters))
 input$par <- "rec_devs"
+input[input$yr == 2019, "value"] <- 0
 recdevInput$input <- input %>% select(par, scen, iter, yr, value)
 
-# use random recdevs with sd same as to historical
+### use random recdevs with sd same as to historical
 template_mod_change <- create_future_om_list(example_type = "model_change")
 rec_dev_specify <- template_mod_change[[1]]
 rec_dev_specify$pars <- "rec_devs"
@@ -127,6 +132,18 @@ rec_dev_specify$input$last_yr_orig_val <- 2019
 rec_dev_specify$input$first_yr_final_val <- 2020
 rec_dev_specify$input$ts_param <- "sd"
 rec_dev_specify$input$value <- NA
+
+### Add autocorrelation ###
+new_vals <- data.frame(first_yr_averaging = NA,
+                       last_yr_averaging  = NA, 
+                       last_yr_orig_val   = 2019,
+                       first_yr_final_val = 2020, 
+                       ts_param = "ar_1_phi", 
+                       method = "absolute",
+                       value = 0.5) # 1 for random walk
+rec_dev_specify$input <- rbind(rec_dev_specify$input,
+                               new_vals)
+
 rand_dev_list <- list(rec_dev_specify)
 
 # Run the OM --------------------------------------------------------------
@@ -136,7 +153,7 @@ rand_dev_list <- list(rec_dev_specify)
 
 # EM starts in 1981 to test a high data quality scenario
 # EMmodelPath <- "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/EM/EM_alldat"
-EMmodelPath <- "C:/Users/rwildermuth/Desktop/EM_K"
+EMmodelPath <- "C:/Users/Robert W/Documents/FutureSeas/SardineMSE/EM/EM_K"
 # EM starter.ss file must indicate init values are to be pulled from control.ss file, not ss.par
 
 startTime <- Sys.time()
@@ -147,14 +164,14 @@ out <- run_SSMSE(scen_name_vec = scenName, #"margComps_SardineHCR",# name of the
                  OM_in_dir_vec = OMmodelPath, # OM files
                  EM_name_vec = "margCompsOMfixedSelexEM", # cod is included in package data
                  EM_in_dir_vec = EMmodelPath, # EM files
-                 # MS_vec = "EM",
-                 MS_vec = "no_catch",
+                 MS_vec = "EM",
+                 # MS_vec = "no_catch",
                  # MS_vec = "MS_sar_hcr",       # The management strategy is specified in the custom function
                  # custom_MS_source = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/R/MS_sar_hcr.R", # file location of the MS function
                  use_SS_boot_vec = TRUE, # use the SS bootstrap module for sampling
                  nyrs_vec = nyrs,        # Years to project OM forward
                  nyrs_assess_vec = 1, # Years between assessments
-                 future_om_list =  rand_dev_list, #list(recdevInput),#
+                 future_om_list = list(recdevInput),#rand_dev_list, # 
                  run_parallel = FALSE, # Run iterations in parallel
                  sample_struct_list = sample_struct_list, # How to sample data for running the EM.
                  seed = 1234) #Set a fixed integer seed that allows replication

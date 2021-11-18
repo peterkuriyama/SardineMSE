@@ -124,7 +124,7 @@ rand_dev_list <- list(rec_dev_specify)
 
 # EM starts in 1981 to test a high data quality scenario
 # EMmodelPath <- "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/EM/EM_alldat"
-EMmodelPath <- "C:/Users/Robert W/Desktop/EM_K"
+EMmodelPath <- "C:/Users/Robert W/Documents/FutureSeas/EM_K"
 # EM starter.ss file must indicate init values are to be pulled from control.ss file, not ss.par
 
 startTime <- Sys.time()
@@ -134,7 +134,7 @@ out <- run_SSMSE(scen_name_vec = scenName, #"margComps_SardineHCR",# name of the
                  OM_name_vec = NULL, # specify directories instead
                  OM_in_dir_vec = OMmodelPath, # OM files
                  EM_name_vec = "constantOM_EMalldat", # cod is included in package data
-                 EM_in_dir_vec = EMmodelPath, # EM files
+                 EM_in_dir_vec = OMmodelPath, # EM files
                  # MS_vec = "EM",
                  MS_vec = "no_catch",
                  # MS_vec = "MS_sar_hcr",       # The management strategy is specified in the custom function
