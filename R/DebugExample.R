@@ -19,8 +19,8 @@ library(SSMSE) # v0.1.0
 # devtools::load_all(path = "C:/Users/rwildermuth/Documents/SSMSE")
 packageVersion("SSMSE")
 
-source("R/MS_sar_hcr.R")
-source("R/SourceDiagnosticPlots.R")
+# source("R/MS_sar_hcr.R")
+# source("R/SourceDiagnosticPlots.R")
 
 # directory for MSE output
 mseOutputPath <- "C:/Users/Robert W/Documents/FutureSeas/SardineMSE/debugExample"
@@ -40,7 +40,7 @@ datfile <- SS_readdat(file = paste0(OMmodelPath, "/dat.ss"), version = "3.30")
 # create_sample_strct() has trouble IDing SE for survey CPUE
 # define an index for the Acoustic-Trawl survey as in Desiree's code
 #specify number of years of MSE loop
-nyrs <- 5
+nyrs <- 2
 
 #sample_struct <- create_sample_struct(dat = datfile, nyrs = nyrs)
 #traceback()
@@ -98,28 +98,28 @@ sample_struct_list <- list("SardineHCR" = sample_struct)
 # figure out the recruitment deviation input ---------------
 
 # define scenario name
-scenName <- "margComps_SardineHCRRandRec"
+scenName <- "margComps_EMRandRec"
 iters <- 2
 
 ### Define custom rec devs based on environment
 
-template <- create_future_om_list(example_type = "custom")
-
-recdevPDO <- read.csv("C:/Users/Robert W/Documents/FutureSeas/Recruitment Index/recdevPDO2120.csv")
-# remove last row
-recdevPDO <- recdevPDO %>% filter(Year <= yrend - 1)
-
-recdevInput <- template[[1]]
-recdevInput$pars <- "rec_devs"
-
-input <- data.frame(scen = rep(scenName, length.out = iters*nrow(recdevPDO)),
-                    iter = rep(1:iters, each = nrow(recdevPDO)),
-                    yr = rep(recdevPDO$Year, times = iters),
-                    # value = rep(0.15, length.out = iters*nrow(recdevPDO)))
-                    value = rep(recdevPDO$recDevPDO, times = iters))
-input$par <- "rec_devs"
-input[input$yr == 2019, "value"] <- 0
-recdevInput$input <- input %>% select(par, scen, iter, yr, value)
+# template <- create_future_om_list(example_type = "custom")
+# 
+# recdevPDO <- read.csv("C:/Users/Robert W/Documents/FutureSeas/Recruitment Index/recdevPDO2120.csv")
+# # remove last row
+# recdevPDO <- recdevPDO %>% filter(Year <= yrend - 1)
+# 
+# recdevInput <- template[[1]]
+# recdevInput$pars <- "rec_devs"
+# 
+# input <- data.frame(scen = rep(scenName, length.out = iters*nrow(recdevPDO)),
+#                     iter = rep(1:iters, each = nrow(recdevPDO)),
+#                     yr = rep(recdevPDO$Year, times = iters),
+#                     # value = rep(0.15, length.out = iters*nrow(recdevPDO)))
+#                     value = rep(recdevPDO$recDevPDO, times = iters))
+# input$par <- "rec_devs"
+# input[input$yr == 2019, "value"] <- 0
+# recdevInput$input <- input %>% select(par, scen, iter, yr, value)
 
 ### use random recdevs with sd same as to historical
 template_mod_change <- create_future_om_list(example_type = "model_change")
@@ -134,15 +134,15 @@ rec_dev_specify$input$ts_param <- "sd"
 rec_dev_specify$input$value <- NA
 
 ### Add autocorrelation ###
-new_vals <- data.frame(first_yr_averaging = NA,
-                       last_yr_averaging  = NA, 
-                       last_yr_orig_val   = 2019,
-                       first_yr_final_val = 2020, 
-                       ts_param = "ar_1_phi", 
-                       method = "absolute",
-                       value = 0.5) # 1 for random walk
-rec_dev_specify$input <- rbind(rec_dev_specify$input,
-                               new_vals)
+# new_vals <- data.frame(first_yr_averaging = NA,
+#                        last_yr_averaging  = NA, 
+#                        last_yr_orig_val   = 2019,
+#                        first_yr_final_val = 2020, 
+#                        ts_param = "ar_1_phi", 
+#                        method = "absolute",
+#                        value = 0.5) # 1 for random walk
+# rec_dev_specify$input <- rbind(rec_dev_specify$input,
+#                                new_vals)
 
 rand_dev_list <- list(rec_dev_specify)
 
@@ -153,7 +153,7 @@ rand_dev_list <- list(rec_dev_specify)
 
 # EM starts in 1981 to test a high data quality scenario
 # EMmodelPath <- "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/EM/EM_alldat"
-EMmodelPath <- "C:/Users/Robert W/Documents/FutureSeas/SardineMSE/EM/EM_K"
+EMmodelPath <- "C:/Users/Robert W/Documents/FutureSeas/SardineMSE/EM/EM_HCR6"
 # EM starter.ss file must indicate init values are to be pulled from control.ss file, not ss.par
 
 startTime <- Sys.time()
@@ -164,15 +164,15 @@ out <- run_SSMSE(scen_name_vec = scenName, #"margComps_SardineHCR",# name of the
                  OM_in_dir_vec = OMmodelPath, # OM files
                  EM_name_vec = "margCompsOMfixedSelexEM", # cod is included in package data
                  EM_in_dir_vec = EMmodelPath, # EM files
-                 # MS_vec = "EM",
+                 MS_vec = "EM",
                  # MS_vec = "no_catch",
-                 MS_vec = "MS_sar_hcr",       # The management strategy is specified in the custom function
-                 custom_MS_source = "C:/Users/Robert W/Documents/FutureSeas/SardineMSE/R/MS_sar_hcr.R", # file location of the MS function
+                 # MS_vec = "MS_sar_hcr",       # The management strategy is specified in the custom function
+                 # custom_MS_source = "C:/Users/Robert W/Documents/FutureSeas/SardineMSE/R/MS_sar_hcr.R", # file location of the MS function
                  use_SS_boot_vec = TRUE, # use the SS bootstrap module for sampling
                  nyrs_vec = nyrs,        # Years to project OM forward
                  nyrs_assess_vec = 1, # Years between assessments
                  future_om_list = rand_dev_list, # list(recdevInput),#
-                 run_parallel = FALSE, # Run iterations in parallel
+                 run_parallel = TRUE, # Run iterations in parallel
                  sample_struct_list = sample_struct_list, # How to sample data for running the EM.
                  seed = 1234) #Set a fixed integer seed that allows replication
 endTime <- Sys.time()
