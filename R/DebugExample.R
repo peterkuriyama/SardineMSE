@@ -98,7 +98,7 @@ sample_struct_list <- list("SardineHCR" = sample_struct)
 # figure out the recruitment deviation input ---------------
 
 # define scenario name
-scenName <- "margComps_EMPDORec"
+scenName <- "margComps_SardineHCRRandRec"
 iters <- 2
 
 ### Define custom rec devs based on environment
@@ -164,14 +164,14 @@ out <- run_SSMSE(scen_name_vec = scenName, #"margComps_SardineHCR",# name of the
                  OM_in_dir_vec = OMmodelPath, # OM files
                  EM_name_vec = "margCompsOMfixedSelexEM", # cod is included in package data
                  EM_in_dir_vec = EMmodelPath, # EM files
-                 MS_vec = "EM",
+                 # MS_vec = "EM",
                  # MS_vec = "no_catch",
-                 # MS_vec = "MS_sar_hcr",       # The management strategy is specified in the custom function
-                 # custom_MS_source = "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/R/MS_sar_hcr.R", # file location of the MS function
+                 MS_vec = "MS_sar_hcr",       # The management strategy is specified in the custom function
+                 custom_MS_source = "C:/Users/Robert W/Documents/FutureSeas/SardineMSE/R/MS_sar_hcr.R", # file location of the MS function
                  use_SS_boot_vec = TRUE, # use the SS bootstrap module for sampling
                  nyrs_vec = nyrs,        # Years to project OM forward
                  nyrs_assess_vec = 1, # Years between assessments
-                 future_om_list = list(recdevInput),#rand_dev_list, # 
+                 future_om_list = rand_dev_list, # list(recdevInput),#
                  run_parallel = FALSE, # Run iterations in parallel
                  sample_struct_list = sample_struct_list, # How to sample data for running the EM.
                  seed = 1234) #Set a fixed integer seed that allows replication
