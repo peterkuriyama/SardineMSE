@@ -23,7 +23,7 @@ packageVersion("SSMSE")
 # source("R/SourceDiagnosticPlots.R")
 
 # directory for MSE output
-mseOutputPath <- "C:/Users/Robert W/Documents/FutureSeas/SardineMSE/debugExample"
+mseOutputPath <- "C:/Users/Robert W/Documents/FutureSeas/SardineMSE/serverScenarios"
 
 # Operating Model - Research Model ----------------------------------------
 
@@ -40,7 +40,7 @@ datfile <- SS_readdat(file = paste0(OMmodelPath, "/dat.ss"), version = "3.30")
 # create_sample_strct() has trouble IDing SE for survey CPUE
 # define an index for the Acoustic-Trawl survey as in Desiree's code
 #specify number of years of MSE loop
-nyrs <- 2
+nyrs <- 50
 
 #sample_struct <- create_sample_struct(dat = datfile, nyrs = nyrs)
 #traceback()
@@ -93,13 +93,13 @@ agecomp = data.frame(Yr = rep(c(yrsrt:yrend),nadat),
                      Nsamp = c(rep(20,nyrs),rep(20,nyrs),rep(20,nyrs),rep(20,nyrs)))
 
 sample_struct <- list(catch = catch, CPUE = CPUE, lencomp = lencomp, agecomp = agecomp)
-sample_struct_list <- list("SardineHCR" = sample_struct)
+sample_struct_list <- list("HCR6" = sample_struct)
 
 # figure out the recruitment deviation input ---------------
 
 # define scenario name
-scenName <- "margComps_EMRandRec"
-iters <- 2
+scenName <- "margComps_HCR6"
+iters <- 100
 
 ### Define custom rec devs based on environment
 
@@ -173,6 +173,7 @@ out <- run_SSMSE(scen_name_vec = scenName, #"margComps_SardineHCR",# name of the
                  nyrs_assess_vec = 1, # Years between assessments
                  future_om_list = rand_dev_list, # list(recdevInput),#
                  run_parallel = TRUE, # Run iterations in parallel
+                 n_cores = 4, # number of cores to use in parallel
                  sample_struct_list = sample_struct_list, # How to sample data for running the EM.
                  seed = 1234) #Set a fixed integer seed that allows replication
 endTime <- Sys.time()
