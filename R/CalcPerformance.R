@@ -65,5 +65,6 @@ metrics <- data.frame(closuresN = smryBio$closuresN,
                       meanCat = smryCat$meanCat,
                       sdCat = smryCat$sdCat)
 
-save(list = c("tsBio", "tsCat", "B0", "metrics"),
+save(tsBio, tsCat, B0, metrics,
      file = file.path(mseOutputPath, "resRandRecHCR1.RData"))
+load(file = file.path(mseOutputPath, "resRandRecHCR1.RData"))
