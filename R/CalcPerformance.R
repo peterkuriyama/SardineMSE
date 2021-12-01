@@ -2,9 +2,9 @@
 # Created: 10/26/2021, Robert Wildermuth
 
 # directory for MSE output
-mseOutputPath <- "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/debugExample"
+mseOutputPath <- "C:/Users/Robert W/Documents/FutureSeas/SSMSEscenarios/margCompsOMfixedSelexEM"
 # scenario
-scenName <- "margComps_noCatch100yrs"
+scenName <- "margCompsOMfixedSelexEM_RandRecHCR1"
 
 # get the iterations
 iters <- list.dirs(file.path(mseOutputPath, scenName), recursive = FALSE, full.names = FALSE)
@@ -19,7 +19,8 @@ tsCat <- data.frame(Yr = NA, obsCat = NA, expCat = NA, iter = NA)
 B0 <- NA
 
 for(i in iters){
-  omOut <- SS_output(file.path(mseOutputPath, scenName, i, omName), verbose = FALSE)
+  omOut <- SS_output(file.path(mseOutputPath, scenName, i, omName), 
+                     verbose = FALSE, printstats = FALSE)
   
   tsBio <- rbind(tsBio,
                  omOut$sprseries %>% #filter(Era == "FORE") %>%
@@ -40,8 +41,8 @@ for(i in iters){
 
 # Fishery closure cutoff
 cutoff <- 150000
-# maximum catch of 200000
-maxcat <- 200000
+# biomass at which maximum catch of 200000 reached when Fmsy = 0.05
+maxcat <- 4150000
 
 tsBio <- tsBio %>% mutate(closure = Bio_Smry.1 < cutoff,
                           bonanza = Bio_Smry.1 > maxcat)
@@ -63,3 +64,6 @@ metrics <- data.frame(closuresN = smryBio$closuresN,
                       meanB1plus = smryBio$meanB1plus,
                       meanCat = smryCat$meanCat,
                       sdCat = smryCat$sdCat)
+
+save(list = c("tsBio", "tsCat", "B0", "metrics"),
+     file = file.path(mseOutputPath, "resRandRecHCR1.RData"))
