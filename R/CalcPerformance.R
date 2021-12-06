@@ -4,7 +4,7 @@
 # directory for MSE output
 mseOutputPath <- "C:/Users/Robert W/Documents/FutureSeas/SSMSEscenarios/margCompsOMfixedSelexEM"
 # scenario
-scenName <- "margCompsOMfixedSelexEM_RandRecHCR1"
+scenName <- "margCompsOMfixedSelexEM_RandRecHCR0"
 
 # get the iterations
 iters <- list.dirs(file.path(mseOutputPath, scenName), recursive = FALSE, full.names = FALSE)
@@ -66,5 +66,5 @@ metrics <- data.frame(closuresN = smryBio$closuresN,
                       sdCat = smryCat$sdCat)
 
 save(tsBio, tsCat, B0, metrics,
-     file = file.path(mseOutputPath, "resRandRecHCR1.RData"))
-load(file = file.path(mseOutputPath, "resRandRecHCR1.RData"))
+     file = file.path(mseOutputPath, "resRandRecHCR0.RData"))
+load(file = file.path(mseOutputPath, "resRandRecHCR0.RData"))
