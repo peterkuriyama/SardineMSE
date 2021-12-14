@@ -23,13 +23,13 @@ packageVersion("SSMSE")
 # source("R/SourceDiagnosticPlots.R")
 
 # directory for MSE output
-mseOutputPath <- "C:/Users/Robert W/Documents/FutureSeas/SardineMSE/serverScenarios"
+mseOutputPath <- "C:/Users/r.wildermuth/Documents/FutureSeas/SardineScenarios"
 
 # Operating Model - Research Model ----------------------------------------
 
 # directory for OM SS code
 # OMmodelPath <- "C:/Users/Robert W/Documents/FutureSeas/SardineMSE/OM/OM_20211019"
-OMmodelPath <- "C:/Users/Robert W/Documents/FutureSeas/SardineMSE/OM/OM_K"
+OMmodelPath <- "C:/Users/r.wildermuth/Documents/FutureSeas/SardineMSE/OM/OM_K"
 # RW: need to re-save data.ss_new as data.ss to fix formatting for SS_readdat()
 
 
@@ -40,7 +40,7 @@ datfile <- SS_readdat(file = paste0(OMmodelPath, "/dat.ss"), version = "3.30")
 # create_sample_strct() has trouble IDing SE for survey CPUE
 # define an index for the Acoustic-Trawl survey as in Desiree's code
 #specify number of years of MSE loop
-nyrs <- 50
+nyrs <- 2
 
 #sample_struct <- create_sample_struct(dat = datfile, nyrs = nyrs)
 #traceback()
@@ -93,13 +93,13 @@ agecomp = data.frame(Yr = rep(c(yrsrt:yrend),nadat),
                      Nsamp = c(rep(20,nyrs),rep(20,nyrs),rep(20,nyrs),rep(20,nyrs)))
 
 sample_struct <- list(catch = catch, CPUE = CPUE, lencomp = lencomp, agecomp = agecomp)
-sample_struct_list <- list("HCR6" = sample_struct)
+sample_struct_list <- list("HCR4" = sample_struct)
 
 # figure out the recruitment deviation input ---------------
 
 # define scenario name
-scenName <- "margComps_HCR6"
-iters <- 100
+scenName <- "margComps_HCR4"
+iters <- 2
 
 ### Define custom rec devs based on environment
 
@@ -153,7 +153,7 @@ rand_dev_list <- list(rec_dev_specify)
 
 # EM starts in 1981 to test a high data quality scenario
 # EMmodelPath <- "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/EM/EM_alldat"
-EMmodelPath <- "C:/Users/Robert W/Documents/FutureSeas/SardineMSE/EM/EM_HCR6"
+EMmodelPath <- "C:/Users/r.wildermuth/Documents/FutureSeas/SardineMSE/EM/EM_HCR4"
 # EM starter.ss file must indicate init values are to be pulled from control.ss file, not ss.par
 
 startTime <- Sys.time()
