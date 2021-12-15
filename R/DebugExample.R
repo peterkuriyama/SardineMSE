@@ -40,7 +40,7 @@ datfile <- SS_readdat(file = paste0(OMmodelPath, "/dat.ss"), version = "3.30")
 # create_sample_strct() has trouble IDing SE for survey CPUE
 # define an index for the Acoustic-Trawl survey as in Desiree's code
 #specify number of years of MSE loop
-nyrs <- 2
+nyrs <- 3
 
 #sample_struct <- create_sample_struct(dat = datfile, nyrs = nyrs)
 #traceback()
@@ -93,12 +93,12 @@ agecomp = data.frame(Yr = rep(c(yrsrt:yrend),nadat),
                      Nsamp = c(rep(20,nyrs),rep(20,nyrs),rep(20,nyrs),rep(20,nyrs)))
 
 sample_struct <- list(catch = catch, CPUE = CPUE, lencomp = lencomp, agecomp = agecomp)
-sample_struct_list <- list("HCR4" = sample_struct)
+sample_struct_list <- list("HCR_st2005" = sample_struct)
 
 # figure out the recruitment deviation input ---------------
 
 # define scenario name
-scenName <- "margComps_HCR4"
+scenName <- "HCR_st2005"
 iters <- 2
 
 ### Define custom rec devs based on environment
@@ -153,7 +153,7 @@ rand_dev_list <- list(rec_dev_specify)
 
 # EM starts in 1981 to test a high data quality scenario
 # EMmodelPath <- "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/EM/EM_alldat"
-EMmodelPath <- "C:/Users/r.wildermuth/Documents/FutureSeas/SardineMSE/EM/EM_HCR4"
+EMmodelPath <- "C:/Users/r.wildermuth/Documents/FutureSeas/SardineMSE/EM/EM_st2005"
 # EM starter.ss file must indicate init values are to be pulled from control.ss file, not ss.par
 
 startTime <- Sys.time()
@@ -175,9 +175,12 @@ out <- run_SSMSE(scen_name_vec = scenName, #"margComps_SardineHCR",# name of the
                  run_parallel = TRUE, # Run iterations in parallel
                  n_cores = 4, # number of cores to use in parallel
                  sample_struct_list = sample_struct_list, # How to sample data for running the EM.
-                 seed = 1234) #Set a fixed integer seed that allows replication
+                 seed = 12349) #Set a fixed integer seed that allows replication
 endTime <- Sys.time()
 # Summarize results -------------------------------------------------------
+
+test1 <- SS_output(dir = "C:/Users/r.wildermuth/Documents/FutureSeas/SardineScenarios/HCR_st2005/2/margCompsOMfixedSelexEM_EM_2021")
+SS_plots(test1)
 
 # Summarize 1 iteration of output
 sumry <- SSMSE_summary_all(mseOutputPath)
