@@ -14,14 +14,14 @@ library(SSMSE)
 packageVersion("SSMSE")
 
 # directory for MSE output
-# mseOutputPath <- "C:/Users/r.wildermuth/Documents/FutureSeas/SardineScenarios"
-mseOutputPath <- "J:/Desiree/Sardine/SardineScenarios"
+mseOutputPath <- "C:/Users/r.wildermuth/Documents/FutureSeas/SardineScenarios"
+# mseOutputPath <- "J:/Desiree/Sardine/SardineScenarios"
 
 # Operating Model - Research Model ----------------------------------------
 
 # directory for OM SS code
-# OMmodelPath <- "C:/Users/r.wildermuth/Documents/FutureSeas/SardineMSE/OM/OM_K"
-OMmodelPath <- "J:/Desiree/Sardine/SardineMSE/OM/OM_K"
+OMmodelPath <- "C:/Users/r.wildermuth/Documents/FutureSeas/SardineMSE/OM/OM_K"
+# OMmodelPath <- "J:/Desiree/Sardine/SardineMSE/OM/OM_K"
 
 
 # Define Observation Model ------------------------------------------------
@@ -62,27 +62,27 @@ catch <- data.frame(Yr = rep(c(yrsrt:yrend),ncdat),
 #specify the number of lengthcomp surveys
 nldat <- 4
 lencomp <- data.frame(Yr = rep(c(yrsrt:yrend),nldat), 
-                     Seas = c(rep(1,nyrs),rep(4,nyrs),rep(10,nyrs),rep(4,nyrs)),
-                     FltSvy = c(rep(4,nyrs),rep(1,nyrs),rep(2,nyrs),rep(3,nyrs)),
-                     Sex = rep(0,nyrs*nldat),
-                     Part = rep(0,nyrs*nldat),
-                     Nsamp = c(rep(20,nyrs),rep(20,nyrs),rep(20,nyrs),rep(20,nyrs)))
+                      Seas = c(rep(1,nyrs),rep(4,nyrs),rep(10,nyrs),rep(4,nyrs)),
+                      FltSvy = c(rep(4,nyrs),rep(1,nyrs),rep(2,nyrs),rep(3,nyrs)),
+                      Sex = rep(0,nyrs*nldat),
+                      Part = rep(0,nyrs*nldat),
+                      Nsamp = c(rep(20,nyrs),rep(20,nyrs),rep(20,nyrs),rep(20,nyrs)))
 
 #for age comps same surveys as as lcomps
 nadat <- 4
 agecomp <- data.frame(Yr = rep(c(yrsrt:yrend),nadat), 
-                     Seas = c(rep(1,nyrs),rep(4,nyrs),rep(10,nyrs),rep(4,nyrs)),
-                     FltSvy = c(rep(4,nyrs),rep(1,nyrs),rep(2,nyrs),rep(3,nyrs)),
-                     Sex = rep(0,nyrs*nadat),
-                     Part = rep(0,nyrs*nadat),
-                     Ageerr = c(rep(4,nyrs),rep(4,nyrs),rep(4,nyrs),rep(4,nyrs)),
-                     Lbin_lo = c(rep(-1,nyrs),rep(-1,nyrs),rep(-1,nyrs),rep(-1,nyrs)),
-                     Lbin_hi = c(rep(-1,nyrs),rep(-1,nyrs),rep(-1,nyrs),rep(-1,nyrs)),
-                     Nsamp = c(rep(20,nyrs),rep(20,nyrs),rep(20,nyrs),rep(20,nyrs)))
+                      Seas = c(rep(1,nyrs),rep(4,nyrs),rep(10,nyrs),rep(4,nyrs)),
+                      FltSvy = c(rep(4,nyrs),rep(1,nyrs),rep(2,nyrs),rep(3,nyrs)),
+                      Sex = rep(0,nyrs*nadat),
+                      Part = rep(0,nyrs*nadat),
+                      Ageerr = c(rep(4,nyrs),rep(4,nyrs),rep(4,nyrs),rep(4,nyrs)),
+                      Lbin_lo = c(rep(-1,nyrs),rep(-1,nyrs),rep(-1,nyrs),rep(-1,nyrs)),
+                      Lbin_hi = c(rep(-1,nyrs),rep(-1,nyrs),rep(-1,nyrs),rep(-1,nyrs)),
+                      Nsamp = c(rep(20,nyrs),rep(20,nyrs),rep(20,nyrs),rep(20,nyrs)))
 
 sample_struct <- list(catch = catch, CPUE = CPUE, lencomp = lencomp, agecomp = agecomp)
-sample_struct_list <- list(#"margCompsOMfixedSelexEM_RandRecHCR0" = sample_struct,
-                           #"margCompsOMfixedSelexEM_RandRecHCR1" = sample_struct,
+sample_struct_list <- list("margCompsOMfixedSelexEM_RandRecHCR0" = sample_struct,
+                           "margCompsOMfixedSelexEM_RandRecHCR1" = sample_struct,
                            "margCompsOMfixedSelexEM_RandRecHCR4" = sample_struct,
                            "margCompsOMfixedSelexEM_RandRecHCR5" = sample_struct,
                            "margCompsOMfixedSelexEM_RandRecHCR6" = sample_struct)
@@ -90,8 +90,8 @@ sample_struct_list <- list(#"margCompsOMfixedSelexEM_RandRecHCR0" = sample_struc
 # figure out the recruitment deviation input ---------------
 
 # define scenario name
-scenName <- c(#"margCompsOMfixedSelexEM_RandRecHCR0",
-              #"margCompsOMfixedSelexEM_RandRecHCR1",
+scenName <- c("margCompsOMfixedSelexEM_RandRecHCR0",
+              "margCompsOMfixedSelexEM_RandRecHCR1",
               "margCompsOMfixedSelexEM_RandRecHCR4",
               "margCompsOMfixedSelexEM_RandRecHCR5",
               "margCompsOMfixedSelexEM_RandRecHCR6")
@@ -114,8 +114,8 @@ rand_dev_list <- list(rec_dev_specify)
 # Run the OM --------------------------------------------------------------
 
 # EM starts in 1981 to test a high data quality scenario
-# EMmodelPath <- "C:/Users/r.wildermuth/Documents/FutureSeas/SardineMSE/EM"
-EMmodelPath <- "J:/Desiree/Sardine/SardineMSE/EM"
+EMmodelPath <- "C:/Users/r.wildermuth/Documents/FutureSeas/SardineMSE/EM"
+# EMmodelPath <- "J:/Desiree/Sardine/SardineMSE/EM"
 # EM starter.ss file must indicate init values are to be pulled from control.ss file, not ss.par
 
 startTime <- Sys.time()
@@ -124,15 +124,16 @@ out <- run_SSMSE(scen_name_vec = scenName, # name of the scenario
                  iter_vec = rep(iters, times = length(scenName)), # run with 5 iterations for now
                  OM_name_vec = NULL, # specify directories instead
                  OM_in_dir_vec = OMmodelPath, #rep(OMmodelPath, times = length(scenName)), # OM files
-                 EM_name_vec = rep("margCompsOMfixedSelexEM", times = length(scenName)), # cod is included in package data
-                 EM_in_dir_vec = #EMmodelPath, #rep(EMmodelPath, times = length(scenName)),
-                   c(file.path(EMmodelPath, "EM_HCR4"),
+                 EM_name_vec = c(NA, rep("margCompsOMfixedSelexEM", times = length(scenName)-1)), # cod is included in package data
+                 EM_in_dir_vec = c(NA,
+                                   file.path(EMmodelPath, "EM_st2005"),
+                                   file.path(EMmodelPath, "EM_HCR4"),
                                    file.path(EMmodelPath, "EM_HCR5"),
                                    file.path(EMmodelPath, "EM_HCR6")), # EM files
                  MS_vec = #"EM",
-                   #c(#"no_catch", "MS_sar_hcr",
-                           rep("EM", times = length(scenName)),
-                 #custom_MS_source = "C:/Users/r.wildermuth/Documents/FutureSeas/SardineMSE/R/MS_sar_hcr.R", # file location of the MS function
+                   c("no_catch", "MS_sar_hcr",
+                     rep("EM", times = 3)),
+                 custom_MS_source = "C:/Users/r.wildermuth/Documents/FutureSeas/SardineMSE/R/MS_sar_hcr.R", # file location of the MS function
                  use_SS_boot_vec = TRUE, # use the SS bootstrap module for sampling
                  nyrs_vec = nyrs,        # Years to project OM forward
                  nyrs_assess_vec = 1, # Years between assessments

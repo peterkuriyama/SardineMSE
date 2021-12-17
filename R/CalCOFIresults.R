@@ -3,7 +3,7 @@
 library(tidyverse)
 
 # directory for MSE output
-mseOutputPath <- "C:/Users/Robert W/Documents/FutureSeas/SSMSEscenarios/margCompsOMfixedSelexEM"
+mseOutputPath <- "C:/Users/r.wildermuth/Documents/FutureSeas/SardineScenarios/margCompsOMfixedSelexEM"
 load(file = file.path(mseOutputPath, "resRandRecHCR0.RData"))
 metricsHCR0 <- metrics %>% mutate(mngtStrategy = "NoCatch")
 
