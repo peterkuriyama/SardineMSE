@@ -14,12 +14,14 @@ library(SSMSE)
 packageVersion("SSMSE")
 
 # directory for MSE output
-mseOutputPath <- "C:/Users/r.wildermuth/Documents/FutureSeas/SardineScenarios"
+# mseOutputPath <- "C:/Users/r.wildermuth/Documents/FutureSeas/SardineScenarios"
+mseOutputPath <- "J:/Desiree/Sardine/SardineScenarios"
 
 # Operating Model - Research Model ----------------------------------------
 
 # directory for OM SS code
-OMmodelPath <- "C:/Users/r.wildermuth/Documents/FutureSeas/SardineMSE/OM/OM_K"
+# OMmodelPath <- "C:/Users/r.wildermuth/Documents/FutureSeas/SardineMSE/OM/OM_K"
+OMmodelPath <- "J:/Desiree/Sardine/SardineMSE/OM/OM_K"
 
 
 # Define Observation Model ------------------------------------------------
@@ -112,7 +114,8 @@ rand_dev_list <- list(rec_dev_specify)
 # Run the OM --------------------------------------------------------------
 
 # EM starts in 1981 to test a high data quality scenario
-EMmodelPath <- "C:/Users/r.wildermuth/Documents/FutureSeas/SardineMSE/EM"
+# EMmodelPath <- "C:/Users/r.wildermuth/Documents/FutureSeas/SardineMSE/EM"
+EMmodelPath <- "J:/Desiree/Sardine/SardineMSE/EM"
 # EM starter.ss file must indicate init values are to be pulled from control.ss file, not ss.par
 
 startTime <- Sys.time()
