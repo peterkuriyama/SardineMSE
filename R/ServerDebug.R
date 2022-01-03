@@ -31,7 +31,7 @@ datfile <- SS_readdat(file = paste0(OMmodelPath, "/dat.ss"), version = "3.30")
 # create_sample_strct() has trouble IDing SE for survey CPUE
 # define an index for the Acoustic-Trawl survey as in Desiree's code
 #specify number of years of MSE loop
-nyrs <- 2
+nyrs <- 20
 
 #sample_struct <- create_sample_struct(dat = datfile, nyrs = nyrs)
 #traceback()
@@ -81,21 +81,22 @@ agecomp <- data.frame(Yr = rep(c(yrsrt:yrend),nadat),
                       Nsamp = c(rep(20,nyrs),rep(20,nyrs),rep(20,nyrs),rep(20,nyrs)))
 
 sample_struct <- list(catch = catch, CPUE = CPUE, lencomp = lencomp, agecomp = agecomp)
-sample_struct_list <- list("margCompsOMfixedSelexEM_RandRecHCR0" = sample_struct,
-                           "margCompsOMfixedSelexEM_RandRecHCR1" = sample_struct,
-                           "margCompsOMfixedSelexEM_RandRecHCR4" = sample_struct,
-                           "margCompsOMfixedSelexEM_RandRecHCR5" = sample_struct,
-                           "margCompsOMfixedSelexEM_RandRecHCR6" = sample_struct)
-
+sample_struct_list <- list("margCompsOMfixedSelexEM_RandRecst2005" = sample_struct)
+# sample_struct_list <- list(#"margCompsOMfixedSelexEM_RandRecHCR0" = sample_struct,
+#                            #"margCompsOMfixedSelexEM_RandRecHCR1" = sample_struct,
+#                            "margCompsOMfixedSelexEM_RandRecHCR4" = sample_struct,
+#                            #"margCompsOMfixedSelexEM_RandRecHCR5" = sample_struct,
+#                            "margCompsOMfixedSelexEM_RandRecHCR6" = sample_struct)
 # figure out the recruitment deviation input ---------------
 
 # define scenario name
-scenName <- c("margCompsOMfixedSelexEM_RandRecHCR0",
-              "margCompsOMfixedSelexEM_RandRecHCR1",
-              "margCompsOMfixedSelexEM_RandRecHCR4",
-              "margCompsOMfixedSelexEM_RandRecHCR5",
-              "margCompsOMfixedSelexEM_RandRecHCR6")
-iters <- 2
+scenName <- c("margCompsOMfixedSelexEM_RandRecst2005")
+# scenName <- c(#"margCompsOMfixedSelexEM_RandRecHCR0",
+#               #"margCompsOMfixedSelexEM_RandRecHCR1",
+#               "margCompsOMfixedSelexEM_RandRecHCR4",
+#               #"margCompsOMfixedSelexEM_RandRecHCR5",
+#               "margCompsOMfixedSelexEM_RandRecHCR6")
+iters <- 50
 
 ### use random recdevs with sd same as to historical
 template_mod_change <- create_future_om_list(example_type = "model_change")
@@ -124,25 +125,27 @@ out <- run_SSMSE(scen_name_vec = scenName, # name of the scenario
                  iter_vec = rep(iters, times = length(scenName)), # run with 5 iterations for now
                  OM_name_vec = NULL, # specify directories instead
                  OM_in_dir_vec = OMmodelPath, #rep(OMmodelPath, times = length(scenName)), # OM files
-                 EM_name_vec = c(NA, rep("margCompsOMfixedSelexEM", times = length(scenName)-1)), # cod is included in package data
-                 EM_in_dir_vec = c(NA,
-                                   file.path(EMmodelPath, "EM_st2005"),
-                                   file.path(EMmodelPath, "EM_HCR4"),
-                                   file.path(EMmodelPath, "EM_HCR5"),
-                                   file.path(EMmodelPath, "EM_HCR6")), # EM files
-                 MS_vec = #"EM",
-                   c("no_catch", "MS_sar_hcr",
-                     rep("EM", times = 3)),
+                 EM_name_vec = "margCompsOMfixedSelexEM", #c(NA, rep("margCompsOMfixedSelexEM", times = length(scenName)-1)), # cod is included in package data
+                 EM_in_dir_vec = file.path(EMmodelPath, "EM_st2005"),
+                   # c(#NA,
+                   #                 #file.path(EMmodelPath, "EM_st2005"),
+                   #                 file.path(EMmodelPath, "EM_HCR4"),
+                   #                 #file.path(EMmodelPath, "EM_HCR5"),
+                   #                 file.path(EMmodelPath, "EM_HCR6")), # EM files
+                 MS_vec = "EM", #c("EM", "EM"),
+                   # c("no_catch", "MS_sar_hcr",
+                   #   rep("EM", times = 3)),
                  # custom_MS_source = "C:/Users/r.wildermuth/Documents/FutureSeas/SardineMSE/R/MS_sar_hcr.R", # file location of the MS function
-                 custom_MS_source = "J:/Desiree/Sardine/SardineMSE/R/MS_sar_hcr.R",
+                 # custom_MS_source = "J:/Desiree/Sardine/SardineMSE/R/MS_sar_hcr.R",
                  use_SS_boot_vec = TRUE, # use the SS bootstrap module for sampling
                  nyrs_vec = nyrs,        # Years to project OM forward
                  nyrs_assess_vec = 1, # Years between assessments
                  future_om_list = rand_dev_list, 
                  run_parallel = TRUE, # Run iterations in parallel
+                 # n_cores = 20,
                  sample_struct_list = sample_struct_list, # How to sample data for running the EM.
                  seed = 1234) #Set a fixed integer seed that allows replication
-endTime <- Sys.time()
+ endTime <- Sys.time()
 # Summarize results -------------------------------------------------------
 
 # Summarize 1 iteration of output
