@@ -93,45 +93,47 @@ agecomp = data.frame(Yr = rep(c(yrsrt:yrend),nadat),
                      Nsamp = c(rep(20,nyrs),rep(20,nyrs),rep(20,nyrs),rep(20,nyrs)))
 
 sample_struct <- list(catch = catch, CPUE = CPUE, lencomp = lencomp, agecomp = agecomp)
-sample_struct_list <- list("HCR_st2005" = sample_struct)
+sample_struct_list <- list("HCR_st2005_PDOrec" = sample_struct)
 
 # figure out the recruitment deviation input ---------------
 
 # define scenario name
-scenName <- "HCR_st2005"
+scenName <- "HCR_st2005_PDOrec"
 iters <- 2
 
 ### Define custom rec devs based on environment
 
-# template <- create_future_om_list(example_type = "custom")
-# 
-# recdevPDO <- read.csv("C:/Users/Robert W/Documents/FutureSeas/Recruitment Index/recdevPDO2120.csv")
-# # remove last row
-# recdevPDO <- recdevPDO %>% filter(Year <= yrend - 1)
-# 
-# recdevInput <- template[[1]]
-# recdevInput$pars <- "rec_devs"
-# 
-# input <- data.frame(scen = rep(scenName, length.out = iters*nrow(recdevPDO)),
-#                     iter = rep(1:iters, each = nrow(recdevPDO)),
-#                     yr = rep(recdevPDO$Year, times = iters),
-#                     # value = rep(0.15, length.out = iters*nrow(recdevPDO)))
-#                     value = rep(recdevPDO$recDevPDO, times = iters))
-# input$par <- "rec_devs"
-# input[input$yr == 2019, "value"] <- 0
-# recdevInput$input <- input %>% select(par, scen, iter, yr, value)
+template <- create_future_om_list(example_type = "custom")
+
+recdevPDO <- read.csv("C:/Users/r.wildermuth/Documents/FutureSeas/Recruitment Index/recdevPDO2120.csv")
+# remove last row
+recdevPDO <- recdevPDO %>% filter(Year <= yrend - 1)
+
+recdevInput <- template[[1]]
+recdevInput$pars <- "rec_devs"
+
+input <- data.frame(scen = rep(scenName, length.out = iters*nrow(recdevPDO)),
+                    iter = rep(1:iters, each = nrow(recdevPDO)),
+                    yr = rep(recdevPDO$Year, times = iters),
+                    # value = rep(0.15, length.out = iters*nrow(recdevPDO)))
+                    value = rep(recdevPDO$recDevPDO, times = iters))
+input$par <- "rec_devs"
+input[input$yr == 2019, "value"] <- 0
+recdevInput$input <- input %>% select(par, scen, iter, yr, value)
+
+envt_dev_list <- list(recdevInput)
 
 ### use random recdevs with sd same as to historical
-template_mod_change <- create_future_om_list(example_type = "model_change")
-rec_dev_specify <- template_mod_change[[1]]
-rec_dev_specify$pars <- "rec_devs"
-rec_dev_specify$scen <- c("replicate", "all") # noe: could change this to c("random", "all") if did not want to replicate the same recdevs sequences across scenarios
-rec_dev_specify$input$first_yr_averaging <- 1981
-rec_dev_specify$input$last_yr_averaging <- 2019
-rec_dev_specify$input$last_yr_orig_val <- 2019
-rec_dev_specify$input$first_yr_final_val <- 2020
-rec_dev_specify$input$ts_param <- "sd"
-rec_dev_specify$input$value <- NA
+# template_mod_change <- create_future_om_list(example_type = "model_change")
+# rec_dev_specify <- template_mod_change[[1]]
+# rec_dev_specify$pars <- "rec_devs"
+# rec_dev_specify$scen <- c("replicate", "all") # noe: could change this to c("random", "all") if did not want to replicate the same recdevs sequences across scenarios
+# rec_dev_specify$input$first_yr_averaging <- 1981
+# rec_dev_specify$input$last_yr_averaging <- 2019
+# rec_dev_specify$input$last_yr_orig_val <- 2019
+# rec_dev_specify$input$first_yr_final_val <- 2020
+# rec_dev_specify$input$ts_param <- "sd"
+# rec_dev_specify$input$value <- NA
 
 ### Add autocorrelation ###
 # new_vals <- data.frame(first_yr_averaging = NA,
@@ -144,7 +146,7 @@ rec_dev_specify$input$value <- NA
 # rec_dev_specify$input <- rbind(rec_dev_specify$input,
 #                                new_vals)
 
-rand_dev_list <- list(rec_dev_specify)
+# rand_dev_list <- list(rec_dev_specify)
 
 # Run the OM --------------------------------------------------------------
 
@@ -156,7 +158,13 @@ rand_dev_list <- list(rec_dev_specify)
 EMmodelPath <- "C:/Users/r.wildermuth/Documents/FutureSeas/SardineMSE/EM/EM_st2005"
 # EM starter.ss file must indicate init values are to be pulled from control.ss file, not ss.par
 
+logFile <- paste0(mseOutputPath, "/SardineMSElog_", Sys.Date(), ".log")
+
+sink(file(logFile))
+
 startTime <- Sys.time()
+ptm <- proc.time()
+
 out <- run_SSMSE(scen_name_vec = scenName, #"margComps_SardineHCR",# name of the scenario
                  out_dir_scen_vec = mseOutputPath, # directory in which to run the scenario
                  iter_vec = c(iters), # run with 5 iterations for now
@@ -171,12 +179,25 @@ out <- run_SSMSE(scen_name_vec = scenName, #"margComps_SardineHCR",# name of the
                  use_SS_boot_vec = TRUE, # use the SS bootstrap module for sampling
                  nyrs_vec = nyrs,        # Years to project OM forward
                  nyrs_assess_vec = 1, # Years between assessments
-                 future_om_list = rand_dev_list, # list(recdevInput),#
+                 future_om_list = envt_dev_list, # rand_dev_list
                  run_parallel = TRUE, # Run iterations in parallel
                  n_cores = 4, # number of cores to use in parallel
                  sample_struct_list = sample_struct_list, # How to sample data for running the EM.
                  seed = 12349) #Set a fixed integer seed that allows replication
 endTime <- Sys.time()
+
+procDiff <- proc.time() - ptm
+
+cat("Start time: ", as.character(startTime), "\n")
+cat("End time: ", as.character(endTime), "\n")
+cat("Processor time difference: \n")
+print(procDiff)
+cat("\n \n")
+
+out
+
+# close log connection
+sink()
 # Summarize results -------------------------------------------------------
 
 test1 <- SS_output(dir = "C:/Users/r.wildermuth/Documents/FutureSeas/SardineScenarios/HCR_st2005/2/margCompsOMfixedSelexEM_EM_2021")
