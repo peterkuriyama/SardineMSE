@@ -118,7 +118,13 @@ rand_dev_list <- list(rec_dev_specify)
 EMmodelPath <- "J:/Desiree/Sardine/SardineMSE/EM"
 # EM starter.ss file must indicate init values are to be pulled from control.ss file, not ss.par
 
+logFile <- paste0(mseOutputPath, "/SardineMSElog_", Sys.Date(), ".log")
+
+sink(file(logFile), append = TRUE)
+
 startTime <- Sys.time()
+ptm <- proc.time()
+
 out <- run_SSMSE(scen_name_vec = scenName, # name of the scenario
                  out_dir_scen_vec = mseOutputPath, # directory in which to run the scenario
                  iter_vec = rep(iters, times = length(scenName)), # run with 5 iterations for now
@@ -143,6 +149,19 @@ out <- run_SSMSE(scen_name_vec = scenName, # name of the scenario
                  sample_struct_list = sample_struct_list, # How to sample data for running the EM.
                  seed = 1234) #Set a fixed integer seed that allows replication
 endTime <- Sys.time()
+
+procDiff <- proc.time() - ptm
+
+cat("Start time: ", as.character(startTime), "\n")
+cat("End time: ", as.character(endTime), "\n")
+cat("Processor time difference: \n")
+print(procDiff)
+cat("\n \n")
+
+out
+
+# close log connection
+sink()
 # Summarize results -------------------------------------------------------
 
 # Summarize 1 iteration of output
