@@ -1,0 +1,99 @@
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2020
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2019 
+run mceval objfun B_yr 2019 
+1 0 488603 N_at_Age  1 1  1.15456e+06 740844 59989.6 39267.3 11508.3 15460.8 5717.34 1542.49 553.965 1375.22 7139.8
+1 0 488603 F/Fmsy  0.316903
+1 0 488603 B/Bmsy  0.0503064
+1 0 488603 F/Fmsy_stdev 0 
+1 0 488603 B/Bmsy_stdev 0 
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2023
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2022 
+run mceval objfun B_yr 2022 
+2 0 823285 N_at_Age  1 1  746669 471474 109526 36883.6 12745.5 2235.68 2252.63 1161.66 1587.41 809.576 1767.84
+2 0 823285 F/Fmsy  0.557947
+2 0 823285 B/Bmsy  0.0308868
+2 0 823285 F/Fmsy_stdev 0 
+2 0 823285 B/Bmsy_stdev 0 
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2023
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2022 
+run mceval objfun B_yr 2022 
+3 0 823285 N_at_Age  1 1  746669 471474 109526 36883.6 12745.5 2235.68 2252.63 1161.66 1587.41 809.576 1767.84
+3 0 823285 F/Fmsy  0.557947
+3 0 823285 B/Bmsy  0.0308868
+3 0 823285 F/Fmsy_stdev 0 
+3 0 823285 B/Bmsy_stdev 0 
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2023
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2022 
+run mceval objfun B_yr 2022 
+4 0 725625 N_at_Age  1 1  1.07726e+06 643574 194744 35534.2 26368.7 4077.01 3680.78 1277.87 2010.59 827.822 1752.28
+4 0 725625 F/Fmsy  0.568124
+4 0 725625 B/Bmsy  0.0464687
+4 0 725625 F/Fmsy_stdev 0 
+4 0 725625 B/Bmsy_stdev 0 
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2023
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2022 
+run mceval objfun B_yr 2022 
+5 0 725625 N_at_Age  1 1  1.07726e+06 643574 194744 35534.2 26368.7 4077.01 3680.78 1277.87 2010.59 827.822 1752.28
+5 0 725625 F/Fmsy  0.568124
+5 0 725625 B/Bmsy  0.0464687
+5 0 725625 F/Fmsy_stdev 0 
+5 0 725625 B/Bmsy_stdev 0 
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2023
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2022 
+run mceval objfun B_yr 2022 
+6 0 612568 N_at_Age  1 1  1.26756e+06 1.11102e+06 175357 55628.5 38576.2 5568.65 3897.62 1481.05 2029.74 865.897 1719.52
+6 0 612568 F/Fmsy  0.541755
+6 0 612568 B/Bmsy  0.0560579
+6 0 612568 F/Fmsy_stdev 0 
+6 0 612568 B/Bmsy_stdev 0 
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2023
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2022 
+run mceval objfun B_yr 2022 
+7 0 612568 N_at_Age  1 1  1.26756e+06 1.11102e+06 175357 55628.5 38576.2 5568.65 3897.62 1481.05 2029.74 865.897 1719.52
+7 0 612568 F/Fmsy  0.541755
+7 0 612568 B/Bmsy  0.0560579
+7 0 612568 F/Fmsy_stdev 0 
+7 0 612568 B/Bmsy_stdev 0 
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2023
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2022 
+run mceval objfun B_yr 2022 
+8 0 495608 N_at_Age  1 1  2.19449e+06 1.03472e+06 316906 91901.4 58236.7 6083.56 4790.6 1526.63 2187.51 859.937 1707.69
+8 0 495608 F/Fmsy  0.278374
+8 0 495608 B/Bmsy  0.110661
+8 0 495608 F/Fmsy_stdev 0 
+8 0 495608 B/Bmsy_stdev 0 
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2023
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2022 
+run mceval objfun B_yr 2022 
+9 0 495608 N_at_Age  1 1  2.19449e+06 1.03472e+06 316906 91901.4 58236.7 6083.56 4790.6 1526.63 2187.51 859.937 1707.69
+9 0 495608 F/Fmsy  0.278374
+9 0 495608 B/Bmsy  0.110661
+9 0 495608 F/Fmsy_stdev 0 
+9 0 495608 B/Bmsy_stdev 0 

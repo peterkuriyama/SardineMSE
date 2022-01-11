@@ -1,0 +1,82 @@
+#V3.30.15.09-safe;_2020_07_06;_Stock_Synthesis_by_Richard_Methot_(NOAA)_using_ADMB_12.0
+#Stock Synthesis (SS) is a work of the U.S. Government and is not subject to copyright protection in the United States.
+#Foreign copyrights may apply. See copyright.txt for more information.
+StartTime: Tue Oct 19 15:48:57 2021
+
+Data_File: init_dat.ss
+Control_File: om.ctl
+to_come_# Best_F
+to_come_#  F_units
+2020 F_year
+to_come_# F_basis
+to_come_# F_limit
+to_come_#  F_limit_basis
+to_come_# F_msy
+to_come_# F_msy_basis
+to_come_# F_target
+to_come_# F_target_basis
+to_come_# F/F_limit
+to_come_# F/F_msy
+to_come_# F/F_target
+to_come_# Best_Bio
+to_come_# Bio_units
+2020 Bio_year
+to_come_# Bio_basis
+to_come_# Bio_limit
+to_come_# Bio_limit_basis
+to_come_# Bio_MSY
+to_come_# Bio_MSY_basis
+to_come_# Bio_MSY
+to_come_# Bio_above_below
+to_come_# Bio/Bio_limit
+to_come_# Bio/Bio_MSY
+
+Category Year Abundance Abundance Recruitment Spawners Catch Catch Catch Catch Catch Catch Fmort Fmort Fmort Fmort Fmort
+Primary _ N Y Y Y N Y N N N N N N N Y Y
+Type _ Biomass Biomass Age Female_Mature Sel_Bio Kill_Bio Retain_Bio Sel_Numbers Kill_Numbers Retain_Numbers Exploitation SPR_report F_report Sum_Fleet_Apical_Fs F=Z-M
+Source _ Model Model Model Model Model Model Model Model Model Model Model Model Model Model Model
+Basis _ Biomass Biomass Numbers Eggs Biomass Biomass Biomass Numbers Numbers Numbers Dead_Catch_Bio/Summary_Bio  1-SPR (F)/(Fmsy);_with_F=Exploit(bio)  Sum_Fleet_Apical_Fs F=Z-M
+Range _ All Age_1+ Age_0 Mature Exploitable_all Exploitable_dead Exploitable_retained  Exploitable_all Exploitable_dead Exploitable_retained  Exploitable_dead Exploitable_all Exploitable_all Exploitable_all 5_5
+Statistic _ Mean Mean Mean Mean Mean Mean Mean Mean Mean Mean Mean Mean Mean Mean Mean
+Scalar _ 1 1 1000 1 1 1 1 1000 1000 1000 1 1 1 1 1
+_ 1981 0 7184.37 0 0  0 0 0 0 0 0 0 0 0  0 -0.585 0.585
+_ 1982 0 43157.1 0 0  0 0 0 0 0 0 0 0 0  0 -0.585 0.585
+_ 1983 0 113700 0 0  0 0 0 0 0 0 0 0 0  0 -0.585 0.585
+_ 1984 0 223459 0 0  0 0 0 0 0 0 0 0 0  0 -0.585 0.585
+_ 1985 0 428564 0 0  0 0 0 0 0 0 0 0 0  0 -0.585 0.585
+_ 1986 0 771504 0 0  0 0 0 0 0 0 0 0 0  0 -0.585 0.585
+_ 1987 0 1.27091e+006 0 0  0 0 0 0 0 0 0 1.11022e-016 0  0 -0.585 0.585
+_ 1988 0 1.92903e+006 0 0  0 0 0 0 0 0 0 0 0  0 -0.585 0.585
+_ 1989 0 2.72924e+006 0 0  0 0 0 0 0 0 0 0 0  0 -0.585 0.585
+_ 1990 0 3.64308e+006 0 0  0 0 0 0 0 0 0 0 0  0 -0.585 0.585
+_ 1991 0 4.64068e+006 0 0  0 0 0 0 0 0 0 0 0  0 -0.585 0.585
+_ 1992 0 5.69678e+006 0 0  0 0 0 0 0 0 0 0 0  0 -0.585 0.585
+_ 1993 0 6.79299e+006 0 0  0 0 0 0 0 0 0 0 0  0 -0.585 0.585
+_ 1994 0 7.91601e+006 0 0  0 0 0 0 0 0 0 0 0  0 -0.585 0.585
+_ 1995 0 9.05703e+006 0 0  0 0 0 0 0 0 0 0 0  0 -0.585 0.585
+_ 1996 0 1.02103e+007 0 0  0 0 0 0 0 0 0 0 0  0 -0.585 0.585
+_ 1997 0 1.13722e+007 0 0  0 0 0 0 0 0 0 0 0  0 -0.585 0.585
+_ 1998 0 1.25401e+007 0 0  0 0 0 0 0 0 0 1.11022e-016 0  0 -0.585 0.585
+_ 1999 0 1.37126e+007 0 0  0 0 0 0 0 0 0 0 0  0 -0.585 0.585
+_ 2000 0 1.48885e+007 0 0  0 0 0 0 0 0 0 0 0  0 -0.585 0.585
+_ 2001 0 1.60672e+007 0 0  0 0 0 0 0 0 0 0 0  0 -0.585 0.585
+_ 2002 0 1.72481e+007 0 0  0 0 0 0 0 0 0 0 0  0 -0.585 0.585
+_ 2003 0 1.84308e+007 0 0  0 0 0 0 0 0 0 0 0  0 -0.585 0.585
+_ 2004 0 1.96151e+007 0 0  0 0 0 0 0 0 0 0 0  0 -0.585 0.585
+_ 2005 0 2.08007e+007 0 0  0 0 0 0 0 0 0 0 0  0 -0.585 0.585
+_ 2006 0 2.19875e+007 0 0  0 0 0 0 0 0 0 0 0  0 -0.585 0.585
+_ 2007 0 2.31752e+007 0 0  0 0 0 0 0 0 0 0 0  0 -0.585 0.585
+_ 2008 0 2.43638e+007 0 0  0 0 0 0 0 0 0 0 0  0 -0.585 0.585
+_ 2009 0 2.55532e+007 0 0  0 0 0 0 0 0 0 0 0  0 -0.585 0.585
+_ 2010 0 2.67432e+007 0 0  0 0 0 0 0 0 0 0 0  0 -0.585 0.585
+_ 2011 0 2.79339e+007 0 0  0 0 0 0 0 0 0 0 0  0 -0.585 0.585
+_ 2012 0 2.91251e+007 0 0  0 0 0 0 0 0 0 0 0  0 -0.585 0.585
+_ 2013 0 3.03169e+007 0 0  0 0 0 0 0 0 0 0 0  0 -0.585 0.585
+_ 2014 0 3.15091e+007 0 0  0 0 0 0 0 0 0 0 0  0 -0.585 0.585
+_ 2015 0 3.27018e+007 0 0  0 0 0 0 0 0 0 0 0  0 -0.585 0.585
+_ 2016 0 3.38948e+007 0 0  0 0 0 0 0 0 0 0 0  0 -0.585 0.585
+_ 2017 0 3.50882e+007 0 0  0 0 0 0 0 0 0 0 0  0 -0.585 0.585
+_ 2018 0 3.62819e+007 0 0  0 0 0 0 0 0 0 0 0  0 -0.585 0.585
+_ 2019 0 3.74901e+007 0 0  0 0 0 0 0 0 0 0 0  0 -0.585 0.585
+_ 2020 0 3.88063e+007 0 0  0 0 0 0 0 0 0 0 0  0 -0.585 0.585
+_ 2021 4.03543e+007 4.03339e+007 0 0  0 0 0 0 0 0 0 0.503067 0.110127  0 0.236532 0.585

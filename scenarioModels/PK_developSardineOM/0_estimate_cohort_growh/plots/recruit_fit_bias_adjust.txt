@@ -1,0 +1,6 @@
+     value                                                label
+ 1978.0765 #_last_early_yr_nobias_adj_in_MPD                   
+ 1981.4427 #_first_yr_fullbias_adj_in_MPD                      
+ 2016.9211 #_last_yr_fullbias_adj_in_MPD                       
+ 2017.4741 #_first_recent_yr_nobias_adj_in_MPD                 
+    0.9311 #_max_bias_adj_in_MPD (1.0 to mimic pre-2009 models)

@@ -1,0 +1,495 @@
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2020
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2019 
+run mceval objfun B_yr 2019 
+1 0 2294.93 N_at_Age  1 1  1.59159e+06 965745 117018 63914.8 8303.24 11999.6 3845.85 772.392 310.236 723.765 5926.62
+1 0 2294.93 F/Fmsy  0.227583
+1 0 2294.93 B/Bmsy  0.0399253
+1 0 2294.93 F/Fmsy_stdev 0 
+1 0 2294.93 B/Bmsy_stdev 0 
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2020
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2019 
+run mceval objfun B_yr 2019 
+2 0 2295.09 N_at_Age  1 1  1.59159e+06 965745 117018 63914.8 8303.25 11999.6 3845.85 772.391 310.236 723.765 5926.62
+2 0 2295.09 F/Fmsy  0.227583
+2 0 2295.09 B/Bmsy  0.0399253
+2 0 2295.09 F/Fmsy_stdev 0 
+2 0 2295.09 B/Bmsy_stdev 0 
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2020
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2019 
+run mceval objfun B_yr 2019 
+3 0 2295.09 N_at_Age  1 1  1.59159e+06 965745 117018 63914.8 8303.25 11999.6 3845.85 772.391 310.236 723.765 5926.62
+3 0 2295.09 F/Fmsy  0.227583
+3 0 2295.09 B/Bmsy  0.0399253
+3 0 2295.09 F/Fmsy_stdev 0 
+3 0 2295.09 B/Bmsy_stdev 0 
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2020
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2019 
+run mceval objfun B_yr 2019 
+4 0 2295.09 N_at_Age  1 1  1.59159e+06 965745 117018 63914.8 8303.25 11999.6 3845.85 772.391 310.236 723.765 5926.62
+4 0 2295.09 F/Fmsy  0.227583
+4 0 2295.09 B/Bmsy  0.0399253
+4 0 2295.09 F/Fmsy_stdev 0 
+4 0 2295.09 B/Bmsy_stdev 0 
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2021
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2020 
+run mceval objfun B_yr 2020 
+5 0 2295.28 N_at_Age  1 1  1.23249e+06 886678 519201 52981.2 24226 4153.75 4971.03 1986.93 385.072 172.531 3691.54
+5 0 2295.28 F/Fmsy  0.090287
+5 0 2295.28 B/Bmsy  0.0564654
+5 0 2295.28 F/Fmsy_stdev 0 
+5 0 2295.28 B/Bmsy_stdev 0 
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2021
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2020 
+run mceval objfun B_yr 2020 
+6 0 2295.31 N_at_Age  1 1  1.23249e+06 886678 519201 52981.2 24226 4153.75 4971.03 1986.93 385.072 172.531 3691.54
+6 0 2295.31 F/Fmsy  0.090287
+6 0 2295.31 B/Bmsy  0.0564654
+6 0 2295.31 F/Fmsy_stdev 0 
+6 0 2295.31 B/Bmsy_stdev 0 
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2021
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2020 
+run mceval objfun B_yr 2020 
+7 0 2295.31 N_at_Age  1 1  1.23249e+06 886678 519201 52981.2 24226 4153.75 4971.03 1986.93 385.072 172.531 3691.54
+7 0 2295.31 F/Fmsy  0.090287
+7 0 2295.31 B/Bmsy  0.0564654
+7 0 2295.31 F/Fmsy_stdev 0 
+7 0 2295.31 B/Bmsy_stdev 0 
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2021
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2020 
+run mceval objfun B_yr 2020 
+8 0 2295.31 N_at_Age  1 1  1.23249e+06 886678 519201 52981.2 24226 4153.75 4971.03 1986.93 385.072 172.531 3691.54
+8 0 2295.31 F/Fmsy  0.090287
+8 0 2295.31 B/Bmsy  0.0564654
+8 0 2295.31 F/Fmsy_stdev 0 
+8 0 2295.31 B/Bmsy_stdev 0 
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2022
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2021 
+run mceval objfun B_yr 2021 
+9 0 2298.02 N_at_Age  1 1  2.28936e+06 686628 493973 289249 29516 13496.4 2314.07 2769.39 1106.93 214.526 2152.69
+9 0 2298.02 F/Fmsy  1.31646e-06
+9 0 2298.02 B/Bmsy  0.0840139
+9 0 2298.02 F/Fmsy_stdev 0 
+9 0 2298.02 B/Bmsy_stdev 0 
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2022
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2021 
+run mceval objfun B_yr 2021 
+10 0 2298.38 N_at_Age  1 1  2.28936e+06 686628 493973 289249 29516 13496.4 2314.07 2769.39 1106.93 214.526 2152.69
+10 0 2298.38 F/Fmsy  1.31646e-06
+10 0 2298.38 B/Bmsy  0.0840139
+10 0 2298.38 F/Fmsy_stdev 0 
+10 0 2298.38 B/Bmsy_stdev 0 
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2022
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2021 
+run mceval objfun B_yr 2021 
+11 0 2298.38 N_at_Age  1 1  2.28936e+06 686628 493973 289249 29516 13496.4 2314.07 2769.39 1106.93 214.526 2152.69
+11 0 2298.38 F/Fmsy  1.31646e-06
+11 0 2298.38 B/Bmsy  0.0840139
+11 0 2298.38 F/Fmsy_stdev 0 
+11 0 2298.38 B/Bmsy_stdev 0 
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2022
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2021 
+run mceval objfun B_yr 2021 
+12 0 2298.38 N_at_Age  1 1  2.28936e+06 686628 493973 289249 29516 13496.4 2314.07 2769.39 1106.93 214.526 2152.69
+12 0 2298.38 F/Fmsy  1.31646e-06
+12 0 2298.38 B/Bmsy  0.0840139
+12 0 2298.38 F/Fmsy_stdev 0 
+12 0 2298.38 B/Bmsy_stdev 0 
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2022
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2021 
+run mceval objfun B_yr 2021 
+13 0 2298.38 N_at_Age  1 1  2.28936e+06 686628 493973 289249 29516 13496.4 2314.07 2769.39 1106.93 214.526 2152.69
+13 0 2298.38 F/Fmsy  1.31646e-06
+13 0 2298.38 B/Bmsy  0.0840139
+13 0 2298.38 F/Fmsy_stdev 0 
+13 0 2298.38 B/Bmsy_stdev 0 
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2022
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2021 
+run mceval objfun B_yr 2021 
+14 0 2298.38 N_at_Age  1 1  2.28936e+06 686628 493973 289249 29516 13496.4 2314.07 2769.39 1106.93 214.526 2152.69
+14 0 2298.38 F/Fmsy  1.31646e-06
+14 0 2298.38 B/Bmsy  0.0840139
+14 0 2298.38 F/Fmsy_stdev 0 
+14 0 2298.38 B/Bmsy_stdev 0 
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2023
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2022 
+run mceval objfun B_yr 2022 
+15 0 2319.13 N_at_Age  1 1  1.48868e+06 1.27542e+06 382525 275195 161142 16443.5 7518.94 1289.18 1542.84 616.677 1318.79
+15 0 2319.13 F/Fmsy  7.98163e-07
+15 0 2319.13 B/Bmsy  0.101207
+15 0 2319.13 F/Fmsy_stdev 0 
+15 0 2319.13 B/Bmsy_stdev 0 
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2023
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2022 
+run mceval objfun B_yr 2022 
+16 0 2319.27 N_at_Age  1 1  1.48868e+06 1.27542e+06 382525 275195 161142 16443.5 7518.94 1289.18 1542.84 616.677 1318.79
+16 0 2319.27 F/Fmsy  7.98163e-07
+16 0 2319.27 B/Bmsy  0.101207
+16 0 2319.27 F/Fmsy_stdev 0 
+16 0 2319.27 B/Bmsy_stdev 0 
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2023
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2022 
+run mceval objfun B_yr 2022 
+17 0 2319.27 N_at_Age  1 1  1.48868e+06 1.27542e+06 382525 275195 161142 16443.5 7518.94 1289.18 1542.84 616.677 1318.79
+17 0 2319.27 F/Fmsy  7.98163e-07
+17 0 2319.27 B/Bmsy  0.101207
+17 0 2319.27 F/Fmsy_stdev 0 
+17 0 2319.27 B/Bmsy_stdev 0 
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2023
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2022 
+run mceval objfun B_yr 2022 
+18 0 2319.27 N_at_Age  1 1  1.48868e+06 1.27542e+06 382525 275195 161142 16443.5 7518.94 1289.18 1542.84 616.677 1318.79
+18 0 2319.27 F/Fmsy  7.98163e-07
+18 0 2319.27 B/Bmsy  0.101207
+18 0 2319.27 F/Fmsy_stdev 0 
+18 0 2319.27 B/Bmsy_stdev 0 
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2023
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2022 
+run mceval objfun B_yr 2022 
+19 0 2319.27 N_at_Age  1 1  1.48868e+06 1.27542e+06 382525 275195 161142 16443.5 7518.94 1289.18 1542.84 616.677 1318.79
+19 0 2319.27 F/Fmsy  7.98163e-07
+19 0 2319.27 B/Bmsy  0.101207
+19 0 2319.27 F/Fmsy_stdev 0 
+19 0 2319.27 B/Bmsy_stdev 0 
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2023
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2022 
+run mceval objfun B_yr 2022 
+20 0 2319.27 N_at_Age  1 1  1.48868e+06 1.27542e+06 382525 275195 161142 16443.5 7518.94 1289.18 1542.84 616.677 1318.79
+20 0 2319.27 F/Fmsy  7.98163e-07
+20 0 2319.27 B/Bmsy  0.101207
+20 0 2319.27 F/Fmsy_stdev 0 
+20 0 2319.27 B/Bmsy_stdev 0 
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2024
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2023 
+run mceval objfun B_yr 2023 
+21 0 77874.5 N_at_Age  1 1  6.94387e+06 829350 710542 213107 153313 89773.1 9160.63 4187.57 714.225 784.858 553.074
+21 0 77874.5 F/Fmsy  0.000868907
+21 0 77874.5 B/Bmsy  0.127202
+21 0 77874.5 F/Fmsy_stdev 0 
+21 0 77874.5 B/Bmsy_stdev 0 
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2024
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2023 
+run mceval objfun B_yr 2023 
+22 0 77876 N_at_Age  1 1  6.94387e+06 829350 710542 213107 153313 89773.1 9160.63 4187.57 714.225 784.858 553.074
+22 0 77876 F/Fmsy  0.000868907
+22 0 77876 B/Bmsy  0.127202
+22 0 77876 F/Fmsy_stdev 0 
+22 0 77876 B/Bmsy_stdev 0 
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2024
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2023 
+run mceval objfun B_yr 2023 
+23 0 77876 N_at_Age  1 1  6.94387e+06 829350 710542 213107 153313 89773.1 9160.63 4187.57 714.225 784.858 553.074
+23 0 77876 F/Fmsy  0.000868907
+23 0 77876 B/Bmsy  0.127202
+23 0 77876 F/Fmsy_stdev 0 
+23 0 77876 B/Bmsy_stdev 0 
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2025
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2024 
+run mceval objfun B_yr 2024 
+24 0 307708 N_at_Age  1 1  729292 3.86847e+06 462035 389543 108246 54201.7 23624.9 3473.06 2154.69 362.428 398.264
+24 0 307708 F/Fmsy  0.114105
+24 0 307708 B/Bmsy  0.126037
+24 0 307708 F/Fmsy_stdev 0 
+24 0 307708 B/Bmsy_stdev 0 
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2025
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2024 
+run mceval objfun B_yr 2024 
+25 0 307709 N_at_Age  1 1  729292 3.86847e+06 462035 389543 108246 54201.7 23624.9 3473.06 2154.69 362.428 398.264
+25 0 307709 F/Fmsy  0.114105
+25 0 307709 B/Bmsy  0.126037
+25 0 307709 F/Fmsy_stdev 0 
+25 0 307709 B/Bmsy_stdev 0 
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2025
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2024 
+run mceval objfun B_yr 2024 
+26 0 307709 N_at_Age  1 1  729292 3.86847e+06 462035 389543 108246 54201.7 23624.9 3473.06 2154.69 362.428 398.264
+26 0 307709 F/Fmsy  0.114105
+26 0 307709 B/Bmsy  0.126037
+26 0 307709 F/Fmsy_stdev 0 
+26 0 307709 B/Bmsy_stdev 0 
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2025
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2024 
+run mceval objfun B_yr 2024 
+27 0 307709 N_at_Age  1 1  729292 3.86847e+06 462035 389543 108246 54201.7 23624.9 3473.06 2154.69 362.428 398.264
+27 0 307709 F/Fmsy  0.114105
+27 0 307709 B/Bmsy  0.126037
+27 0 307709 F/Fmsy_stdev 0 
+27 0 307709 B/Bmsy_stdev 0 
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2025
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2024 
+run mceval objfun B_yr 2024 
+28 0 307709 N_at_Age  1 1  729292 3.86847e+06 462035 389543 108246 54201.7 23624.9 3473.06 2154.69 362.428 398.264
+28 0 307709 F/Fmsy  0.114105
+28 0 307709 B/Bmsy  0.126037
+28 0 307709 F/Fmsy_stdev 0 
+28 0 307709 B/Bmsy_stdev 0 
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2026
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2025 
+run mceval objfun B_yr 2025 
+29 0 467409 N_at_Age  1 1  1.15916e+07 406286 2.0103e+06 171805 102526 49510.2 17295.5 11484.9 1560.79 1196.95 422.573
+29 0 467409 F/Fmsy  0.194356
+29 0 467409 B/Bmsy  0.23609
+29 0 467409 F/Fmsy_stdev 0 
+29 0 467409 B/Bmsy_stdev 0 
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2026
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2025 
+run mceval objfun B_yr 2025 
+30 0 467410 N_at_Age  1 1  1.15916e+07 406286 2.0103e+06 171805 102526 49510.2 17295.5 11484.9 1560.79 1196.95 422.573
+30 0 467410 F/Fmsy  0.194356
+30 0 467410 B/Bmsy  0.23609
+30 0 467410 F/Fmsy_stdev 0 
+30 0 467410 B/Bmsy_stdev 0 
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2026
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2025 
+run mceval objfun B_yr 2025 
+31 0 467410 N_at_Age  1 1  1.15916e+07 406286 2.0103e+06 171805 102526 49510.2 17295.5 11484.9 1560.79 1196.95 422.573
+31 0 467410 F/Fmsy  0.194356
+31 0 467410 B/Bmsy  0.23609
+31 0 467410 F/Fmsy_stdev 0 
+31 0 467410 B/Bmsy_stdev 0 
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2027
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2026 
+run mceval objfun B_yr 2026 
+32 0 857308 N_at_Age  1 1  2.32631e+06 6.45773e+06 226344 1.10211e+06 87266.3 36246.5 13028.9 6555.28 5877.25 724.414 281.183
+32 0 857308 F/Fmsy  0.060126
+32 0 857308 B/Bmsy  0.207132
+32 0 857308 F/Fmsy_stdev 0 
+32 0 857308 B/Bmsy_stdev 0 
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2027
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2026 
+run mceval objfun B_yr 2026 
+33 0 857308 N_at_Age  1 1  2.32631e+06 6.45773e+06 226344 1.10211e+06 87266.3 36246.5 13028.9 6555.28 5877.25 724.414 281.183
+33 0 857308 F/Fmsy  0.060126
+33 0 857308 B/Bmsy  0.207132
+33 0 857308 F/Fmsy_stdev 0 
+33 0 857308 B/Bmsy_stdev 0 
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2028
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2027 
+run mceval objfun B_yr 2027 
+34 0 857308 N_at_Age  1 1  7.63169e+06 1.296e+06 3.59764e+06 126098 613990 48616.4 20193 7258.47 3651.98 3274.25 560.218
+34 0 857308 F/Fmsy  4.46052e-07
+34 0 857308 B/Bmsy  0.377411
+34 0 857308 F/Fmsy_stdev 0 
+34 0 857308 B/Bmsy_stdev 0 
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2028
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2027 
+run mceval objfun B_yr 2027 
+35 0 857308 N_at_Age  1 1  7.63169e+06 1.296e+06 3.59764e+06 126098 613990 48616.4 20193 7258.47 3651.98 3274.25 560.218
+35 0 857308 F/Fmsy  4.46052e-07
+35 0 857308 B/Bmsy  0.377411
+35 0 857308 F/Fmsy_stdev 0 
+35 0 857308 B/Bmsy_stdev 0 
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2028
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2027 
+run mceval objfun B_yr 2027 
+36 0 857308 N_at_Age  1 1  7.63169e+06 1.296e+06 3.59764e+06 126098 613990 48616.4 20193 7258.47 3651.98 3274.25 560.218
+36 0 857308 F/Fmsy  4.46052e-07
+36 0 857308 B/Bmsy  0.377411
+36 0 857308 F/Fmsy_stdev 0 
+36 0 857308 B/Bmsy_stdev 0 
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2028
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2027 
+run mceval objfun B_yr 2027 
+37 0 857308 N_at_Age  1 1  7.63169e+06 1.296e+06 3.59764e+06 126098 613990 48616.4 20193 7258.47 3651.98 3274.25 560.218
+37 0 857308 F/Fmsy  4.46052e-07
+37 0 857308 B/Bmsy  0.377411
+37 0 857308 F/Fmsy_stdev 0 
+37 0 857308 B/Bmsy_stdev 0 
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2028
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2027 
+run mceval objfun B_yr 2027 
+38 0 857308 N_at_Age  1 1  7.63169e+06 1.296e+06 3.59764e+06 126098 613990 48616.4 20193 7258.47 3651.98 3274.25 560.218
+38 0 857308 F/Fmsy  4.46052e-07
+38 0 857308 B/Bmsy  0.377411
+38 0 857308 F/Fmsy_stdev 0 
+38 0 857308 B/Bmsy_stdev 0 
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2029
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2028 
+run mceval objfun B_yr 2028 
+39 0 1.02002e+06 N_at_Age  1 1  1.85481e+07 4.2516e+06 673482 1.33776e+06 33188.2 280830 15513.3 9816.5 3261.95 2028.72 2130.09
+39 0 1.02002e+06 F/Fmsy  0.243999
+39 0 1.02002e+06 B/Bmsy  0.432742
+39 0 1.02002e+06 F/Fmsy_stdev 0 
+39 0 1.02002e+06 B/Bmsy_stdev 0 
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2029
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2028 
+run mceval objfun B_yr 2028 
+40 0 1.02002e+06 N_at_Age  1 1  1.85481e+07 4.2516e+06 673482 1.33776e+06 33188.2 280830 15513.3 9816.5 3261.95 2028.72 2130.09
+40 0 1.02002e+06 F/Fmsy  0.243999
+40 0 1.02002e+06 B/Bmsy  0.432742
+40 0 1.02002e+06 F/Fmsy_stdev 0 
+40 0 1.02002e+06 B/Bmsy_stdev 0 
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2029
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2028 
+run mceval objfun B_yr 2028 
+41 0 1.02002e+06 N_at_Age  1 1  1.85481e+07 4.2516e+06 673482 1.33776e+06 33188.2 280830 15513.3 9816.5 3261.95 2028.72 2130.09
+41 0 1.02002e+06 F/Fmsy  0.243999
+41 0 1.02002e+06 B/Bmsy  0.432742
+41 0 1.02002e+06 F/Fmsy_stdev 0 
+41 0 1.02002e+06 B/Bmsy_stdev 0 
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2029
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2028 
+run mceval objfun B_yr 2028 
+42 0 1.02002e+06 N_at_Age  1 1  1.85481e+07 4.2516e+06 673482 1.33776e+06 33188.2 280830 15513.3 9816.5 3261.95 2028.72 2130.09
+42 0 1.02002e+06 F/Fmsy  0.243999
+42 0 1.02002e+06 B/Bmsy  0.432742
+42 0 1.02002e+06 F/Fmsy_stdev 0 
+42 0 1.02002e+06 B/Bmsy_stdev 0 
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2029
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2028 
+run mceval objfun B_yr 2028 
+43 0 1.02002e+06 N_at_Age  1 1  1.85481e+07 4.2516e+06 673482 1.33776e+06 33188.2 280830 15513.3 9816.5 3261.95 2028.72 2130.09
+43 0 1.02002e+06 F/Fmsy  0.243999
+43 0 1.02002e+06 B/Bmsy  0.432742
+43 0 1.02002e+06 F/Fmsy_stdev 0 
+43 0 1.02002e+06 B/Bmsy_stdev 0 
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2029
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2028 
+run mceval objfun B_yr 2028 
+44 0 1.02002e+06 N_at_Age  1 1  1.85481e+07 4.2516e+06 673482 1.33776e+06 33188.2 280830 15513.3 9816.5 3261.95 2028.72 2130.09
+44 0 1.02002e+06 F/Fmsy  0.243999
+44 0 1.02002e+06 B/Bmsy  0.432742
+44 0 1.02002e+06 F/Fmsy_stdev 0 
+44 0 1.02002e+06 B/Bmsy_stdev 0 
+depletion_basis_is_not_=2;_so_info_below_is_not_B/Bmsy
+F_std_basis_is_not_=2;_so_info_below_is_not_F/Fmsy
+Endyr+1= 2030
+run mceval objfun Numbers Area Sex Ages: 0 1 2 3 4 5 6 7 8 9 10
+run mceval objfun F_yr 2029 
+run mceval objfun B_yr 2029 
+45 0 1.09935e+06 N_at_Age  1 1  1.92728e+06 1.03332e+07 2.34912e+06 357628 681831 18061.7 146440 8501.36 5301.61 1658.82 1228.72
+45 0 1.09935e+06 F/Fmsy  0.0400226
+45 0 1.09935e+06 B/Bmsy  0.391709
+45 0 1.09935e+06 F/Fmsy_stdev 0 
+45 0 1.09935e+06 B/Bmsy_stdev 0 

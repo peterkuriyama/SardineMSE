@@ -1,0 +1,75 @@
+"file","caption","category","png_time","StartTime"
+"sel01_multiple_fleets_length1.png","Selectivity at length for multiple fleets.","Sel",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"sel02_multiple_fleets_age1.png","Selectivity at age for multiple fleets.","Sel",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"sel02_multiple_fleets_age2.png","Selectivity at age derived from selectivity at length for multiple fleets.","Sel",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"sel09_len_flt1sex1.png","Ending year selectivity for MexCal_S1","Sel",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"sel09_len_flt2sex1.png","Ending year selectivity for MexCal_S2","Sel",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"sel09_len_flt3sex1.png","Ending year selectivity for PNW","Sel",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"sel11_timevary_surf_flt1sex1.png","Time-varying selectivity for MexCal_S1","Sel",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"sel12_timevary_contour_flt1sex1.png","Time-varying selectivity for MexCal_S1","Sel",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"sel13_age_flt1sex1.png","Ending year selectivity for MexCal_S1","Sel",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"sel11_timevary_surf_flt2sex1.png","Time-varying selectivity for MexCal_S2","Sel",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"sel12_timevary_contour_flt2sex1.png","Time-varying selectivity for MexCal_S2","Sel",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"sel13_age_flt2sex1.png","Ending year selectivity for MexCal_S2","Sel",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"sel11_timevary_surf_flt3sex1.png","Time-varying selectivity for PNW","Sel",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"sel12_timevary_contour_flt3sex1.png","Time-varying selectivity for PNW","Sel",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"sel13_age_flt3sex1.png","Ending year selectivity for PNW","Sel",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"sel11_timevary_surf_flt4sex1.png","Time-varying selectivity for AT_Survey","Sel",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"sel12_timevary_contour_flt4sex1.png","Time-varying selectivity for AT_Survey","Sel",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"sel13_age_flt4sex1.png","Ending year selectivity for AT_Survey","Sel",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"sel21_agelen_contour_flt1sex1.png","Ending year selectivity and growth for MexCal_S1","Sel",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"sel21_agelen_contour_flt2sex1.png","Ending year selectivity and growth for MexCal_S2","Sel",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"sel21_agelen_contour_flt3sex1.png","Ending year selectivity and growth for PNW","Sel",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"comp_lenfit__aggregated_across_time.png","Length comps, aggregated across time by fleet.
+ <br> Labels 'retained' and 'discard' indicate discarded or retained sampled for each fleet. Panels without this designation represent the whole catch.
+","LenComp",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"comp_lenfit__multi-fleet_comparison.png","Pearson residuals,  comparing across fleets <br> 
+Closed bubbles are positive residuals (observed > expected) and open bubbles are negative residuals (observed < expected).","LenComp",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"comp_lenfit_flt1mkt0_page1.png","Length comps, whole catch, MexCal_S1 (plot 1 of 2).<br><br>'N adj.' is the input sample size after data-weighting adjustment. N eff. is the calculated effective sample size used in the McAllister-Ianelli tuning method.","LenComp",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"comp_lenfit_flt1mkt0_page2.png","Length comps, whole catch, MexCal_S1 (plot 2 of 2)","LenComp",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"comp_lenfit_residsflt1mkt0_page2.png","Pearson residuals, whole catch, MexCal_S1 (max=3.96) (plot 2 of 2) <br> 
+Closed bubbles are positive residuals (observed > expected) and open bubbles are negative residuals (observed < expected).","LenComp",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"comp_lenfit_sampsize_flt1mkt0.png","N-EffN comparison, Length comps, whole catch, MexCal_S1","LenComp",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"comp_lenfit_data_weighting_TA1.8_MexCal_S1.png","Mean length for MexCal_S1 with 95% confidence intervals based on current samples sizes.<br>Francis data weighting method TA1.8: thinner intervals (with capped ends) show result of further adjusting sample sizes based on suggested multiplier (with 95% interval) for len data from MexCal_S1:<br>0.3633 (0.2472-0.6758) <br><br>For more info, see<br> <blockquote>Francis, R.I.C.C. (2011). Data weighting in statistical fisheries stock assessment models. <i>Can. J. Fish. Aquat. Sci.</i> 68: 1124-1138.  <a href=https://doi.org/10.1139/f2011-025> https://doi.org/10.1139/f2011-025</a> </blockquote>","LenComp",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"comp_lenfit_flt2mkt0_page1.png","Length comps, whole catch, MexCal_S2 (plot 1 of 2).<br><br>'N adj.' is the input sample size after data-weighting adjustment. N eff. is the calculated effective sample size used in the McAllister-Ianelli tuning method.","LenComp",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"comp_lenfit_flt2mkt0_page2.png","Length comps, whole catch, MexCal_S2 (plot 2 of 2)","LenComp",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"comp_lenfit_residsflt2mkt0_page2.png","Pearson residuals, whole catch, MexCal_S2 (max=6.12) (plot 2 of 2) <br> 
+Closed bubbles are positive residuals (observed > expected) and open bubbles are negative residuals (observed < expected).","LenComp",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"comp_lenfit_sampsize_flt2mkt0.png","N-EffN comparison, Length comps, whole catch, MexCal_S2","LenComp",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"comp_lenfit_data_weighting_TA1.8_MexCal_S2.png","Mean length for MexCal_S2 with 95% confidence intervals based on current samples sizes.<br>Francis data weighting method TA1.8: thinner intervals (with capped ends) show result of further adjusting sample sizes based on suggested multiplier (with 95% interval) for len data from MexCal_S2:<br>0.2105 (0.1569-0.3302) <br><br>For more info, see<br> <blockquote>Francis, R.I.C.C. (2011). Data weighting in statistical fisheries stock assessment models. <i>Can. J. Fish. Aquat. Sci.</i> 68: 1124-1138.  <a href=https://doi.org/10.1139/f2011-025> https://doi.org/10.1139/f2011-025</a> </blockquote>","LenComp",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"comp_lenfit_flt3mkt0.png","Length comps, whole catch, PNW.<br><br>'N adj.' is the input sample size after data-weighting adjustment. N eff. is the calculated effective sample size used in the McAllister-Ianelli tuning method.","LenComp",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"comp_lenfit_residsflt3mkt0.png","Pearson residuals, whole catch, PNW (max=4.67) <br> 
+Closed bubbles are positive residuals (observed > expected) and open bubbles are negative residuals (observed < expected).","LenComp",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"comp_lenfit_sampsize_flt3mkt0.png","N-EffN comparison, Length comps, whole catch, PNW","LenComp",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"comp_lenfit_data_weighting_TA1.8_PNW.png","Mean length for PNW with 95% confidence intervals based on current samples sizes.<br>Francis data weighting method TA1.8: thinner intervals (with capped ends) show result of further adjusting sample sizes based on suggested multiplier (with 95% interval) for len data from PNW:<br>0.1852 (0.121-0.4583) <br><br>For more info, see<br> <blockquote>Francis, R.I.C.C. (2011). Data weighting in statistical fisheries stock assessment models. <i>Can. J. Fish. Aquat. Sci.</i> 68: 1124-1138.  <a href=https://doi.org/10.1139/f2011-025> https://doi.org/10.1139/f2011-025</a> </blockquote>","LenComp",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"comp_lenfit_flt4mkt0.png","Length comps, whole catch, AT_Survey.<br><br>'N adj.' is the input sample size after data-weighting adjustment. N eff. is the calculated effective sample size used in the McAllister-Ianelli tuning method.","LenComp",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"comp_lenfit_residsflt4mkt0.png","Pearson residuals, whole catch, AT_Survey (max=14.11) <br> 
+Closed bubbles are positive residuals (observed > expected) and open bubbles are negative residuals (observed < expected).","LenComp",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"comp_lenfit_sampsize_flt4mkt0.png","N-EffN comparison, Length comps, whole catch, AT_Survey","LenComp",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"comp_lenfit_data_weighting_TA1.8_AT_Survey.png","Mean length for AT_Survey with 95% confidence intervals based on current samples sizes.<br>Francis data weighting method TA1.8: thinner intervals (with capped ends) show result of further adjusting sample sizes based on suggested multiplier (with 95% interval) for len data from AT_Survey:<br>0.2293 (0.1503-0.722) <br><br>For more info, see<br> <blockquote>Francis, R.I.C.C. (2011). Data weighting in statistical fisheries stock assessment models. <i>Can. J. Fish. Aquat. Sci.</i> 68: 1124-1138.  <a href=https://doi.org/10.1139/f2011-025> https://doi.org/10.1139/f2011-025</a> </blockquote>","LenComp",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"comp_gstlenfit_flt1mkt0.png","Ghost length comps, whole catch, MexCal_S1.<br><br>'N adj.' is the input sample size after data-weighting adjustment. N eff. is the calculated effective sample size used in the McAllister-Ianelli tuning method.","LenComp",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"comp_gstlenfit_residsflt1mkt0.png","Pearson residuals, whole catch, MexCal_S1 (max=NA) <br> 
+Closed bubbles are positive residuals (observed > expected) and open bubbles are negative residuals (observed < expected).","LenComp",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"comp_gstlenfit_flt2mkt0.png","Ghost length comps, whole catch, MexCal_S2.<br><br>'N adj.' is the input sample size after data-weighting adjustment. N eff. is the calculated effective sample size used in the McAllister-Ianelli tuning method.","LenComp",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"comp_gstlenfit_residsflt2mkt0.png","Pearson residuals, whole catch, MexCal_S2 (max=NA) <br> 
+Closed bubbles are positive residuals (observed > expected) and open bubbles are negative residuals (observed < expected).","LenComp",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"comp_gstlenfit_flt3mkt0.png","Ghost length comps, whole catch, PNW.<br><br>'N adj.' is the input sample size after data-weighting adjustment. N eff. is the calculated effective sample size used in the McAllister-Ianelli tuning method.","LenComp",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"comp_gstlenfit_residsflt3mkt0.png","Pearson residuals, whole catch, PNW (max=NA) <br> 
+Closed bubbles are positive residuals (observed > expected) and open bubbles are negative residuals (observed < expected).","LenComp",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"comp_gstlenfit_flt4mkt0.png","Ghost length comps, whole catch, AT_Survey.<br><br>'N adj.' is the input sample size after data-weighting adjustment. N eff. is the calculated effective sample size used in the McAllister-Ianelli tuning method.","LenComp",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"comp_gstlenfit_residsflt4mkt0.png","Pearson residuals, whole catch, AT_Survey (max=NA) <br> 
+Closed bubbles are positive residuals (observed > expected) and open bubbles are negative residuals (observed < expected).","LenComp",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"comp_gstagefit_flt1mkt0_page1.png","Ghost age comps, whole catch, MexCal_S1 (plot 1 of 2).<br><br>'N adj.' is the input sample size after data-weighting adjustment. N eff. is the calculated effective sample size used in the McAllister-Ianelli tuning method.","AgeComp",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"comp_gstagefit_flt1mkt0_page2.png","Ghost age comps, whole catch, MexCal_S1 (plot 2 of 2)","AgeComp",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"comp_gstagefit_residsflt1mkt0_page2.png","Pearson residuals, whole catch, MexCal_S1 (max=NA) (plot 2 of 2) <br> 
+Closed bubbles are positive residuals (observed > expected) and open bubbles are negative residuals (observed < expected).","AgeComp",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"comp_gstagefit_flt2mkt0_page1.png","Ghost age comps, whole catch, MexCal_S2 (plot 1 of 2).<br><br>'N adj.' is the input sample size after data-weighting adjustment. N eff. is the calculated effective sample size used in the McAllister-Ianelli tuning method.","AgeComp",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"comp_gstagefit_flt2mkt0_page2.png","Ghost age comps, whole catch, MexCal_S2 (plot 2 of 2)","AgeComp",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"comp_gstagefit_residsflt2mkt0_page2.png","Pearson residuals, whole catch, MexCal_S2 (max=NA) (plot 2 of 2) <br> 
+Closed bubbles are positive residuals (observed > expected) and open bubbles are negative residuals (observed < expected).","AgeComp",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"comp_gstagefit_flt3mkt0.png","Ghost age comps, whole catch, PNW.<br><br>'N adj.' is the input sample size after data-weighting adjustment. N eff. is the calculated effective sample size used in the McAllister-Ianelli tuning method.","AgeComp",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"comp_gstagefit_residsflt3mkt0.png","Pearson residuals, whole catch, PNW (max=NA) <br> 
+Closed bubbles are positive residuals (observed > expected) and open bubbles are negative residuals (observed < expected).","AgeComp",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"comp_gstagefit_flt4mkt0.png","Ghost age comps, whole catch, AT_Survey.<br><br>'N adj.' is the input sample size after data-weighting adjustment. N eff. is the calculated effective sample size used in the McAllister-Ianelli tuning method.","AgeComp",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"
+"comp_gstagefit_residsflt4mkt0.png","Pearson residuals, whole catch, AT_Survey (max=NA) <br> 
+Closed bubbles are positive residuals (observed > expected) and open bubbles are negative residuals (observed < expected).","AgeComp",2021-08-24 11:19:18,"StartTime: Tue Aug 10 15:30:17 2021"

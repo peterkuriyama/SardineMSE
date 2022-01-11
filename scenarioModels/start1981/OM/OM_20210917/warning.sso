@@ -1,0 +1,16 @@
+#V3.30.17.00;_2021_06_11;_safe;_Stock_Synthesis_by_Richard_Methot_(NOAA)_using_ADMB_12.3
+#Stock Synthesis (SS) is a work of the U.S. Government and is not subject to copyright protection in the United States.
+#Foreign copyrights may apply. See copyright.txt for more information.
+Tue Sep 21 11:28:52 2021
+
+This file contains warnings, suggestions and notes generated as files are read and processed
+
+1 NOTE:  Max data length bin: 28  < max pop len bins: 30; so will accumulate larger pop len bins
+2 Input catches in 2020 can be overridden by caps or allocations
+3 Input catches in 2020 can be overridden by caps or allocations
+4 Input catches in 2020 can be overridden by caps or allocations
+5 settle_month is less than spawn_month, so logical age at settlement calculated to be: 1  for settle_time 1.  Does not match read value of 0 are you sure? 
+6 setting in starter does not request all priors, and 5 parameters have priors and are not estimated, so their prior not included in obj_fun.
+6 setting positive forecast relF for forecast only fleet: 2
+6 setting positive forecast relF for forecast only fleet: 2
+N warnings: 6

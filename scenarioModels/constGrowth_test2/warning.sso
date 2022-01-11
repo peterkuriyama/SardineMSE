@@ -1,0 +1,18 @@
+#V3.30.15.09-safe;_2020_07_06;_Stock_Synthesis_by_Richard_Methot_(NOAA)_using_ADMB_12.0
+#Stock Synthesis (SS) is a work of the U.S. Government and is not subject to copyright protection in the United States.
+#Foreign copyrights may apply. See copyright.txt for more information.
+Mon Jun 07 15:05:04 2021
+
+settle_month is less than spawn_month, so logical age at settlement calculated to be: 1  for settle_time 1.  Does not match read value of 0 are you sure? 
+setting in starter does not request all priors, and 1 parameters have priors and are not estimated, so their prior not included in obj_fun.
+ adjusted selparm out of base parm bounds (Phase, Iter, Parm#, yr, min, max, base, value) 5 936 24 2019 0 9 2.28258 10.3459
+setting positive forecast relF for forecast only fleet: 1
+setting positive forecast relF for forecast only fleet: 2
+ warning: poor convergence in Fmsy, final dy/dy2= -0.237983
+ Fmsy is close to max allowed; check for convergence 
+Final gradient: 0.000140915 is larger than final_conv: 1e-005
+ adjusted selparm out of base parm bounds (Phase, Iter, Parm#, yr, min, max, base, value) 5 1714 24 2019 0 9 2.28258 10.3459
+setting positive forecast relF for forecast only fleet: 1
+setting positive forecast relF for forecast only fleet: 2
+ adjusted selparm out of base parm bounds (Phase, Iter, Parm#, yr, min, max, base, value) 5 1714 24 2019 0 9 2.28258 10.3459
+ N warnings: 8

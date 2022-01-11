@@ -1,0 +1,63 @@
+#V3.30.16.00;_2020_09_03;_safe;_Stock_Synthesis_by_Richard_Methot_(NOAA)_using_ADMB_12.2
+#Stock Synthesis (SS) is a work of the U.S. Government and is not subject to copyright protection in the United States.
+#Foreign copyrights may apply. See copyright.txt for more information.
+StartTime: Tue Aug 17 10:59:47 2021
+
+Data_File: init_dat.ss
+Control_File: om.ctl
+to_come_# Best_F
+to_come_#  F_units
+2020 F_year
+to_come_# F_basis
+to_come_# F_limit
+to_come_#  F_limit_basis
+to_come_# F_msy
+to_come_# F_msy_basis
+to_come_# F_target
+to_come_# F_target_basis
+to_come_# F/F_limit
+to_come_# F/F_msy
+to_come_# F/F_target
+to_come_# Best_Bio
+to_come_# Bio_units
+2020 Bio_year
+to_come_# Bio_basis
+to_come_# Bio_limit
+to_come_# Bio_limit_basis
+to_come_# Bio_MSY
+to_come_# Bio_MSY_basis
+to_come_# Bio_MSY
+to_come_# Bio_above_below
+to_come_# Bio/Bio_limit
+to_come_# Bio/Bio_MSY
+
+Category Year Abundance Abundance Recruitment Spawners Catch Catch Catch Catch Catch Catch Fmort Fmort Fmort Fmort Fmort
+Primary _ N Y Y Y N Y N N N N N N N Y Y
+Type _ Biomass Biomass Age Female_Mature Sel_Bio Kill_Bio Retain_Bio Sel_Numbers Kill_Numbers Retain_Numbers Exploitation SPR_report F_report Sum_Fleet_Apical_Fs F=Z-M
+Source _ Model Model Model Model Model Model Model Model Model Model Model Model Model Model Model
+Basis _ Biomass Biomass Numbers Eggs Biomass Biomass Biomass Numbers Numbers Numbers Dead_Catch_Bio/Summary_Bio  1-SPR (F)/(Fmsy);_with_F=Exploit(bio)  Sum_Fleet_Apical_Fs F=Z-M
+Range _ All Age_1+ Age_0 Mature Exploitable_all Exploitable_dead Exploitable_retained  Exploitable_all Exploitable_dead Exploitable_retained  Exploitable_dead Exploitable_all Exploitable_all Exploitable_all 5_5
+Statistic _ Mean Mean Mean Mean Mean Mean Mean Mean Mean Mean Mean Mean Mean Mean Mean
+Scalar _ 1 1 1000 1 1 1 1 1000 1000 1000 1 1 1 1 1
+_ 2000 0 888133 0 0  76807.5 76807.5 76807.5 838296 838296 838296 0.0864819 0.273255 0.268637  1.34452 0.0826909 0.585
+_ 2001 0 717874 0 0  78520 78520 78520 910520 910520 910520 0.109378 0.320858 0.33976  1.17741 0.102663 0.585
+_ 2002 0 623681 0 0  89163.2 89163.2 89163.2 957367 957367 957367 0.142963 0.325424 0.444083  1.47079 0.143519 0.585
+_ 2003 0 487939 0 0  71802.5 71802.5 71802.5 872260 872260 872260 0.147155 0.283137 0.457104  1.11079 0.185058 0.585
+_ 2004 0 818815 0 0  90414.3 90414.3 90414.3 1.03391e+06 1.03391e+06 1.03391e+06 0.110421 0.262221 0.342998  0.770401 0.231688 0.585
+_ 2005 0 1.077e+06 0 0  98676.9 98676.9 98676.9 1.10991e+06 1.10991e+06 1.10991e+06 0.0916222 0.25496 0.284604  0.642785 0.202278 0.585
+_ 2006 0 1.2565e+06 0 0  102061 102061 102061 1.13218e+06 1.13218e+06 1.13218e+06 0.0812261 0.203478 0.252311  0.732727 0.10612 0.585
+_ 2007 0 1.16281e+06 0 0  137682 137682 137682 1.43872e+06 1.43872e+06 1.43872e+06 0.118404 0.349817 0.367796  2.1677 0.132218 0.585
+_ 2008 0 885735 0 0  111813 111813 111813 1.10171e+06 1.10171e+06 1.10171e+06 0.126238 0.390064 0.39213  2.28928 0.129261 0.585
+_ 2009 0 607939 0 0  91913.9 91913.9 91913.9 897826 897826 897826 0.151189 0.426618 0.469637  1.98795 0.174003 0.585
+_ 2010 0 436302 0 0  93685.2 93685.2 93685.2 962148 962148 962148 0.214726 0.396225 0.666998  1.69974 0.257504 0.585
+_ 2011 0 427173 0 0  94388.8 94388.8 94388.8 1.01203e+06 1.01203e+06 1.01203e+06 0.220961 0.41545 0.686368  2.42546 0.341235 0.585
+_ 2012 0 346219 0 0  114237 114237 114237 913758 913758 913758 0.329956 0.55611 1.02494  1.3487 0.894183 0.585
+_ 2013 0 188908 0 0  65215.7 65215.7 65215.7 474736 474736 474736 0.345224 0.547773 1.07236  1.36351 0.6874 0.585
+_ 2014 0 88772.1 0 0  19958.5 19958.5 19958.5 141957 141957 141957 0.224828 0.38682 0.698379  2.2746 0.347586 0.585
+_ 2015 0 54004.7 0 0  259.498 259.498 259.498 3417.67 3417.67 3417.67 0.0048051 0.0129413 0.014926  0.0163785 0.00300278 0.585
+_ 2016 0 61198.4 0 0  7569.13 7569.13 7569.13 102734 102734 102734 0.123682 0.235036 0.38419  0.386449 0.0342915 0.585
+_ 2017 0 58958.8 0 0  6419.43 6419.43 6419.43 98095.6 98095.6 98095.6 0.10888 0.258048 0.338211  0.373351 0.0320811 0.585
+_ 2018 0 66710.4 0 0  11913.8 11913.8 11913.8 158574 158574 158574 0.17859 0.333086 0.554751  0.388992 0.0437911 0.585
+_ 2019 0 58541.4 0 0  12047.7 12047.7 12047.7 142823 142823 142823 0.205798 0.60742 0.639266  1.02007 0.108924 0.585
+_ 2020 0 38846.8 0 0  9330.33 9330.33 9330.33 101067 101067 101067 0.240183 0.787088 0.746075  1.88468 0.20725 0.585
+_ 2021 25455.7 21430.7 0 0  0 0 0 0 0 0 0 4.22882e-05 5.01221e-05  0 4.34848e-06 0.585
