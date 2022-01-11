@@ -160,7 +160,7 @@ EMmodelPath <- "C:/Users/r.wildermuth/Documents/FutureSeas/SardineMSE/EM/EM_st20
 
 logFile <- paste0(mseOutputPath, "/SardineMSElog_", Sys.Date(), ".log")
 
-sink(file(logFile))
+sink(file(logFile), append = TRUE)
 
 startTime <- Sys.time()
 ptm <- proc.time()

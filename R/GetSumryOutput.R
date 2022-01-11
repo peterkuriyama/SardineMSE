@@ -107,10 +107,10 @@ GetSumryOutput <- function(dir, # SSMSE directory (character)
     # Next get the forecast values for each projected EM year
     for(y in max(smryEMspr$Yr):termYr){
       EMoutputSS <- SS_output(dir = file.path(dir, scenario, i, 
-                                            grep(y, termNames, value = TRUE)),
-                            dir.mcmc = NULL,
-                            repfile = "Report.sso",
-                            compfile = "CompReport.sso", verbose = FALSE, printstats = FALSE)
+                                              grep(y, termNames, value = TRUE)),
+                              dir.mcmc = NULL,
+                              repfile = "Report.sso",
+                              compfile = "CompReport.sso", verbose = FALSE, printstats = FALSE)
       
       nxtYrSPR <- EMoutputSS[["sprseries"]] %>% select(Yr, Era, Bio_Smry.1, SSB, Recruits, Num_Smry) %>%
         mutate(model_run = paste0(scenario, "_EM_term"),
@@ -125,39 +125,39 @@ GetSumryOutput <- function(dir, # SSMSE directory (character)
                iteration = as.integer(i),
                Yr = y+1)
       nxtYrlenN <- EMoutputSS[["natlen"]] %>% select(Yr, Seas, `Beg/Mid`, 
-                                                        c("6", "6.5", "7", "7.5", "8", "8.5", "9", "9.5", "10", "10.5", 
-                                                          "11", "11.5", "12", "12.5", "13", "13.5", "14", "14.5", "15", "15.5",
-                                                          "16", "16.5", "17", "17.5", "18", "18.5", "19", "19.5", "20", "20.5",
-                                                          "21", "21.5", "22", "22.5", "23", "23.5", "24", "24.5", "25", "25.5",
-                                                          "26", "26.5", "27", "27.5", "28", "28.5", "29", "29.5", "30")) %>%
+                                                     c("6", "6.5", "7", "7.5", "8", "8.5", "9", "9.5", "10", "10.5", 
+                                                       "11", "11.5", "12", "12.5", "13", "13.5", "14", "14.5", "15", "15.5",
+                                                       "16", "16.5", "17", "17.5", "18", "18.5", "19", "19.5", "20", "20.5",
+                                                       "21", "21.5", "22", "22.5", "23", "23.5", "24", "24.5", "25", "25.5",
+                                                       "26", "26.5", "27", "27.5", "28", "28.5", "29", "29.5", "30")) %>%
         mutate(model_run = paste0(scenario, "_EM_term"),
                iteration = as.integer(i))%>%
         filter(Yr == y+1)
       nxtYrageN <- EMoutputSS[["natage"]] %>% select(Yr, Seas, `Beg/Mid`, 
-                                                        c("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10")) %>%
+                                                     c("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10")) %>%
         mutate(model_run = paste0(scenario, "_EM_term"),
                iteration = as.integer(i))%>%
         filter(Yr == y+1)
       nxtYrlenB <- EMoutputSS[["batlen"]] %>% select(Yr, Seas, `Beg/Mid`, 
-                                                        c("6", "6.5", "7", "7.5", "8", "8.5", "9", "9.5", "10", "10.5", 
-                                                          "11", "11.5", "12", "12.5", "13", "13.5", "14", "14.5", "15", "15.5",
-                                                          "16", "16.5", "17", "17.5", "18", "18.5", "19", "19.5", "20", "20.5",
-                                                          "21", "21.5", "22", "22.5", "23", "23.5", "24", "24.5", "25", "25.5",
-                                                          "26", "26.5", "27", "27.5", "28", "28.5", "29", "29.5", "30")) %>%
+                                                     c("6", "6.5", "7", "7.5", "8", "8.5", "9", "9.5", "10", "10.5", 
+                                                       "11", "11.5", "12", "12.5", "13", "13.5", "14", "14.5", "15", "15.5",
+                                                       "16", "16.5", "17", "17.5", "18", "18.5", "19", "19.5", "20", "20.5",
+                                                       "21", "21.5", "22", "22.5", "23", "23.5", "24", "24.5", "25", "25.5",
+                                                       "26", "26.5", "27", "27.5", "28", "28.5", "29", "29.5", "30")) %>%
         mutate(model_run = paste0(scenario, "_EM_term"),
                iteration = as.integer(i))%>%
         filter(Yr == y+1)
       nxtYrageB <- EMoutputSS[["batage"]] %>% select(Yr, Seas, `Beg/Mid`, 
-                                                        c("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10")) %>%
+                                                     c("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10")) %>%
         mutate(model_run = paste0(scenario, "_EM_term"),
                iteration = as.integer(i))%>%
         filter(Yr == y+1)
       
       # Get EM observed data for CPUE, catch, and comps
       EMDatSS <- SS_readdat(file = file.path(dir, scenario, i, 
-                                            grep(y, termNames, value = TRUE), 
-                                            "data.ss_new"),
-                              version = "3.30")
+                                             grep(y, termNames, value = TRUE), 
+                                             "data.ss_new"),
+                            version = "3.30")
       
       
       nxtDatcpue <- EMDatSS[["CPUE"]] %>% select(year, seas, index, obs) %>%
@@ -209,27 +209,27 @@ GetSumryOutput <- function(dir, # SSMSE directory (character)
              iteration = as.integer(i),
              Yr = termYr)
     smryOMlenN <- OMoutputSS[["natlen"]] %>% select(Yr, Seas, `Beg/Mid`, 
-                                                      c("6", "6.5", "7", "7.5", "8", "8.5", "9", "9.5", "10", "10.5", 
-                                                        "11", "11.5", "12", "12.5", "13", "13.5", "14", "14.5", "15", "15.5",
-                                                        "16", "16.5", "17", "17.5", "18", "18.5", "19", "19.5", "20", "20.5",
-                                                        "21", "21.5", "22", "22.5", "23", "23.5", "24", "24.5", "25", "25.5",
-                                                        "26", "26.5", "27", "27.5", "28", "28.5", "29", "29.5", "30")) %>%
+                                                    c("6", "6.5", "7", "7.5", "8", "8.5", "9", "9.5", "10", "10.5", 
+                                                      "11", "11.5", "12", "12.5", "13", "13.5", "14", "14.5", "15", "15.5",
+                                                      "16", "16.5", "17", "17.5", "18", "18.5", "19", "19.5", "20", "20.5",
+                                                      "21", "21.5", "22", "22.5", "23", "23.5", "24", "24.5", "25", "25.5",
+                                                      "26", "26.5", "27", "27.5", "28", "28.5", "29", "29.5", "30")) %>%
       mutate(model_run = paste0(scenario, omName),
              iteration = as.integer(i))
     smryOMageN <- OMoutputSS[["natage"]] %>% select(Yr, Seas, `Beg/Mid`, 
-                                                      c("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10")) %>%
+                                                    c("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10")) %>%
       mutate(model_run = paste0(scenario, omName),
              iteration = as.integer(i))
     smryOMlenB <- OMoutputSS[["batlen"]] %>% select(Yr, Seas, `Beg/Mid`, 
-                                                      c("6", "6.5", "7", "7.5", "8", "8.5", "9", "9.5", "10", "10.5", 
-                                                        "11", "11.5", "12", "12.5", "13", "13.5", "14", "14.5", "15", "15.5",
-                                                        "16", "16.5", "17", "17.5", "18", "18.5", "19", "19.5", "20", "20.5",
-                                                        "21", "21.5", "22", "22.5", "23", "23.5", "24", "24.5", "25", "25.5",
-                                                        "26", "26.5", "27", "27.5", "28", "28.5", "29", "29.5", "30")) %>%
+                                                    c("6", "6.5", "7", "7.5", "8", "8.5", "9", "9.5", "10", "10.5", 
+                                                      "11", "11.5", "12", "12.5", "13", "13.5", "14", "14.5", "15", "15.5",
+                                                      "16", "16.5", "17", "17.5", "18", "18.5", "19", "19.5", "20", "20.5",
+                                                      "21", "21.5", "22", "22.5", "23", "23.5", "24", "24.5", "25", "25.5",
+                                                      "26", "26.5", "27", "27.5", "28", "28.5", "29", "29.5", "30")) %>%
       mutate(model_run = paste0(scenario, omName),
              iteration = as.integer(i))
     smryOMageB <- OMoutputSS[["batage"]] %>% select(Yr, Seas, `Beg/Mid`, 
-                                                      c("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10")) %>%
+                                                    c("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10")) %>%
       mutate(model_run = paste0(scenario, omName),
              iteration = as.integer(i))
     
