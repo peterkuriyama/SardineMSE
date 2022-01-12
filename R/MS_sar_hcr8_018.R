@@ -150,12 +150,12 @@ MS_sar_hcr8_018 = function(EM_out_dir = NULL,
   
   #Extract unfished SSB and compute reference points
   #Note that SS does not output dynamic B0 only SSB0, so even for equilibirum SSB0 Ftarget will be modified based on SSB0 rather than total B0
-  B0d=EMcdat$Dynamic_Bzero$SSB_nofishing[EMcdat$Dynamic_Bzero$Yr==mod_endyr]
+  B0d=EM_out$Dynamic_Bzero$SSB_nofishing[EM_out$Dynamic_Bzero$Yr==mod_endyr]
   B040d=0.4*B0d
   B010d=0.1*B0d
   
   #Exract current SSB
-  Bcur=EMcdat$Dynamic_Bzero$SSB[EMcdat$Dynamic_Bzero$Yr==mod_endyr]
+  Bcur=EM_out$Dynamic_Bzero$SSB[EM_out$Dynamic_Bzero$Yr==mod_endyr]
   
   #Compute F target level
   if (Bcur > B040d) {Ftar = Emsy } else if (Bcur < B040d & Bcur >B010d)
