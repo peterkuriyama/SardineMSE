@@ -29,7 +29,7 @@ mseOutputPath <- "C:/Users/r.wildermuth/Documents/FutureSeas/SardineScenarios"
 
 # directory for OM SS code
 # OMmodelPath <- "C:/Users/Robert W/Documents/FutureSeas/SardineMSE/OM/OM_20211019"
-OMmodelPath <- "C:/Users/r.wildermuth/Documents/FutureSeas/SardineMSE/OM/OM_K"
+OMmodelPath <- "C:/Users/r.wildermuth/Documents/FutureSeas/SardineMSE/scenarioModels/start1981/OM/OM_K"
 # RW: need to re-save data.ss_new as data.ss to fix formatting for SS_readdat()
 
 
@@ -46,10 +46,10 @@ nyrs <- 3
 #traceback()
 
 #specify the start year of data inputs
-yrsrt = datfile$endyr +1
+yrsrt <- datfile$endyr +1
 
 #specify the end year of data inputs
-yrend = datfile$endyr + nyrs
+yrend <- datfile$endyr + nyrs
 
 #sample_struct$CPUE = sample_struct$CPUE[1:nyrs,]
 CPUE <- data.frame(Yr= yrsrt:yrend,
@@ -58,7 +58,7 @@ CPUE <- data.frame(Yr= yrsrt:yrend,
                    SE = 0.5)
 
 #specify the number of catch fleets
-ncdat=3
+ncdat <- 3
 
 catch <- data.frame(Yr = rep(c(yrsrt:yrend),ncdat), 
                     Seas = c(rep(1,nyrs),rep(2,nyrs)),
@@ -72,8 +72,8 @@ catch <- data.frame(Yr = rep(c(yrsrt:yrend),ncdat),
 #pnw (fleet #3 Nsamp 30 s1)
 #the .dat file specifies month...but here it is labeled as season?
 #specify the number of lengthcomp surveys
-nldat=4
-lencomp = data.frame(Yr = rep(c(yrsrt:yrend),nldat), 
+nldat <- 4
+lencomp <- data.frame(Yr = rep(c(yrsrt:yrend),nldat), 
                      Seas = c(rep(1,nyrs),rep(4,nyrs),rep(10,nyrs),rep(4,nyrs)),
                      FltSvy = c(rep(4,nyrs),rep(1,nyrs),rep(2,nyrs),rep(3,nyrs)),
                      Sex = rep(0,nyrs*nldat),
@@ -81,8 +81,8 @@ lencomp = data.frame(Yr = rep(c(yrsrt:yrend),nldat),
                      Nsamp = c(rep(20,nyrs),rep(20,nyrs),rep(20,nyrs),rep(20,nyrs)))
 
 #for age comps same surveys as as lcomps
-nadat=4
-agecomp = data.frame(Yr = rep(c(yrsrt:yrend),nadat), 
+nadat <- 4
+agecomp <- data.frame(Yr = rep(c(yrsrt:yrend),nadat), 
                      Seas = c(rep(1,nyrs),rep(4,nyrs),rep(10,nyrs),rep(4,nyrs)),
                      FltSvy = c(rep(4,nyrs),rep(1,nyrs),rep(2,nyrs),rep(3,nyrs)),
                      Sex = rep(0,nyrs*nadat),
@@ -93,47 +93,47 @@ agecomp = data.frame(Yr = rep(c(yrsrt:yrend),nadat),
                      Nsamp = c(rep(20,nyrs),rep(20,nyrs),rep(20,nyrs),rep(20,nyrs)))
 
 sample_struct <- list(catch = catch, CPUE = CPUE, lencomp = lencomp, agecomp = agecomp)
-sample_struct_list <- list("HCR_st2005_PDOrec" = sample_struct)
+sample_struct_list <- list("HCR8_OMK_RandRec" = sample_struct)
 
 # figure out the recruitment deviation input ---------------
 
 # define scenario name
-scenName <- "HCR_st2005_PDOrec"
+scenName <- "HCR8_OMK_RandRec"
 iters <- 2
 
 ### Define custom rec devs based on environment
 
-template <- create_future_om_list(example_type = "custom")
-
-recdevPDO <- read.csv("C:/Users/r.wildermuth/Documents/FutureSeas/Recruitment Index/recdevPDO2120.csv")
-# remove last row
-recdevPDO <- recdevPDO %>% filter(Year <= yrend - 1)
-
-recdevInput <- template[[1]]
-recdevInput$pars <- "rec_devs"
-
-input <- data.frame(scen = rep(scenName, length.out = iters*nrow(recdevPDO)),
-                    iter = rep(1:iters, each = nrow(recdevPDO)),
-                    yr = rep(recdevPDO$Year, times = iters),
-                    # value = rep(0.15, length.out = iters*nrow(recdevPDO)))
-                    value = rep(recdevPDO$recDevPDO, times = iters))
-input$par <- "rec_devs"
-input[input$yr == 2019, "value"] <- 0
-recdevInput$input <- input %>% select(par, scen, iter, yr, value)
-
-envt_dev_list <- list(recdevInput)
+# template <- create_future_om_list(example_type = "custom")
+# 
+# recdevPDO <- read.csv("C:/Users/r.wildermuth/Documents/FutureSeas/Recruitment Index/recdevPDO2120.csv")
+# # remove last row
+# recdevPDO <- recdevPDO %>% filter(Year <= yrend - 1)
+# 
+# recdevInput <- template[[1]]
+# recdevInput$pars <- "rec_devs"
+# 
+# input <- data.frame(scen = rep(scenName, length.out = iters*nrow(recdevPDO)),
+#                     iter = rep(1:iters, each = nrow(recdevPDO)),
+#                     yr = rep(recdevPDO$Year, times = iters),
+#                     # value = rep(0.15, length.out = iters*nrow(recdevPDO)))
+#                     value = rep(recdevPDO$recDevPDO, times = iters))
+# input$par <- "rec_devs"
+# input[input$yr == 2019, "value"] <- 0
+# recdevInput$input <- input %>% select(par, scen, iter, yr, value)
+# 
+# envt_dev_list <- list(recdevInput)
 
 ### use random recdevs with sd same as to historical
-# template_mod_change <- create_future_om_list(example_type = "model_change")
-# rec_dev_specify <- template_mod_change[[1]]
-# rec_dev_specify$pars <- "rec_devs"
-# rec_dev_specify$scen <- c("replicate", "all") # noe: could change this to c("random", "all") if did not want to replicate the same recdevs sequences across scenarios
-# rec_dev_specify$input$first_yr_averaging <- 1981
-# rec_dev_specify$input$last_yr_averaging <- 2019
-# rec_dev_specify$input$last_yr_orig_val <- 2019
-# rec_dev_specify$input$first_yr_final_val <- 2020
-# rec_dev_specify$input$ts_param <- "sd"
-# rec_dev_specify$input$value <- NA
+template_mod_change <- create_future_om_list(example_type = "model_change")
+rec_dev_specify <- template_mod_change[[1]]
+rec_dev_specify$pars <- "rec_devs"
+rec_dev_specify$scen <- c("replicate", "all") # noe: could change this to c("random", "all") if did not want to replicate the same recdevs sequences across scenarios
+rec_dev_specify$input$first_yr_averaging <- 1981
+rec_dev_specify$input$last_yr_averaging <- 2019
+rec_dev_specify$input$last_yr_orig_val <- 2019
+rec_dev_specify$input$first_yr_final_val <- 2020
+rec_dev_specify$input$ts_param <- "sd"
+rec_dev_specify$input$value <- NA
 
 ### Add autocorrelation ###
 # new_vals <- data.frame(first_yr_averaging = NA,
@@ -146,7 +146,7 @@ envt_dev_list <- list(recdevInput)
 # rec_dev_specify$input <- rbind(rec_dev_specify$input,
 #                                new_vals)
 
-# rand_dev_list <- list(rec_dev_specify)
+rand_dev_list <- list(rec_dev_specify)
 
 # Run the OM --------------------------------------------------------------
 
@@ -155,7 +155,7 @@ envt_dev_list <- list(recdevInput)
 
 # EM starts in 1981 to test a high data quality scenario
 # EMmodelPath <- "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/EM/EM_alldat"
-EMmodelPath <- "C:/Users/r.wildermuth/Documents/FutureSeas/SardineMSE/EM/EM_st2005"
+EMmodelPath <- "C:/Users/r.wildermuth/Documents/FutureSeas/SardineMSE/scenarioModels/start1981/EM_K"
 # EM starter.ss file must indicate init values are to be pulled from control.ss file, not ss.par
 
 logFile <- paste0(mseOutputPath, "/SardineMSElog_", Sys.Date(), ".log")
@@ -165,21 +165,21 @@ sink(file(logFile), append = TRUE)
 startTime <- Sys.time()
 ptm <- proc.time()
 
-out <- run_SSMSE(scen_name_vec = scenName, #"margComps_SardineHCR",# name of the scenario
+out <- run_SSMSE(scen_name_vec = scenName, # name of the scenario
                  out_dir_scen_vec = mseOutputPath, # directory in which to run the scenario
                  iter_vec = c(iters), # run with 5 iterations for now
                  OM_name_vec = NULL, # specify directories instead
                  OM_in_dir_vec = OMmodelPath, # OM files
-                 EM_name_vec = "margCompsOMfixedSelexEM", # cod is included in package data
+                 EM_name_vec = "margCompsOMandEM", # cod is included in package data
                  EM_in_dir_vec = EMmodelPath, # EM files
-                 MS_vec = "EM",
+                 # MS_vec = "EM",
                  # MS_vec = "no_catch",
-                 # MS_vec = "MS_sar_hcr",       # The management strategy is specified in the custom function
-                 # custom_MS_source = "C:/Users/Robert W/Documents/FutureSeas/SardineMSE/R/MS_sar_hcr.R", # file location of the MS function
+                 MS_vec = "MS_sar_hcr8_018",       # The management strategy is specified in the custom function
+                 custom_MS_source = "C:/Users/r.wildermuth/Documents/FutureSeas/SardineMSE/R/MS_sar_hcr8_018.R", # file location of the MS function
                  use_SS_boot_vec = TRUE, # use the SS bootstrap module for sampling
                  nyrs_vec = nyrs,        # Years to project OM forward
                  nyrs_assess_vec = 1, # Years between assessments
-                 future_om_list = envt_dev_list, # rand_dev_list
+                 future_om_list = rand_dev_list, #envt_dev_list, # 
                  run_parallel = TRUE, # Run iterations in parallel
                  n_cores = 4, # number of cores to use in parallel
                  sample_struct_list = sample_struct_list, # How to sample data for running the EM.
