@@ -16,7 +16,7 @@ library(SSMSE) # v0.1.0
 #   # RW: These don't
 # remotes::install_github("nmfs-fish-tools/SSMSE")
 # library(SSMSE, lib.loc = "C:/Users/rwildermuth/Documents/R/libversions") # v0.2.0
-# devtools::load_all(path = "C:/Users/rwildermuth/Documents/SSMSE")
+devtools::load_all(path = "C:/Users/r.wildermuth/Documents/SSMSE")
 packageVersion("SSMSE")
 
 # source("R/MS_sar_hcr.R")
@@ -93,12 +93,12 @@ agecomp <- data.frame(Yr = rep(c(yrsrt:yrend),nadat),
                      Nsamp = c(rep(20,nyrs),rep(20,nyrs),rep(20,nyrs),rep(20,nyrs)))
 
 sample_struct <- list(catch = catch, CPUE = CPUE, lencomp = lencomp, agecomp = agecomp)
-sample_struct_list <- list("HCR8_OMK_RandRec" = sample_struct)
+sample_struct_list <- list("HCR1_OMK_RandRec" = sample_struct)
 
 # figure out the recruitment deviation input ---------------
 
 # define scenario name
-scenName <- "HCR8_OMK_RandRec"
+scenName <- "HCR1_OMK_RandRec"
 iters <- 2
 
 ### Define custom rec devs based on environment
@@ -174,8 +174,8 @@ out <- run_SSMSE(scen_name_vec = scenName, # name of the scenario
                  EM_in_dir_vec = EMmodelPath, # EM files
                  # MS_vec = "EM",
                  # MS_vec = "no_catch",
-                 MS_vec = "MS_sar_hcr8_018",       # The management strategy is specified in the custom function
-                 custom_MS_source = "C:/Users/r.wildermuth/Documents/FutureSeas/SardineMSE/R/MS_sar_hcr8_018.R", # file location of the MS function
+                 MS_vec = "MS_sar_hcr1",       # The management strategy is specified in the custom function
+                 custom_MS_source = "C:/Users/r.wildermuth/Documents/FutureSeas/SardineMSE/R/MS_sar_hcr1.R", # file location of the MS function
                  use_SS_boot_vec = TRUE, # use the SS bootstrap module for sampling
                  nyrs_vec = nyrs,        # Years to project OM forward
                  nyrs_assess_vec = 1, # Years between assessments
@@ -200,7 +200,7 @@ out
 sink()
 # Summarize results -------------------------------------------------------
 
-test1 <- SS_output(dir = "C:/Users/r.wildermuth/Documents/FutureSeas/SardineScenarios/HCR_st2005/2/margCompsOMfixedSelexEM_EM_2021")
+test1 <- SS_output(dir = "C:/Users/r.wildermuth/Documents/FutureSeas/SardineScenarios/HCR3_OMK_RandRec/2/margCompsOMandEM_EM_2021")
 SS_plots(test1)
 
 # Summarize 1 iteration of output

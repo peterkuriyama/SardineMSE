@@ -20,7 +20,7 @@
 #' @return A list with a dataframe of catches by fleet and season to be input into the OM
 #' @author Desiree Tommasi (code below based on parse_MS function developed by Kathryn Doering & Nathan Vaughan for SSMSE package)
 
-MS_sar_hcr = function(EM_out_dir = NULL, 
+MS_sar_hcr1 = function(EM_out_dir = NULL, 
                        init_loop = TRUE, OM_dat,
                        verbose = FALSE, nyrs_assess, dat_yrs,
                        sample_struct = NULL, interim_struct = NULL, seed = NULL, ...){
