@@ -20,11 +20,11 @@ mseOutputPath <- "C:/Users/r.wildermuth/Documents/FutureSeas/SardineScenarios"
 # Set Operating and Estimation Model ----------------------------------------
 
 # directory for OM SS code
-OMmodelPath <- "C:/Users/r.wildermuth/Documents/FutureSeas/SardineMSE/scenarioModels/start2005/constantGrowth"
+OMmodelPath <- "C:/Users/r.wildermuth/Documents/FutureSeas/SardineMSE/scenarioModels/start2001"
 # OMmodelPath <- "J:/Desiree/Sardine/SardineMSE/scenarioModels/start2001"
 
 # EM starts in 1981 to test a high data quality scenario
-EMmodelPath <- "C:/Users/r.wildermuth/Documents/FutureSeas/SardineMSE/scenarioModels/start2005/constantGrowth"
+EMmodelPath <- "C:/Users/r.wildermuth/Documents/FutureSeas/SardineMSE/scenarioModels/start2001"
 # EMmodelPath <- "J:/Desiree/Sardine/SardineMSE/EM"
 # EM starter.ss file must indicate init values are to be pulled from control.ss file, not ss.par
 
@@ -85,12 +85,12 @@ agecomp <- data.frame(Yr = rep(c(yrsrt:yrend),nadat),
                       Nsamp = c(rep(20,nyrs),rep(20,nyrs),rep(20,nyrs),rep(20,nyrs)))
 
 sample_struct <- list(catch = catch, CPUE = CPUE, lencomp = lencomp, agecomp = agecomp)
-sample_struct_list <- list("constGrowth2005OMandEM_RandRecHCR1" = sample_struct)
+sample_struct_list <- list("constGrowth2001OMandEM_RandRecHCR1" = sample_struct)
 
 # figure out the recruitment deviation input ---------------
 
 # define scenario name
-scenName <- c("constGrowth2005OMandEM_RandRecHCR1")
+scenName <- c("constGrowth2001OMandEM_RandRecHCR1")
 iters <- 5
 
 ### use random recdevs with sd same as to historical
@@ -98,7 +98,7 @@ template_mod_change <- create_future_om_list(example_type = "model_change")
 rec_dev_specify <- template_mod_change[[1]]
 rec_dev_specify$pars <- "rec_devs"
 rec_dev_specify$scen <- c("replicate", "all") # note: could change this to c("random", "all") if did not want to replicate the same recdevs sequences across scenarios
-rec_dev_specify$input$first_yr_averaging <- 1981
+rec_dev_specify$input$first_yr_averaging <- datfile$styr
 rec_dev_specify$input$last_yr_averaging <- 2019
 rec_dev_specify$input$last_yr_orig_val <- 2019
 rec_dev_specify$input$first_yr_final_val <- 2020
@@ -122,7 +122,7 @@ out <- run_SSMSE(scen_name_vec = scenName, # name of the scenario
                  iter_vec = rep(iters, times = length(scenName)), # run with 5 iterations for now
                  OM_name_vec = NULL, # specify directories instead
                  OM_in_dir_vec = OMmodelPath, #rep(OMmodelPath, times = length(scenName)), # OM files
-                 EM_name_vec = "constGrowth2005OMandEM", 
+                 EM_name_vec = "constGrowthShortOMandEM", # Can't have number in name for summary diagnostics to work
                  EM_in_dir_vec = EMmodelPath, # Self test
                  MS_vec = "MS_sar_hcr1", #"EM",# 
                  custom_MS_source = "C:/Users/r.wildermuth/Documents/FutureSeas/SardineMSE/R/MS_sar_hcr1.R", # file location of the MS function
@@ -131,7 +131,7 @@ out <- run_SSMSE(scen_name_vec = scenName, # name of the scenario
                  nyrs_vec = nyrs,        # Years to project OM forward
                  nyrs_assess_vec = 1, # Years between assessments
                  future_om_list = rand_dev_list, 
-                 run_parallel = FALSE, # Run iterations in parallel
+                 run_parallel = TRUE, # Run iterations in parallel
                  sample_struct_list = sample_struct_list, # How to sample data for running the EM.
                  seed = 1234) #Set a fixed integer seed that allows replication
 endTime <- Sys.time()

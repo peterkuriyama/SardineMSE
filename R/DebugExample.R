@@ -16,7 +16,7 @@ library(SSMSE) # v0.1.0
 #   # RW: These don't
 # remotes::install_github("nmfs-fish-tools/SSMSE")
 # library(SSMSE, lib.loc = "C:/Users/rwildermuth/Documents/R/libversions") # v0.2.0
-devtools::load_all(path = "C:/Users/r.wildermuth/Documents/SSMSE")
+# devtools::load_all(path = "C:/Users/r.wildermuth/Documents/SSMSE")
 packageVersion("SSMSE")
 
 # source("R/MS_sar_hcr.R")
@@ -29,13 +29,17 @@ mseOutputPath <- "C:/Users/r.wildermuth/Documents/FutureSeas/SardineScenarios"
 
 # directory for OM SS code
 # OMmodelPath <- "C:/Users/Robert W/Documents/FutureSeas/SardineMSE/OM/OM_20211019"
-OMmodelPath <- "C:/Users/r.wildermuth/Documents/FutureSeas/SardineMSE/scenarioModels/start1981/OM/OM_K"
+OMmodelPath <- "C:/Users/r.wildermuth/Documents/FutureSeas/SardineMSE/scenarioModels/start2005/constantGrowth"
 # RW: need to re-save data.ss_new as data.ss to fix formatting for SS_readdat()
 
+# EM starts in 1981 to test a high data quality scenario
+# EMmodelPath <- "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/EM/EM_alldat"
+EMmodelPath <- "C:/Users/r.wildermuth/Documents/FutureSeas/SardineMSE/scenarioModels/start2005/constantGrowth"
+# EM starter.ss file must indicate init values are to be pulled from control.ss file, not ss.par
 
 # Define Observation Model ------------------------------------------------
 # Run test of marginal comps OM
-datfile <- SS_readdat(file = paste0(OMmodelPath, "/dat.ss"), version = "3.30")
+datfile <- SS_readdat(file = paste0(OMmodelPath, "/data.ss"), version = "3.30")
 
 # create_sample_strct() has trouble IDing SE for survey CPUE
 # define an index for the Acoustic-Trawl survey as in Desiree's code
@@ -93,12 +97,12 @@ agecomp <- data.frame(Yr = rep(c(yrsrt:yrend),nadat),
                      Nsamp = c(rep(20,nyrs),rep(20,nyrs),rep(20,nyrs),rep(20,nyrs)))
 
 sample_struct <- list(catch = catch, CPUE = CPUE, lencomp = lencomp, agecomp = agecomp)
-sample_struct_list <- list("HCR1_OMK_RandRec" = sample_struct)
+sample_struct_list <- list("HCR1_constGrowth2005OMandEM_RandRec" = sample_struct)
 
 # figure out the recruitment deviation input ---------------
 
 # define scenario name
-scenName <- "HCR1_OMK_RandRec"
+scenName <- "HCR1_constGrowth2005OMandEM_RandRec"
 iters <- 2
 
 ### Define custom rec devs based on environment
@@ -128,7 +132,7 @@ template_mod_change <- create_future_om_list(example_type = "model_change")
 rec_dev_specify <- template_mod_change[[1]]
 rec_dev_specify$pars <- "rec_devs"
 rec_dev_specify$scen <- c("replicate", "all") # noe: could change this to c("random", "all") if did not want to replicate the same recdevs sequences across scenarios
-rec_dev_specify$input$first_yr_averaging <- 1981
+rec_dev_specify$input$first_yr_averaging <- datfile$styr
 rec_dev_specify$input$last_yr_averaging <- 2019
 rec_dev_specify$input$last_yr_orig_val <- 2019
 rec_dev_specify$input$first_yr_final_val <- 2020
@@ -153,11 +157,6 @@ rand_dev_list <- list(rec_dev_specify)
 #run_res_path <- file.path("C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE", "results")
 # dir.create(mseOutputPath)
 
-# EM starts in 1981 to test a high data quality scenario
-# EMmodelPath <- "C:/Users/rwildermuth/Documents/FutureSeas/SardineMSE/EM/EM_alldat"
-EMmodelPath <- "C:/Users/r.wildermuth/Documents/FutureSeas/SardineMSE/scenarioModels/start1981/EM_K"
-# EM starter.ss file must indicate init values are to be pulled from control.ss file, not ss.par
-
 logFile <- paste0(mseOutputPath, "/SardineMSElog_", Sys.Date(), ".log")
 
 sink(file(logFile), append = TRUE)
@@ -170,7 +169,7 @@ out <- run_SSMSE(scen_name_vec = scenName, # name of the scenario
                  iter_vec = c(iters), # run with 5 iterations for now
                  OM_name_vec = NULL, # specify directories instead
                  OM_in_dir_vec = OMmodelPath, # OM files
-                 EM_name_vec = "margCompsOMandEM", # cod is included in package data
+                 EM_name_vec = "constGrowth2005OMandEM", # cod is included in package data
                  EM_in_dir_vec = EMmodelPath, # EM files
                  # MS_vec = "EM",
                  # MS_vec = "no_catch",
@@ -180,7 +179,7 @@ out <- run_SSMSE(scen_name_vec = scenName, # name of the scenario
                  nyrs_vec = nyrs,        # Years to project OM forward
                  nyrs_assess_vec = 1, # Years between assessments
                  future_om_list = rand_dev_list, #envt_dev_list, # 
-                 run_parallel = TRUE, # Run iterations in parallel
+                 run_parallel = FALSE, # Run iterations in parallel
                  n_cores = 4, # number of cores to use in parallel
                  sample_struct_list = sample_struct_list, # How to sample data for running the EM.
                  seed = 12349) #Set a fixed integer seed that allows replication
